@@ -13,11 +13,13 @@ public class Effect {
 	public boolean objetive; 
 	public double bonus; 
 	public boolean operator;
+	public boolean permanent;
 	
-	public Effect(Scope scope, boolean objetive, double bonus, boolean operator){
+	public Effect( Scope scope, boolean objetive, double bonus, boolean operator, boolean permanent ) {
 		this.scope = scope;
 		this.objetive = objetive;
 		this.bonus = bonus;
 		this.operator = operator;
+		this.permanent = permanent;
 	}
 }
