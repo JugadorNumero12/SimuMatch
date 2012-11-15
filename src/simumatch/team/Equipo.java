@@ -1,6 +1,6 @@
 package simumatch.team;
 
-import xenos.Accion;
+import simumatch.datamanager.Effect;
 import java.util.List;
 
 public class Equipo {
@@ -43,7 +43,7 @@ public class Equipo {
 	public Estadio estadio;
 	public String nombre;
 	int aforoBase;
-	public List<Accion> preparacion;//las acciones preparadas para el proximo partido
+	public List<Effect> preparacion;//las acciones preparadas para el proximo partido
 	
 	public Equipo(String nombre, int lvl, Estadio estadio, int aforoBase) throws Exception{
 		if(lvl<1||aforoBase<0)throw new Exception("Datos incorrectos: Equipo no puede tener nivel ni aforo negativo");

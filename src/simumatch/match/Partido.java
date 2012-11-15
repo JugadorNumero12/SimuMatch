@@ -3,10 +3,8 @@ package simumatch.match;
 import java.util.ArrayList;
 import java.util.List;
 
-import xenos.Accion;
-import xenos.Const;
-
-import Equipo.Equipo;
+import simumatch.team.Equipo;
+import simumatch.datamanager.Effect;
 
 public class Partido {
 	public Equipo local, visitante;
@@ -19,10 +17,10 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion];
 	int turnoActual = -1;
-	List<Accion> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
+	List<Effect> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	private Memento mementer= new Memento(this);
 	
-	
+	//Metodos Publicos (solo os interesan estos 2)
 	public Partido(Equipo loc, Equipo vis){
 		aforoL = local.aforoBase();
 		aforoV = visitante.aforoBase();
@@ -36,25 +34,49 @@ public class Partido {
 		visitante=vis;
 		animoL = loc.orgullo();
 		animoV = vis.orgullo();
-		tacL=tacV=0;
 		//el punto de equilibrio del partido (el estado que se mantiene si nadie hace nada)
 		equilibrio = estadoEstable(loc,vis);
+		if(equilibrio>=0){tacL=1;tacV=2;}
+		 else			 {tacL=2;tacV=1;}
 		
 		arbitro = new Arbitro();
 		loc.resetPreparatorias();
 		vis.resetPreparatorias();
 	}
+	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
+		
+		if(turnoActual++>duracion){
+			System.out.println("El partido ya ha acabado");
+			return null;
+		}
+		
+		ejecuta(accLoc, true);
+		ejecuta(accVis, false);
+		ejecutaActivas();
+		
+		recalculaTacticas();
+		recalculaAnimo();
+		
+		if(turnoActual>0)
+			turno[turnoActual] = new Turno(generaTurno(calculaAbanico()));
+		else turno[0]= new Turno(this);
+		
+		mementer.restaura();
+		
+		return turno[turnoActual];
+	}
+	//Privado. No pasar. Su lectura puede producir daños neurologicos permanentes
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
 	Turno actual(){
 		return turno[turnoActual];
 	}
-	private void ejecuta(List<Accion> acc, boolean loc) {
-		List<Accion> turno, partido;
+	private void ejecuta(List<Effect> acc, boolean loc) {
+		List<Effect> turno, partido;
 		turno = vacia();
 		partido= vacia();
-		Accion a;
+		Effect a;
 		while(!acc.isEmpty()){
 			a = acc.get(0);
 			switch (a.tiempo_efecto){
@@ -67,8 +89,8 @@ public class Partido {
 		ejecutaPerma(partido, loc);
 		ejecutaTurno(turno, loc);
 	}
-	private void ejecutaTurno(List<Accion> inst, boolean loc) {
-		Accion a;
+	private void ejecutaTurno(List<Effect> inst, boolean loc) {
+		Effect a;
 		boolean local= loc;
 		while(!inst.isEmpty()){
 			a=inst.get(0);
@@ -84,8 +106,8 @@ public class Partido {
 		}
 		
 	}
-	private void ejecutaPerma(List<Accion> acc, boolean local) {
-		Accion a;
+	private void ejecutaPerma(List<Effect> acc, boolean local) {
+		Effect a;
 		boolean loc= local;
 		while(!acc.isEmpty()){
 			a=acc.get(0);
@@ -127,29 +149,6 @@ public class Partido {
 	private int goles(){
 		return marL-marV;
 	}
-	public Turno turno(List<Accion> accLoc, List<Accion> accVis){
-		
-		if(turnoActual++>duracion){
-			System.out.println("El partido ya ha acabado");
-			return null;
-		}
-		
-		ejecuta(accLoc, true);
-		ejecuta(accVis, false);
-		ejecutaActivas();
-		
-		recalculaTacticas();
-		recalculaAnimo();
-		
-		if(turnoActual>0)
-			turno[turnoActual] = new Turno(generaTurno(calculaAbanico()));
-		else turno[0]= new Turno(this);
-		
-		mementer.restaura();
-		
-		return turno[turnoActual];
-	}
-
 	private void recalculaAnimo() {
 		animoL+=goles();
 		animoV-=goles();
@@ -246,7 +245,7 @@ public class Partido {
 		int ps[]= adyacentes(p,g);
 		for(int i=0; i<ps.length; i++)abanico[i]*=indice;
 	}
-	public static int[] adyacentes(int punto, int grado) {
+	private static int[] adyacentes(int punto, int grado) {
 		if(grado>12)return null;
 		int[] r = new int[2];
 		int s=1;
@@ -259,8 +258,8 @@ public class Partido {
 	}
 	static int puntToEst(int p){return p-6;}
 	static int estToPunt(int e){return e+6;}
-	static List<Accion> vacia(){
-		ArrayList<Accion> ar = new ArrayList<Accion>();
+	static List<Effect> vacia(){
+		ArrayList<Effect> ar = new ArrayList<Effect>();
 		return ar;
 	}
 	private class Memento{
@@ -302,42 +301,42 @@ public class Partido {
 				break;
 			default:
 				System.out.println("No implementadas acciones permanentes de tipo "+tipo);
-		}
+			}
 			
-	}
-		
-	Memento(Partido par){this.p= par;}
-	
-	public void restaura(){
-		if(!modificated)return;
-		if(!inited)System.out.println("No se ha iniciado el turno antes de los cambios, se han perdido los datos originales");
-		p.animoL= animoL;
-		p.animoV= animoV;
-		p.equilibrio= equilibrio;
-		p.local.setIOf(indOfL);
-		p.local.setIDf(indDeL);
-		p.visitante.setIOf(indOfV);
-		p.visitante.setIDf(indDeV);
-		inited=false;
-		modificated=false;	
-	}
-	public void init(){
-		if(inited)return;
-		if(modificated){
-			System.out.println("Se ha reiniciado el turno antes de restaurarlo, restauracion automatica");
-			restaura();
 		}
-		animoL= p.animoL;
-		animoV= p.animoV;
-		equilibrio= p.equilibrio;
-		indOfL= local.indiceOfensivo();
-		indDeL= local.indiceDefensivo();
-		indOfV= visitante.indiceOfensivo();
-		indDeV= visitante.indiceDefensivo();
-		inited=true;
-		modificated=false;
+		
+		Memento(Partido par){this.p= par;}
+	
+		public void restaura(){
+			if(!modificated)return;
+			if(!inited)System.out.println("No se ha iniciado el turno antes de los cambios, se han perdido los datos originales");
+			p.animoL= animoL;
+			p.animoV= animoV;
+			p.equilibrio= equilibrio;
+			p.local.setIOf(indOfL);
+			p.local.setIDf(indDeL);
+			p.visitante.setIOf(indOfV);
+			p.visitante.setIDf(indDeV);
+			inited=false;
+			modificated=false;	
+		}
+		public void init(){
+			if(inited)return;
+			if(modificated){
+				System.out.println("Se ha reiniciado el turno antes de restaurarlo, restauracion automatica");
+				restaura();
+			}	
+			animoL= p.animoL;
+			animoV= p.animoV;
+			equilibrio= p.equilibrio;
+			indOfL= local.indiceOfensivo();
+			indDeL= local.indiceDefensivo();
+			indOfV= visitante.indiceOfensivo();
+			indDeV= visitante.indiceDefensivo();
+			inited=true;
+			modificated=false;
+		}	
 	}
-}
 	
 
 
