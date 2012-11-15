@@ -2,11 +2,7 @@ package simumatch.gui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 import simumatch.common.Action;
 import simumatch.common.Effect;
 /*
@@ -16,6 +12,7 @@ import simumatch.common.Effect;
 import simumatch.datamanager.AbilitiesData;
 import simumatch.match.Partido;
 import simumatch.match.Turno;
+import simumatch.team.Equipo;
 
 public class GraphicInterface extends javax.swing.JFrame {
 
@@ -1121,11 +1118,11 @@ public class GraphicInterface extends javax.swing.JFrame {
 		}
 		for(i=10;i<20;i++){
 			if(arrayCheckBox[i]){
-				arrayVisitP[i] = Action.get(arrayNomb[i]);
+				arrayVisitP[i-10] = Action.get(arrayNomb[i]);
 			}
 		}
-		ArrayList<Action> listLocalP = (ArrayList<Action>) Arrays.asList(arrayLocalP);//Lista con preparatorias del Local
-		ArrayList<Action> listVisitP = (ArrayList<Action>) Arrays.asList(arrayVisitP);//Lista con preparatorias del visitante
+		List<Action> listLocalP = Arrays.asList(arrayLocalP);//Lista con preparatorias del Local
+		List<Action> listVisitP = Arrays.asList(arrayVisitP);//Lista con preparatorias del visitante
 		/*Set<Action> set = new HashSet<Action>();
 		set.addAll(listLocalP);
 		set.addAll(listVisitP);
@@ -1134,7 +1131,11 @@ public class GraphicInterface extends javax.swing.JFrame {
 		listEffectsP1 = data.getEffects(listLocalP);
 		listEffectsP2 = data.getEffects(listVisitP);
 		
-		//match = new Partido();
+		Equipo e1 = Equipo.equipo_de_prueba1();
+		e1.preparacion = listEffectsP1;
+		Equipo e2 = Equipo.equipo_de_prueba2();
+		e1.preparacion = listEffectsP2;
+		match = new Partido(e1,e2);
 		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
     }
     
@@ -1147,11 +1148,11 @@ public class GraphicInterface extends javax.swing.JFrame {
 		}
 		for(int i=8;i<16;i++){
             if(arrayCheckBox2[i]) {
-                arrayVisitM[i] = Action.get(arrayNomb[i+20]);
+                arrayVisitM[i-8] = Action.get(arrayNomb[i+20]);
             } 
 		}
-		ArrayList<Action> listLocalM = (ArrayList<Action>) Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
-		ArrayList<Action> listVisitM = (ArrayList<Action>) Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
+		List<Action> listLocalM = Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
+		List<Action> listVisitM = Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
 		/*Set<Action> set = new HashSet<Action>();
 		set.addAll(listLocalM);
 		set.addAll(listVisitM);
