@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +86,7 @@ public class AbilitiesData {
 		data.put( action, Collections.unmodifiableList( new ArrayList<Effect>( effects ) ) );
 	}
 	
+	/** @return Retrieve the internal data */
 	public Map<Action,List<Effect>> getData () {
 		return Collections.unmodifiableMap( new HashMap<Action,List<Effect>>( data ) );
 	}
@@ -98,7 +98,7 @@ public class AbilitiesData {
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
-	private Action readAction ( BufferedReader reader ) throws IOException {
+	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
 		// If the line is null, EOF -- return null to signal that
@@ -122,7 +122,7 @@ public class AbilitiesData {
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
-	private Effect readEffect ( BufferedReader reader ) throws IOException {
+	private static Effect readEffect ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
 		// If line is null, the file is over -- return null to signal that
