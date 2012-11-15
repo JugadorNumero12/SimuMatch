@@ -1,9 +1,13 @@
 package simumatch.datamanager;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,98 +29,137 @@ import java.util.Map;
  */
 public class AbilitiesData {
 	
-	private final Map<Action,ArrayList<Effect>> data = new HashMap<Action,ArrayList<Effect>>();
+	private final Map<Action,Collection<Effect>> data = new HashMap<Action,Collection<Effect>>();
 	
-	public void fillData ( String f1, String f2, String f3 ) {
-		int fileNumber = 0;
-		while ( fileNumber < 2 ) {
-			
-			File f = new File( f1 );
-			
-			/* Read each file */
-			
-			readFile( f );
-			
-		}
-	}
-	
-	/**
-	 * Each file will have this structure:
-	 * - a String (the name of the action) MUST corresponds to an action in the Enum Actions
-	 * - the string 'ambiente' followed by a double (example 0.03)
-	 * - the string 'nivel_equipo' followed by a double
-	 * - the string 'aforo' followed by a double
-	 * - the string 'animo' followed by a double
-	 * - the string 'factor_ofensivo' followed by a double
-	 * - the string 'factor_defensivo' followed by a double
-	 * - a blanck line
-	 * 
-	 * @param the
-	 *            file
-	 */
-	private void readFile ( File file ) {
-		try {
-			String line = "";
-			FileReader fr = new FileReader( file );
-			BufferedReader br = new BufferedReader( fr );
-			
-			while ( line != null ) {
+	public void loadFile ( File file ) throws IOException {
+		BufferedReader reader = new BufferedReader( new FileReader( file ) );
+		
+		boolean eof = false;
+		while ( !eof ) {
+			Action action = readAction( reader );
+			if ( action == null ) {
+				eof = true;
 				
-				/* Read file */
+			} else {
+				Collection<Effect> effects = new ArrayList<Effect>();
 				
-				/*
-				 * There is an example:
-				 * ----------------------------- ultra.txt
-				 * CALDEAR_AMBIENTE
-				 * ambiente +4
-				 * nivel_equipo 0
-				 * aforo 0,02
-				 * animo -0,03
-				 * factor_ofensivo 0
-				 * factor_defensivo 0
-				 * 
-				 * OLA
-				 * ambiente +4
-				 * nivel_equipo 0
-				 * aforo 0,02
-				 * animo -0,03
-				 * factor_ofensivo 0
-				 * factor_defensivo 0
-				 * 
-				 * (...)
-				 * -----------------------------
-				 */
+				Effect effect;
+				while ( ( effect = readEffect( reader ) ) != null ) {
+					effects.add( effect );
+				}
+				
+				data.put( action, Collections.unmodifiableCollection( effects ) );
 			}
-			
-		} catch ( Exception e ) {
-			/* process exceptions */
 		}
 	}
 	
-	/**
-	 * Returns the arrayList of effects of the asked action and null
-	 * if the action doesn't exist
-	 * 
-	 * @param the
-	 *            action's name
-	 * @returns null if not founded, the effects list otherwise
-	 */
-	public ArrayList<Effect> getActions ( String actionName ) {
+	private Action readAction ( BufferedReader reader ) throws IOException {
+		String line = reader.readLine();
 		
-		/* Search for abilityName in data */
+		// If the line is null, EOF -- return null to signal that
+		if ( line == null ) {
+			return null;
+		}
 		
-		return null;
+		String name = line.trim();
+		Action action = Action.get( name );
+		if ( action == null ) {
+			throw new IOException( "'" + name + "' is not a valid action name" );
+		}
+		
+		return action;
 	}
-	//
-	// /**
-	// *
-	// * @param teamA
-	// * @param teamB
-	// * @returns
-	// */
-	// public GlobalEffect[] proccessActions(ArrayList<Actions> teamA, ArrayList<Actions> teamB)
-	// {
-	//
-	// }
+	
+	private Effect readEffect ( BufferedReader reader ) throws IOException {
+		String line = reader.readLine();
+		
+		// If line is null, the file is over -- return null to signal that
+		if ( line == null ) {
+			return null;
+		}
+		
+		// If line is empty, the list of strings is over -- return null to signal that
+		String effstr = line.trim();
+		if ( ( "" ).equals( effstr ) ) {
+			return null;
+		}
+		
+		// Split the line in parts: <scope> <op&bonus> <target> <perm>
+		String[] parts = effstr.split( "\\s+" );
+		if ( parts.length != 4 ) {
+			throw new IOException( "Invalid effect format" );
+		}
+		
+		// Parse everything -- these methods throw an exception when necessary
+		Scope scope = parseScope( parts[ 0 ] );
+		Operator op = parseOperator( parts[ 1 ].substring( 0, 1 ) );
+		double bonus = parseBonus( parts[ 1 ].substring( 1 ) );
+		Target target = parseTarget( parts[ 2 ] );
+		boolean perm = parsePermanent( parts[ 3 ] );
+		
+		// Return the effect at last
+		return new Effect( scope, target, op, bonus, perm );
+	}
+	
+	private static Scope parseScope ( String str ) throws IOException {
+		Scope scope = Scope.get( str );
+		if ( scope == null ) {
+			throw new IOException( "Invalid scope name" );
+		}
+		
+		return scope;
+	}
+	
+	private static Operator parseOperator ( String string ) throws IOException {
+		Operator op = Operator.get( string );
+		if ( op == null ) {
+			throw new IOException( "Invalid operator '" + string + "'" );
+		}
+		
+		return op;
+	}
+	
+	private static Target parseTarget ( String string ) throws IOException {
+		Target target = Target.get( string );
+		if ( target == null ) {
+			throw new IOException( "Invalid target '" + string + "'" );
+		}
+		
+		return target;
+	}
+	
+	private static boolean parsePermanent ( String string ) throws IOException {
+		boolean perm;
+		if ( "perm".equals( string ) || "permanent".equals( string ) ) {
+			perm = true;
+			
+		} else if ( "temp".equals( string ) || "temporary".equals( string ) ) {
+			perm = false;
+			
+		} else {
+			throw new IOException( "Invalid permanent declaration '" + string + "'" );
+		}
+		
+		return perm;
+	}
+	
+	private static double parseBonus ( String string ) throws IOException {
+		try {
+			return Double.parseDouble( string );
+		} catch ( NumberFormatException exc ) {
+			throw new IOException( exc );
+		}
+	}
+	
+	private void addAction ( Action action, Collection<Effect> effects ) {
+		if ( action == null ) {
+			throw new NullPointerException( "action" );
+		}
+		if ( effects == null || effects.contains( null ) ) {
+			throw new NullPointerException( "effects" );
+		}
+		
+		data.put( action, Collections.unmodifiableCollection( new ArrayList<Effect>( effects ) ) );
+	}
 	
 }
