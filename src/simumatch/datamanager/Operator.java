@@ -71,4 +71,9 @@ public enum Operator {
 	public static Operator get ( String str ) {
 		return OPERATORS.get( str );
 	}
+	
+	@Override
+	public String toString () {
+		return string;
+	}
 }
