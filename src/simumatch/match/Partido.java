@@ -17,7 +17,7 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion];
 	int turnoActual = -1;
-	List<Effect> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
+	//List<Effect> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	private Memento mementer= new Memento(this);
 	
 	//Metodos Publicos (solo os interesan estos 2)
@@ -58,14 +58,15 @@ public class Partido {
 		recalculaAnimo();
 		
 		if(turnoActual>0)
-			turno[turnoActual] = new Turno(generaTurno(calculaAbanico()));
+			turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
 		else turno[0]= new Turno(this);
 		
 		mementer.restaura();
 		
 		return turno[turnoActual];
 	}
-	//Privado. No pasar. Su lectura puede producir daños neurologicos permanentes
+	
+	//Privado. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
@@ -99,7 +100,6 @@ public class Partido {
 		}
 	}
 	private void bonifPer(Scope scope, double bonus, Operator op, boolean loc) {
-		// TODO Auto-generated method stub
 		switch(scope){
 		case PEOPLE:
 			if(loc)aforoL= op.apply(aforoL, bonus);
@@ -174,8 +174,8 @@ public class Partido {
 		for (i=0; tirada>0; i++)
 			tirada-=abanico[i];
 		estado = Partido.puntToEst(i);
-		if(estado>5)marL++;
-		if(estado<1)marV++;
+		if(estado> 5)marL++;
+		if(estado<-5)marV++;
 		return estado;
 	}
 	private double[] calculaAbanico() {
