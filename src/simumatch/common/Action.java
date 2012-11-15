@@ -1,4 +1,4 @@
-package simumatch.datamanager;
+package simumatch.common;
 
 /**
  * An action that can be performed by a team in a match.
@@ -17,7 +17,7 @@ public enum Action {
 	FINANCIAR_EVENTO,
 	MEJORAR_GRADAS,
 	SOBORNAR_LINIER,
-	INCETIVO_ECONOMICO,
+	INCENTIVO_ECONOMICO,
 	ASCENDER_TRABAJO,
 	APOSTAR,
 
@@ -41,7 +41,7 @@ public enum Action {
 	 */
 	public static Action get ( String name ) {
 		try {
-			return Enum.valueOf( Action.class, name );
+			return Enum.valueOf( Action.class, name.trim().toUpperCase() );
 		} catch ( IllegalArgumentException exc ) {
 			return null;
 		}
