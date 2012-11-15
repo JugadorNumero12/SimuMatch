@@ -10,12 +10,16 @@ import simumatch.common.Action;
  * and open the template in the editor.
  */
 
-public class GraphicInterface extends javax.swing.JFrame {
+
+/**
+ * Graphic interphace moved to Eclipse editor
+ */
+public class Gui extends javax.swing.JFrame {
 
 	/**
      * Creates new form GraphicInterface
      */
-    public GraphicInterface() {
+    public Gui() {
         arrayCheckBox = new boolean[20];
         arrayPrep = new Action[20];
         arrayCheckBox2 = new boolean[16];
