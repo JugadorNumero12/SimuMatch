@@ -1134,7 +1134,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 		Equipo e1 = Equipo.equipo_de_prueba1();
 		e1.preparacion = listEffectsP1;
 		Equipo e2 = Equipo.equipo_de_prueba2();
-		e1.preparacion = listEffectsP2;
+		e2.preparacion = listEffectsP2;
 		match = new Partido(e1,e2);
 		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
     }
