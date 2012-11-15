@@ -14,7 +14,7 @@ public enum Action {
 	 */
 	public static Action get ( String name ) {
 		try {
-			return Enum.valueOf( Action.class, name );
+			return Enum.valueOf( Action.class, name.trim().toUpperCase() );
 		} catch ( IllegalArgumentException exc ) {
 			return null;
 		}
