@@ -50,6 +50,31 @@ public final class Effect {
 		this.permanent = permanent;
 	}
 	
+	/** @return Which attribute this effect affects */
+	public Scope getScope () {
+		return scope;
+	}
+	
+	/** @return The target of the effect */
+	public Target getTarget () {
+		return target;
+	}
+	
+	/** @return Numeric value of this effect */
+	public double getBonus () {
+		return bonus;
+	}
+	
+	/** @return Operator this effect uses */
+	public Operator getOperator () {
+		return operator;
+	}
+	
+	/** @return Whether it lasts the whole match */
+	public boolean isPermanent () {
+		return permanent;
+	}
+	
 	@Override
 	public int hashCode () {
 		int hc = 0;
@@ -83,28 +108,7 @@ public final class Effect {
 			&& operator.equals( effect.operator ) && permanent == effect.permanent;
 	}
 	
-	/** @return Which attribute this effect affects */
-	public Scope getScope () {
-		return scope;
-	}
-	
-	/** @return The target of the effect */
-	public Target getTarget () {
-		return target;
-	}
-	
-	/** @return Numeric value of this effect */
-	public double getBonus () {
-		return bonus;
-	}
-	
-	/** @return Operator this effect uses */
-	public Operator getOperator () {
-		return operator;
-	}
-	
-	/** @return Whether it lasts the whole match */
-	public boolean isPermanent () {
-		return permanent;
-	}
+	public String toString() {
+		return "Effect(" + scope + "," + operator + bonus + "," + target + "," + (permanent?"PERM":"TEMP") + ")"; 
+	};
 }
