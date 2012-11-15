@@ -3,8 +3,12 @@ package simumatch.datamanager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,98 +29,209 @@ import java.util.Map;
  */
 public class AbilitiesData {
 	
-	private final Map<Action,ArrayList<Effect>> data = new HashMap<Action,ArrayList<Effect>>();
-	
-	public void fillData ( String f1, String f2, String f3 ) {
-		int fileNumber = 0;
-		while ( fileNumber < 2 ) {
-			
-			File f = new File( f1 );
-			
-			/* Read each file */
-			
-			readFile( f );
-			
-		}
-	}
+	/** The data collected */
+	private final Map<Action,List<Effect>> data = new HashMap<Action,List<Effect>>();
 	
 	/**
-	 * Each file will have this structure:
-	 * - a String (the name of the action) MUST corresponds to an action in the Enum Actions
-	 * - the string 'ambiente' followed by a double (example 0.03)
-	 * - the string 'nivel_equipo' followed by a double
-	 * - the string 'aforo' followed by a double
-	 * - the string 'animo' followed by a double
-	 * - the string 'factor_ofensivo' followed by a double
-	 * - the string 'factor_defensivo' followed by a double
-	 * - a blanck line
+	 * Reads a file and adds its information to this object
 	 * 
-	 * @param the
-	 *            file
+	 * @param file
+	 *            The file to read from
+	 * @throws IOException
+	 *             if anything goes wrong
 	 */
-	private void readFile ( File file ) {
-		try {
-			String line = "";
-			FileReader fr = new FileReader( file );
-			BufferedReader br = new BufferedReader( fr );
-			
-			while ( line != null ) {
+	public void loadFile ( File file ) throws IOException {
+		BufferedReader reader = new BufferedReader( new FileReader( file ) );
+		
+		boolean eof = false;
+		while ( !eof ) {
+			Action action = readAction( reader );
+			if ( action == null ) {
+				eof = true;
 				
-				/* Read file */
+			} else {
+				List<Effect> effects = new ArrayList<Effect>();
 				
-				/*
-				 * There is an example:
-				 * ----------------------------- ultra.txt
-				 * CALDEAR_AMBIENTE
-				 * ambiente +4
-				 * nivel_equipo 0
-				 * aforo 0,02
-				 * animo -0,03
-				 * factor_ofensivo 0
-				 * factor_defensivo 0
-				 * 
-				 * OLA
-				 * ambiente +4
-				 * nivel_equipo 0
-				 * aforo 0,02
-				 * animo -0,03
-				 * factor_ofensivo 0
-				 * factor_defensivo 0
-				 * 
-				 * (...)
-				 * -----------------------------
-				 */
+				Effect effect;
+				while ( ( effect = readEffect( reader ) ) != null ) {
+					effects.add( effect );
+				}
+				
+				addAction( action, Collections.unmodifiableList( effects ) );
 			}
-			
-		} catch ( Exception e ) {
-			/* process exceptions */
 		}
 	}
 	
 	/**
-	 * Returns the arrayList of effects of the asked action and null
-	 * if the action doesn't exist
+	 * Adds an action to this object
 	 * 
-	 * @param the
-	 *            action's name
-	 * @returns null if not founded, the effects list otherwise
+	 * @param action
+	 *            The action to add
+	 * @param effects
+	 *            The effect to add
 	 */
-	public ArrayList<Effect> getActions ( String actionName ) {
+	public void addAction ( Action action, List<Effect> effects ) {
+		if ( action == null ) {
+			throw new NullPointerException( "action" );
+		}
+		if ( effects == null || effects.contains( null ) ) {
+			throw new NullPointerException( "effects" );
+		}
 		
-		/* Search for abilityName in data */
-		
-		return null;
+		data.put( action, Collections.unmodifiableList( new ArrayList<Effect>( effects ) ) );
 	}
-	//
-	// /**
-	// *
-	// * @param teamA
-	// * @param teamB
-	// * @returns
-	// */
-	// public GlobalEffect[] proccessActions(ArrayList<Actions> teamA, ArrayList<Actions> teamB)
-	// {
-	//
-	// }
+	
+	public Map<Action,List<Effect>> getData () {
+		return Collections.unmodifiableMap( new HashMap<Action,List<Effect>>( data ) );
+	}
+	
+	/**
+	 * @param reader
+	 *            The object used to read information
+	 * @return An action read from the <tt>reader</tt>
+	 * @throws IOException
+	 *             If anything goes wrong
+	 */
+	private Action readAction ( BufferedReader reader ) throws IOException {
+		String line = reader.readLine();
+		
+		// If the line is null, EOF -- return null to signal that
+		if ( line == null ) {
+			return null;
+		}
+		
+		String name = line.trim();
+		Action action = Action.get( name );
+		if ( action == null ) {
+			throw new IOException( "'" + name + "' is not a valid action name" );
+		}
+		
+		return action;
+	}
+	
+	/**
+	 * @param reader
+	 *            The object used to read information
+	 * @return An effect read from the <tt>reader</tt>
+	 * @throws IOException
+	 *             If anything goes wrong
+	 */
+	private Effect readEffect ( BufferedReader reader ) throws IOException {
+		String line = reader.readLine();
+		
+		// If line is null, the file is over -- return null to signal that
+		if ( line == null ) {
+			return null;
+		}
+		
+		// If line is empty, the list of strings is over -- return null to signal that
+		String effstr = line.trim();
+		if ( ( "" ).equals( effstr ) ) {
+			return null;
+		}
+		
+		// Split the line in parts: <scope> <op&bonus> <target> <perm>
+		String[] parts = effstr.split( "\\s+" );
+		if ( parts.length != 4 ) {
+			throw new IOException( "Invalid effect format" );
+		}
+		
+		// Parse everything -- these methods throw an exception when necessary
+		Scope scope = parseScope( parts[ 0 ] );
+		Operator op = parseOperator( parts[ 1 ].substring( 0, 1 ) );
+		double bonus = parseBonus( parts[ 1 ].substring( 1 ) );
+		Target target = parseTarget( parts[ 2 ] );
+		boolean perm = parsePermanent( parts[ 3 ] );
+		
+		// Return the effect at last
+		return new Effect( scope, target, op, bonus, perm );
+	}
+	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>Scope</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
+	private static Scope parseScope ( String str ) throws IOException {
+		Scope scope = Scope.get( str );
+		if ( scope == null ) {
+			throw new IOException( "Invalid scope name" );
+		}
+		
+		return scope;
+	}
+	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return An <tt>Operator</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
+	private static Operator parseOperator ( String string ) throws IOException {
+		Operator op = Operator.get( string );
+		if ( op == null ) {
+			throw new IOException( "Invalid operator '" + string + "'" );
+		}
+		
+		return op;
+	}
+	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>Target</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
+	private static Target parseTarget ( String string ) throws IOException {
+		Target target = Target.get( string );
+		if ( target == null ) {
+			throw new IOException( "Invalid target '" + string + "'" );
+		}
+		
+		return target;
+	}
+	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>boolean</tt> value read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
+	private static boolean parsePermanent ( String string ) throws IOException {
+		string = string.toLowerCase();
+		
+		boolean perm;
+		if ( "perm".equals( string ) || "permanent".equals( string ) ) {
+			perm = true;
+			
+		} else if ( "temp".equals( string ) || "temporary".equals( string ) ) {
+			perm = false;
+			
+		} else {
+			throw new IOException( "Invalid permanent declaration '" + string + "'" );
+		}
+		
+		return perm;
+	}
+	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>double</tt> value read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
+	private static double parseBonus ( String string ) throws IOException {
+		try {
+			return Double.parseDouble( string );
+		} catch ( NumberFormatException exc ) {
+			throw new IOException( exc );
+		}
+	}
 	
 }

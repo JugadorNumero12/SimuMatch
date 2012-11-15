@@ -16,7 +16,7 @@ public enum Scope {
 	 */
 	public static Scope get ( String name ) {
 		try {
-			return Enum.valueOf( Scope.class, name );
+			return Enum.valueOf( Scope.class, name.trim().toUpperCase() );
 		} catch ( IllegalArgumentException exc ) {
 			return null;
 		}
