@@ -1,4 +1,4 @@
-package simumatch.gui;
+package src;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -16,11 +16,55 @@ public class GraphicInterface extends javax.swing.JFrame {
      */
     public GraphicInterface() {
         arrayCheckBox = new boolean[20];
-        arrayPrep = new int[20];
-        arrayCheckBox2 = new boolean[20];
-        arrayAcc = new int[20];
+        arrayPrep = new Action[20];
+        arrayCheckBox2 = new boolean[16];
+        arrayAcc = new Action[16];
+        arrayNomb = new String[36];//20 preparatorias y 16 de partido
         initComponents();
+        initNombres(arrayNomb);
         
+    }
+    
+    private void initNombres(String[] arrayNombres){
+    	//Preparatorias
+    	arrayNombres[0] = jCheckBox1.getText();
+    	arrayNombres[1] = jCheckBox2.getText();
+    	arrayNombres[2] = jCheckBox3.getText();
+    	arrayNombres[3] = jCheckBox4.getText();
+    	arrayNombres[4] = jCheckBox5.getText();
+    	arrayNombres[5] = jCheckBox6.getText();
+    	arrayNombres[6] = jCheckBox7.getText();
+    	arrayNombres[7] = jCheckBox8.getText();
+    	arrayNombres[8] = jCheckBox9.getText();
+    	arrayNombres[9] = jCheckBox10.getText();
+    	arrayNombres[10] = jCheckBox11.getText();
+    	arrayNombres[11] = jCheckBox12.getText();
+    	arrayNombres[12] = jCheckBox13.getText();
+    	arrayNombres[13] = jCheckBox14.getText();
+    	arrayNombres[14] = jCheckBox15.getText();
+    	arrayNombres[15] = jCheckBox16.getText();
+    	arrayNombres[16] = jCheckBox17.getText();
+    	arrayNombres[17] = jCheckBox18.getText();
+    	arrayNombres[18] = jCheckBox19.getText();
+    	arrayNombres[19] = jCheckBox20.getText();
+    	
+    	//De partido
+    	arrayNombres[20] = jCheckBox21.getText();
+    	arrayNombres[21] = jCheckBox22.getText();
+    	arrayNombres[22] = jCheckBox23.getText();
+    	arrayNombres[23] = jCheckBox24.getText();
+    	arrayNombres[24] = jCheckBox25.getText();
+    	arrayNombres[25] = jCheckBox26.getText();
+    	arrayNombres[26] = jCheckBox27.getText();
+    	arrayNombres[27] = jCheckBox28.getText();
+    	arrayNombres[28] = jCheckBox29.getText();
+    	arrayNombres[29] = jCheckBox30.getText();
+    	arrayNombres[30] = jCheckBox31.getText();
+    	arrayNombres[31] = jCheckBox32.getText();
+    	arrayNombres[32] = jCheckBox33.getText();
+    	arrayNombres[33] = jCheckBox34.getText();
+    	arrayNombres[34] = jCheckBox35.getText();
+    	arrayNombres[35] = jCheckBox36.getText();
     }
 
     /**
@@ -86,8 +130,8 @@ public class GraphicInterface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jugador Numero 12");
-        setPreferredSize(new java.awt.Dimension(915, 600));
-        setResizable(false);
+        //setPreferredSize(new java.awt.Dimension(915, 600));
+        setResizable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Variables de entrada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
@@ -102,7 +146,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox1.setText("Mod 1");
+        jCheckBox1.setText("MOTIVARSE");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -110,7 +154,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox2.setText("Mod 2");
+        jCheckBox2.setText("PINTARSE");
 		jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox2ActionPerformed(evt);
@@ -118,7 +162,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox3.setText("Mod 3");
+        jCheckBox3.setText("PELEA_AFICIONES");
 		jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox3ActionPerformed(evt);
@@ -126,7 +170,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox4.setText("Mod 4");
+        jCheckBox4.setText("CREAR_PANCARTA");
 		jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox4ActionPerformed(evt);
@@ -134,7 +178,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox5.setText("Mod 5");
+        jCheckBox5.setText("PROMOCIONAR_EQUIPO");
 		jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox5ActionPerformed(evt);
@@ -142,7 +186,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox6.setText("Mod 6");
+        jCheckBox6.setText("HACKEAR_PAGINA");
         jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox6ActionPerformed(evt);
@@ -150,7 +194,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox7.setText("Mod 7");
+        jCheckBox7.setText("ORGANIZAR_CENA");
 		jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox7ActionPerformed(evt);
@@ -158,7 +202,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox8.setText("Mod 8");
+        jCheckBox8.setText("ORGANIZAR_HOMENAJE");
 		jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox8ActionPerformed(evt);
@@ -166,7 +210,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox9.setText("Mod 9");
+        jCheckBox9.setText("CONTRATAR_RRPP");
 		jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox9ActionPerformed(evt);
@@ -174,7 +218,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox10.setText("Mod 10");
+        jCheckBox10.setText("FINANCIAR_EVENTO");
         jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox10ActionPerformed(evt);
@@ -182,7 +226,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox11.setText("Mod 1");
+        jCheckBox11.setText("MOTIVARSE");
 		jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox11ActionPerformed(evt);
@@ -190,7 +234,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox12.setText("Mod 2");
+        jCheckBox12.setText("PINTARSE");
 		jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox12ActionPerformed(evt);
@@ -198,7 +242,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox13.setText("Mod 3");
+        jCheckBox13.setText("PELEA_AFICIONES");
 		jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox13ActionPerformed(evt);
@@ -206,7 +250,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox14.setText("Mod 4");
+        jCheckBox14.setText("CREAR_PANCARTA");
 		jCheckBox14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox14ActionPerformed(evt);
@@ -214,7 +258,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox15.setText("Mod 5");
+        jCheckBox15.setText("PROMOCIONAR_EQUIPO");
 		jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox15ActionPerformed(evt);
@@ -222,7 +266,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox16.setText("Mod 6");
+        jCheckBox16.setText("HACKEAR_PAGINA");
         jCheckBox16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox16ActionPerformed(evt);
@@ -230,7 +274,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox17.setText("Mod 7");
+        jCheckBox17.setText("ORGANIZAR_CENA");
 		jCheckBox17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox17ActionPerformed(evt);
@@ -238,7 +282,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox18.setText("Mod 8");
+        jCheckBox18.setText("ORGANIZAR_HOMENAJE");
 		jCheckBox18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox18ActionPerformed(evt);
@@ -246,7 +290,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox19.setText("Mod 9");
+        jCheckBox19.setText("CONTRATAR_RRPP");
 		jCheckBox19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox19ActionPerformed(evt);
@@ -254,7 +298,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox20.setText("Mod 10");
+        jCheckBox20.setText("FINANCIAR_EVENTO");
 		jCheckBox20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox20ActionPerformed(evt);
@@ -386,7 +430,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox21.setText("Acc 1");
+        jCheckBox21.setText("SALTO_ESPONTANEO");
         jCheckBox21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox21ActionPerformed(evt);
@@ -394,7 +438,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox22.setText("Acc 2");
+        jCheckBox22.setText("INICIAR_OLA");
         jCheckBox22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox22ActionPerformed(evt);
@@ -402,7 +446,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox23.setText("Acc 3");
+        jCheckBox23.setText("PUNTERO_LASER");
         jCheckBox23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox23ActionPerformed(evt);
@@ -410,7 +454,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox24.setText("Acc 4");
+        jCheckBox24.setText("TIRAR_BENGALA");
         jCheckBox24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox24ActionPerformed(evt);
@@ -418,7 +462,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox25.setText("Acc 5");
+        jCheckBox25.setText("BEBER_CERVEZA");
         jCheckBox25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox25ActionPerformed(evt);
@@ -426,7 +470,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox26.setText("Acc 6");
+        jCheckBox26.setText("ENTREVISTA_INTERMEDIO");
         jCheckBox26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox26ActionPerformed(evt);
@@ -434,7 +478,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox27.setText("Acc 7");
+        jCheckBox27.setText("RETRANSMITIR_PARTIDO");
         jCheckBox27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox27ActionPerformed(evt);
@@ -442,7 +486,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox28.setText("Acc 8");
+        jCheckBox28.setText("HABLAR_SPEAKER");
         jCheckBox28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox28ActionPerformed(evt);
@@ -452,7 +496,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jCheckBox29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox29.setText("Acc 1");
+        jCheckBox29.setText("SALTO_ESPONTANEO");
         jCheckBox29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox29ActionPerformed(evt);
@@ -460,7 +504,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox30.setText("Acc 2");
+        jCheckBox30.setText("INICIAR_OLA");
         jCheckBox30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox30ActionPerformed(evt);
@@ -468,7 +512,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox31.setText("Acc 3");
+        jCheckBox31.setText("PUNTERO_LASER");
         jCheckBox31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox31ActionPerformed(evt);
@@ -476,7 +520,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox32.setText("Acc 4");
+        jCheckBox32.setText("TIRAR_BENGALA");
         jCheckBox32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox32ActionPerformed(evt);
@@ -484,7 +528,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox33.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox33.setText("Acc 5");
+        jCheckBox33.setText("BEBER_CERVEZA");
         jCheckBox33.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox33ActionPerformed(evt);
@@ -492,7 +536,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox34.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox34.setText("Acc 8");
+        jCheckBox34.setText("ENTREVISTA_INTERMEDIO");
         jCheckBox34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox34ActionPerformed(evt);
@@ -500,7 +544,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox35.setText("Acc 7");
+        jCheckBox35.setText("RETRANSMITIR_PARTIDO");
         jCheckBox35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox35ActionPerformed(evt);
@@ -508,7 +552,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jCheckBox36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox36.setText("Acc 6");
+        jCheckBox36.setText("HABLAR_SPEAKER");
         jCheckBox36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox36ActionPerformed(evt);
@@ -633,6 +677,11 @@ public class GraphicInterface extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setText("Siguiente");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -915,7 +964,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox3.isEnabled()){
             arrayCheckBox[2] = true;
         }
         else {
@@ -923,7 +972,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox4.isEnabled()){
             arrayCheckBox[3] = true;
         }
         else {
@@ -931,7 +980,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox5.isEnabled()){
             arrayCheckBox[4] = true;
         }
         else {
@@ -939,7 +988,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox6.isEnabled()){
             arrayCheckBox[5] = true;
         }
         else {
@@ -947,7 +996,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox7.isEnabled()){
             arrayCheckBox[6] = true;
         }
         else {
@@ -955,7 +1004,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox8.isEnabled()){
             arrayCheckBox[7] = true;
         }
         else {
@@ -963,7 +1012,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox9.isEnabled()){
             arrayCheckBox[8] = true;
         }
         else {
@@ -971,7 +1020,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox11.isEnabled()){
             arrayCheckBox[10] = true;
         }
         else {
@@ -979,7 +1028,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox12.isEnabled()){
             arrayCheckBox[11] = true;
         }
         else {
@@ -987,7 +1036,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox13.isEnabled()){
             arrayCheckBox[12] = true;
         }
         else {
@@ -995,7 +1044,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox14ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox14.isEnabled()){
             arrayCheckBox[13] = true;
         }
         else {
@@ -1003,7 +1052,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox15.isEnabled()){
             arrayCheckBox[14] = true;
         }
         else {
@@ -1011,7 +1060,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox16ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox16.isEnabled()){
             arrayCheckBox[15] = true;
         }
         else {
@@ -1019,7 +1068,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox17ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox17.isEnabled()){
             arrayCheckBox[16] = true;
         }
         else {
@@ -1027,7 +1076,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox18ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox18.isEnabled()){
             arrayCheckBox[17] = true;
         }
         else {
@@ -1035,7 +1084,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox19ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox19.isEnabled()){
             arrayCheckBox[18] = true;
         }
         else {
@@ -1043,7 +1092,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox20ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox20.isEnabled()){
             arrayCheckBox[19] = true;
         }
         else {
@@ -1051,22 +1100,22 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     
-    //Lo importante son estos botones. Meto un 1 en la posiciï¿½n del array cuyo CheckBox estï¿½ seleccionado
+    //Lo importante son estos botones. Meto un 1 en la posición del array cuyo CheckBox esté seleccionado
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botï¿½n
+        //Lo que hace el botón
 		for(int i=0;i<20;i++){
 	            if(arrayCheckBox[i]) {
-	                arrayPrep[i] = 1;
+	                arrayPrep[i] = Action.get(arrayNomb[i]);
 	            } 
 		}
-        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca mï¿½s
+        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botï¿½n
+        //Lo que hace el botón
 		for(int i=0;i<16;i++){
 	            if(arrayCheckBox2[i]) {
-	                arrayAcc[i] = 1;
+	                arrayAcc[i] = Action.get(arrayNomb[i+20]);
 	            } 
 		}
 		
@@ -1074,6 +1123,12 @@ public class GraphicInterface extends javax.swing.JFrame {
 		int[] array = {3,5,20,15,2};
         lleganDatos(array);
     }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
+    	jTextField1.setText("");
+    }
+    
+    
     
     //Es una prueba
     private void lleganDatos(int[] probabilidades){
@@ -1083,7 +1138,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     		s+=String.valueOf(probabilidades[i]+ " | ");
     		i++;
     	}
-    	jTextArea1.setText(s);
+    	jTextArea1.setText(jTextArea1.getText()+s+"\n");
+    	jTextField1.setText("+3");
     }
 
     /**
@@ -1177,7 +1233,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private boolean[] arrayCheckBox,arrayCheckBox2;
-    private int[] arrayPrep,arrayAcc;
+    private Action[] arrayPrep,arrayAcc;
+    private String[] arrayNomb;
     private static final long serialVersionUID = 1L;
 }
 
