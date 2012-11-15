@@ -1,4 +1,4 @@
-package simumatch.datamanager;
+package simumatch.common;
 
 public final class Effect {
 	
@@ -110,5 +110,5 @@ public final class Effect {
 	
 	public String toString() {
 		return "Effect(" + scope + "," + operator + bonus + "," + target + "," + (permanent?"PERM":"TEMP") + ")"; 
-	};
+	}
 }

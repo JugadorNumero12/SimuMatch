@@ -11,6 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import simumatch.common.Action;
+import simumatch.common.Effect;
+import simumatch.common.Operator;
+import simumatch.common.Scope;
+import simumatch.common.Target;
+
 /**
  * This class represents the "DataBase" and implements methods in order to:
  * - acces de data

@@ -1,4 +1,4 @@
-package simumatch.datamanager;
+package simumatch.common;
 
 public enum Target {
 	SELF, OPPONENT, BOTH;

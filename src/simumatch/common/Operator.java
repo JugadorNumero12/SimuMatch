@@ -1,4 +1,4 @@
-package simumatch.datamanager;
+package simumatch.common;
 
 import java.util.Collections;
 import java.util.HashMap;
