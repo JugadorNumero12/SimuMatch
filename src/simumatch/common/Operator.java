@@ -13,6 +13,7 @@ public enum Operator {
 		public double apply ( double a, double b ) {
 			return a + b;
 		}
+		
 	},
 	
 	/** Arithmetic subtraction */
@@ -63,6 +64,11 @@ public enum Operator {
 	 * @return Result of the operation
 	 */
 	public abstract double apply ( double a, double b );
+	
+	public int apply ( int a, double b){
+		//added to eliminate Castings
+		return Math.round((float)apply((double)a, b));
+	}
 	
 	/**
 	 * @param str String represetation of the operator

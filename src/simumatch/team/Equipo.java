@@ -1,6 +1,6 @@
 package simumatch.team;
 
-import simumatch.datamanager.Effect;
+import simumatch.common.Effect;
 import java.util.List;
 
 public class Equipo {

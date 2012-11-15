@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import simumatch.team.Equipo;
-import simumatch.datamanager.Effect;
+import simumatch.common.*;
 
 public class Partido {
 	public Equipo local, visitante;
@@ -77,74 +77,61 @@ public class Partido {
 		turno = vacia();
 		partido= vacia();
 		Effect a;
-		while(!acc.isEmpty()){
+		while(!acc.isEmpty()){//TODO iterar correctamente
 			a = acc.get(0);
-			switch (a.tiempo_efecto){
-				case Const.TURNO: turno.add(a);break;
-				case Const.PARTIDO: partido.add(a); break;
-				default: System.out.println("No estan implementadas");
-			}
+			if(a.isPermanent())partido.add(a);
+			else turno.add(a);
 			acc.remove(0);
 		}
 		ejecutaPerma(partido, loc);
 		ejecutaTurno(turno, loc);
 	}
-	private void ejecutaTurno(List<Effect> inst, boolean loc) {
+	private void ejecutaPerma(List<Effect> perm, boolean loc) {
 		Effect a;
-		boolean local= loc;
-		while(!inst.isEmpty()){
-			a=inst.get(0);
-			if(a.objetivo==Const.ENEMIGO)loc=!loc;
+		while(!perm.isEmpty()){//TODO iterar correctamente
+			a = perm.get(0);
+			if(a.getTarget()!=Target.OPPONENT)
+				bonifPer(a.getScope(), a.getBonus(), a.getOperator(), loc);
+			if(a.getTarget()!=Target.SELF)
+				bonifPer(a.getScope(), a.getBonus(), a.getOperator(), !loc);
 			
-			bonifTem(a.tipo, a.bonificaci�n, a.entero, local);
-			inst.remove(0);
-			if(a.objetivo==Const.GLOBAL){
-				a.objetivo=Const.ENEMIGO;
-				inst.add(a);
-			}
-			loc=local;
+			perm.remove(0);
+		}
+	}
+	private void bonifPer(Scope scope, double bonus, Operator op, boolean loc) {
+		// TODO Auto-generated method stub
+		switch(scope){
+		case PEOPLE:
+			if(loc)aforoL= op.apply(aforoL, bonus);
+			else   aforoV= op.apply(aforoV, bonus);
+		break;
+		case TEAM_LEVEL:
+			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
+		break;
+		case ATMOSPHERE:
+			if(loc)animoL= op.apply(animoL, bonus);
+			else   animoV= op.apply(animoV, bonus);
+		break;
+		default:
+			System.out.println("No implementadas acciones permanentes de tipo "+scope);
 		}
 		
 	}
-	private void ejecutaPerma(List<Effect> acc, boolean local) {
+	private void ejecutaTurno(List<Effect> inst, boolean loc) {
 		Effect a;
-		boolean loc= local;
-		while(!acc.isEmpty()){
-			a=acc.get(0);
-			if(a.objetivo==Const.ENEMIGO)loc=!loc;
-			switch(a.atributo){
-				case Const.AFORO:
-					if(loc)aforoL=bonifPer(aforoL, a.bonificaci�n, a.entero);
-					else  aforoV =bonifPer(aforoV, a.bonificaci�n, a.entero);
-				break;
-				case Const.NIVEL_EQUIPO:
-					equilibrio= bonifPer(equilibrio, (loc?1:(-1))*a.bonificaci�n, a.entero);
-				break;
-				case Const.ORGULLO:
-					if(loc)animoL=bonifPer(animoL, a.bonificaci�n, a.entero);
-					else  animoV =bonifPer(animoV, a.bonificaci�n, a.entero);
-				break;
-				default:
-					System.out.println("No implementadas acciones permanentes de tipo "+a.tipo);
-			}
-			acc.remove(0);
-			if(a.objetivo==Const.GLOBAL){
-				a.objetivo=Const.ENEMIGO;
-				acc.add(a);
-			}
-			loc=local;
+		while(!inst.isEmpty()){//TODO iterar correctamente
+			a=inst.get(0);
+			if(a.getTarget()!=Target.OPPONENT)
+				bonifTem(a.getScope(), a.getBonus(), a.getOperator(), loc);
+			if(a.getTarget()!=Target.SELF)
+				bonifTem(a.getScope(), a.getBonus(), a.getOperator(), !loc);
+			
+			inst.remove(0);
 		}
+		
 	}
-	private int bonifPer(int base, double bono, boolean suma) {
-		if(suma)return base+=bono;
-		return base*=bono;
-	}
-	private double bonifPer(double base, double bono, boolean suma) {
-		if(suma)return base+=bono;
-		return base*=bono;
-	}
-	private void bonifTem(int tipo, double bono, boolean suma, boolean local) {
-		mementer.bonifTemp(tipo, bono, suma, local);
+	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
+		this.mementer.bonifTemp(scope, bonus, op, loc);
 	}
 	private int goles(){
 		return marL-marV;
@@ -176,7 +163,7 @@ public class Partido {
 		}
 	}
 	private void ejecutaActivas() {
-		// TODO Auto-generated method stub
+		// TODO Aqui se ejecutan las acciones que duran n turnos (1<n<partido)
 		
 	}
 	private int generaTurno(double[] abanico){
@@ -191,7 +178,6 @@ public class Partido {
 		if(estado<1)marV++;
 		return estado;
 	}
-
 	private double[] calculaAbanico() {
 		double abanico[] = new double [13];
 		int eAnt, pAnt;
@@ -268,46 +254,46 @@ public class Partido {
 		private double indDeL, indDeV;
 		int equilibrio;
 		int animoL, animoV;
-		boolean modificated=false;
-		boolean inited=false;
+		boolean modificated = false;
+		boolean inited = false;
 	
-		public void bonifTemp(int tipo, double bono, boolean suma, boolean loc) {
-			switch (tipo){
-			case Const.AFORO:
+		void bonifTemp(Scope atrib, double bono, Operator op, boolean loc) {
+			switch (atrib){
+			case PEOPLE:
 				System.out.println("El partido ya esta en marcha, no se puede modificar el aforo");
 				break;
-			case Const.NIVEL_EQUIPO:
+			case TEAM_LEVEL:
 				init();
 				modificated=true;
-				p.equilibrio= bonifPer(equilibrio, (loc?1:(-1))*bono, suma);
+				p.equilibrio= op.apply(p.equilibrio, bono);
 				break;
-			case Const.ORGULLO:
+			case ATMOSPHERE:
 				init();
 				modificated=true;
-				if(loc)p.animoL =bonifPer(animoL, bono, suma);
-				else p.animoV =bonifPer(animoV, bono, suma);
+				if(loc)p.animoL =op.apply(p.animoL, bono);
+				else   p.animoV =op.apply(p.animoV, bono);
 				break;
-			case Const.FACTOR_OFENSIVO:
+			case OFFENSIVE_SPIRIT:
 				init();
 				modificated=true;
-				if(loc)p.local.setIOf(bonifPer(indOfL, bono, suma));
-				else p.visitante.setIOf(bonifPer(indOfL, bono, suma));
+				if(loc)p.local.setIOf(op.apply(p.local.indiceOfensivo(), bono));
+				else p.visitante.setIOf(op.apply(p.visitante.indiceOfensivo(), bono));
 				break;
-			case Const.FACTOR_DEFENSIVO:
+			case DEFENSIVE_SPIRIT:
 				init();
 				modificated=true;
-				if(loc)p.local.setIDf(bonifPer(indDeL, bono, suma));
-				else p.visitante.setIDf(bonifPer(indDeL, bono, suma));
+				if(loc)p.local.setIDf(op.apply(p.local.indiceDefensivo(), bono));
+				else p.visitante.setIDf(op.apply(p.visitante.indiceDefensivo(), bono));
 				break;
 			default:
-				System.out.println("No implementadas acciones permanentes de tipo "+tipo);
+				System.out.println("No implementadas acciones permanentes de tipo "+atrib);
 			}
 			
 		}
 		
 		Memento(Partido par){this.p= par;}
 	
-		public void restaura(){
+		void restaura(){
 			if(!modificated)return;
 			if(!inited)System.out.println("No se ha iniciado el turno antes de los cambios, se han perdido los datos originales");
 			p.animoL= animoL;
@@ -320,7 +306,7 @@ public class Partido {
 			inited=false;
 			modificated=false;	
 		}
-		public void init(){
+		void init(){
 			if(inited)return;
 			if(modificated){
 				System.out.println("Se ha reiniciado el turno antes de restaurarlo, restauracion automatica");
@@ -336,8 +322,8 @@ public class Partido {
 			inited=true;
 			modificated=false;
 		}	
-	}
+	}//end of Memento
 	
 
 
-}
+}//end of Partido
