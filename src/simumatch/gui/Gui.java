@@ -8,6 +8,11 @@ import simumatch.common.Action;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
+import javax.swing.JCheckBox;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -579,6 +584,15 @@ public class Gui extends javax.swing.JFrame {
                 jCheckBox36ActionPerformed(evt);
             }
         });
+        
+        JCheckBox jCheckBox37 = new JCheckBox("ACTIVAR_SOBORNO");
+        jCheckBox37.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        jCheckBox37.setFont(new Font("Tahoma", Font.BOLD, 11));
+        
+        JSpinner spinner = new JSpinner();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4Layout.setHorizontalGroup(
@@ -589,15 +603,13 @@ public class Gui extends javax.swing.JFrame {
         				.addComponent(jCheckBox26)
         				.addGroup(jPanel4Layout.createSequentialGroup()
         					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        							.addComponent(jCheckBox27)
-        							.addComponent(jCheckBox28))
+        						.addComponent(jCheckBox27)
+        						.addComponent(jCheckBox28)
         						.addGroup(jPanel4Layout.createSequentialGroup()
         							.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        								.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        									.addComponent(jCheckBox23)
-        									.addComponent(jCheckBox22)
-        									.addComponent(jCheckBox24))
+        								.addComponent(jCheckBox23)
+        								.addComponent(jCheckBox22)
+        								.addComponent(jCheckBox24)
         								.addComponent(jCheckBox21))
         							.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
         								.addGroup(jPanel4Layout.createSequentialGroup()
@@ -607,28 +619,40 @@ public class Gui extends javax.swing.JFrame {
         									.addGap(87)
         									.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
         										.addComponent(jCheckBox30)
-        										.addComponent(jCheckBox29)
+        										.addGroup(jPanel4Layout.createSequentialGroup()
+        											.addComponent(jCheckBox29)
+        											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        											.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        											.addPreferredGap(ComponentPlacement.UNRELATED))
         										.addComponent(jCheckBox31)
         										.addComponent(jCheckBox32)
         										.addComponent(jCheckBox33)
         										.addComponent(jCheckBox34)
         										.addComponent(jCheckBox35)
         										.addComponent(jCheckBox36))))))
-        					.addGap(38)
-        					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(352, Short.MAX_VALUE))
+        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addGap(38)
+        							.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(jCheckBox37)))))
+        			.addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
         	jPanel4Layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(jPanel4Layout.createSequentialGroup()
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        			.addContainerGap(20, Short.MAX_VALUE)
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(jPanel4Layout.createSequentialGroup()
         					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING, false)
         						.addGroup(jPanel4Layout.createSequentialGroup()
         							.addComponent(jSeparator3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox29)
+        							.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
+        								.addComponent(jCheckBox29)
+        								.addComponent(jCheckBox37)
+        								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(jCheckBox30)
         							.addPreferredGap(ComponentPlacement.RELATED)
@@ -652,8 +676,7 @@ public class Gui extends javax.swing.JFrame {
         							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(jCheckBox27)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox28)
-        							.addGap(37))
+        							.addComponent(jCheckBox28))
         						.addGroup(jPanel4Layout.createSequentialGroup()
         							.addComponent(jCheckBox33)
         							.addPreferredGap(ComponentPlacement.RELATED)
@@ -661,9 +684,9 @@ public class Gui extends javax.swing.JFrame {
         							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(jCheckBox35)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox36)
-        							.addGap(37))))
-        				.addGroup(Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        							.addComponent(jCheckBox36)))
+        					.addGap(37))
+        				.addGroup(jPanel4Layout.createSequentialGroup()
         					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
         					.addGap(21))))
         );
