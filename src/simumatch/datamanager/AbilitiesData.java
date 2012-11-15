@@ -29,8 +29,17 @@ import java.util.Map;
  */
 public class AbilitiesData {
 	
+	/** The data collected */
 	private final Map<Action,Collection<Effect>> data = new HashMap<Action,Collection<Effect>>();
 	
+	/**
+	 * Reads a file and adds its information to this object
+	 * 
+	 * @param file
+	 *            The file to read from
+	 * @throws IOException
+	 *             if anything goes wrong
+	 */
 	public void loadFile ( File file ) throws IOException {
 		BufferedReader reader = new BufferedReader( new FileReader( file ) );
 		
@@ -48,11 +57,41 @@ public class AbilitiesData {
 					effects.add( effect );
 				}
 				
-				data.put( action, Collections.unmodifiableCollection( effects ) );
+				addAction( action, Collections.unmodifiableCollection( effects ) );
 			}
 		}
 	}
 	
+	/**
+	 * Adds an action to this object
+	 * 
+	 * @param action
+	 *            The action to add
+	 * @param effects
+	 *            The effect to add
+	 */
+	public void addAction ( Action action, Collection<Effect> effects ) {
+		if ( action == null ) {
+			throw new NullPointerException( "action" );
+		}
+		if ( effects == null || effects.contains( null ) ) {
+			throw new NullPointerException( "effects" );
+		}
+		
+		data.put( action, Collections.unmodifiableCollection( new ArrayList<Effect>( effects ) ) );
+	}
+	
+	public Map<Action,Collection<Effect>> getData () {
+		return Collections.unmodifiableMap( new HashMap<Action,Collection<Effect>>( data ) );
+	}
+	
+	/**
+	 * @param reader
+	 *            The object used to read information
+	 * @return An action read from the <tt>reader</tt>
+	 * @throws IOException
+	 *             If anything goes wrong
+	 */
 	private Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
@@ -70,6 +109,13 @@ public class AbilitiesData {
 		return action;
 	}
 	
+	/**
+	 * @param reader
+	 *            The object used to read information
+	 * @return An effect read from the <tt>reader</tt>
+	 * @throws IOException
+	 *             If anything goes wrong
+	 */
 	private Effect readEffect ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
@@ -101,6 +147,13 @@ public class AbilitiesData {
 		return new Effect( scope, target, op, bonus, perm );
 	}
 	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>Scope</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
 	private static Scope parseScope ( String str ) throws IOException {
 		Scope scope = Scope.get( str );
 		if ( scope == null ) {
@@ -110,6 +163,13 @@ public class AbilitiesData {
 		return scope;
 	}
 	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return An <tt>Operator</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
 	private static Operator parseOperator ( String string ) throws IOException {
 		Operator op = Operator.get( string );
 		if ( op == null ) {
@@ -119,6 +179,13 @@ public class AbilitiesData {
 		return op;
 	}
 	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>Target</tt> object read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
 	private static Target parseTarget ( String string ) throws IOException {
 		Target target = Target.get( string );
 		if ( target == null ) {
@@ -128,6 +195,13 @@ public class AbilitiesData {
 		return target;
 	}
 	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>boolean</tt> value read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
 	private static boolean parsePermanent ( String string ) throws IOException {
 		boolean perm;
 		if ( "perm".equals( string ) || "permanent".equals( string ) ) {
@@ -143,23 +217,19 @@ public class AbilitiesData {
 		return perm;
 	}
 	
+	/**
+	 * @param str
+	 *            String to parse
+	 * @return A <tt>double</tt> value read from <tt>str</tt>
+	 * @throws IOException
+	 *             If the format is invalid
+	 */
 	private static double parseBonus ( String string ) throws IOException {
 		try {
 			return Double.parseDouble( string );
 		} catch ( NumberFormatException exc ) {
 			throw new IOException( exc );
 		}
-	}
-	
-	private void addAction ( Action action, Collection<Effect> effects ) {
-		if ( action == null ) {
-			throw new NullPointerException( "action" );
-		}
-		if ( effects == null || effects.contains( null ) ) {
-			throw new NullPointerException( "effects" );
-		}
-		
-		data.put( action, Collections.unmodifiableCollection( new ArrayList<Effect>( effects ) ) );
 	}
 	
 }
