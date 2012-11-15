@@ -1,33 +1,57 @@
 package simumatch.datamanager;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /** An operator used to calculate bonuses in <tt>Effect</tt>s */
 public enum Operator {
 	/** Arithmetic addition */
-	ADDITION {
+	ADDITION( "+" ) {
 		
 		@Override
-		double apply ( double a, double b ) {
+		public double apply ( double a, double b ) {
 			return a + b;
 		}
 	},
 	
 	/** Arithmetic subtraction */
-	SUBTRACTION {
+	SUBTRACTION( "-" ) {
 		
 		@Override
-		double apply ( double a, double b ) {
+		public double apply ( double a, double b ) {
 			return a - b;
 		}
 	},
 	
 	/** Arithmetic product */
-	PRODUCT {
+	PRODUCT( "*" ) {
 		
 		@Override
-		double apply ( double a, double b ) {
+		public double apply ( double a, double b ) {
 			return a * b;
 		}
 	};
+	
+	private static final Map<String,Operator> OPERATORS;
+	static {
+		Map<String,Operator> ops = new HashMap<String,Operator>();
+		for ( Operator op : Operator.values() ) {
+			ops.put( op.string, op );
+		}
+		
+		OPERATORS = Collections.unmodifiableMap( ops );
+	}
+	
+	/** String representation of the operator */
+	private final String string;
+	
+	/**
+	 * @param string String representation of the operator
+	 */
+	private Operator ( String string ) {
+		this.string = string;
+	}
 	
 	/**
 	 * Applies the operator to the given operands
@@ -38,5 +62,13 @@ public enum Operator {
 	 *            Second operant
 	 * @return Result of the operation
 	 */
-	abstract double apply ( double a, double b );
+	public abstract double apply ( double a, double b );
+	
+	/**
+	 * @param str String represetation of the operator
+	 * @return The corresponding operator
+	 */
+	public static Operator get ( String str ) {
+		return OPERATORS.get( str );
+	}
 }
