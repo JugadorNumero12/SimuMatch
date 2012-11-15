@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,10 @@ import simumatch.common.Target;
  * -----------------------------------------------------
  * 
  */
-public class AbilitiesData {
+public final class AbilitiesData {
+	
+	/** Effect comparator */
+	//private static final Comparator<Effect> COMPARATOR;
 	
 	/** The data collected */
 	private final Map<Action,List<Effect>> data = new HashMap<Action,List<Effect>>();
@@ -92,12 +97,45 @@ public class AbilitiesData {
 	}
 	
 	/**
+	 * @param action
+	 *            Which action to retrieve effects
+	 * @return The effects of the action
+	 */
+	public List<Effect> getEffects ( Action action ) {
+		if ( data.containsKey( action ) ) {
+			return Collections.unmodifiableList( new ArrayList<Effect>( data.get( action ) ) );
+			
+		} else {
+			return Collections.emptyList();
+		}
+	}
+	
+	/**
+	 * @param actions
+	 *            The action to retrieve effects from
+	 * @return The effects of the actions
+	 */
+	public List<Effect> getEffects ( Collection<Action> actions ) {
+		List<Effect> effects = new ArrayList<Effect>();
+		
+		for ( Action action : actions ) {
+			effects.addAll( getEffects( action ) );
+		}
+		
+		//Collections.sort( effects, COMPARATOR );
+		return Collections.unmodifiableList( effects );
+	}
+	
+	// --- PRIVATE ---
+	
+	/**
 	 * @param reader
 	 *            The object used to read information
 	 * @return An action read from the <tt>reader</tt>
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
+	
 	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
