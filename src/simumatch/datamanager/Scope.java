@@ -1,4 +1,4 @@
-package dataManager;
+package simumatch.datamanager;
 
 public enum Scope {
 	ATMOSPHERE,

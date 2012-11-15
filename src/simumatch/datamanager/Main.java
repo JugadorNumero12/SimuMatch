@@ -1,4 +1,4 @@
-package dataManager;
+package simumatch.datamanager;
 
 import java.util.ArrayList;
 

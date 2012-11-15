@@ -1,4 +1,4 @@
-package dataManager;
+package simumatch.datamanager;
 
 /**
  * An action that can be performed by a team in a match.

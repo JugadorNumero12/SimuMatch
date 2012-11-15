@@ -1,10 +1,11 @@
-package dataManager;
+package simumatch.datamanager;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents the "DataBase" and implements methods in order to:
@@ -24,11 +25,7 @@ import java.util.HashMap;
  */
 public class AbilitiesData {
 	
-	private HashMap<Action,ArrayList<Effect>> data;
-	
-	public AbilitiesData () {
-		data = new HashMap<Action,ArrayList<Effect>>();
-	}
+	private final Map<Action,ArrayList<Effect>> data = new HashMap<Action,ArrayList<Effect>>();
 	
 	public void fillData ( String f1, String f2, String f3 ) {
 		int fileNumber = 0;

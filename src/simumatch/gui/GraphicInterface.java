@@ -1,4 +1,4 @@
-package src;
+package simumatch.gui;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -1051,19 +1051,19 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     
-    //Lo importante son estos botones. Meto un 1 en la posición del array cuyo CheckBox esté seleccionado
+    //Lo importante son estos botones. Meto un 1 en la posiciï¿½n del array cuyo CheckBox estï¿½ seleccionado
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
 		for(int i=0;i<20;i++){
 	            if(arrayCheckBox[i]) {
 	                arrayPrep[i] = 1;
 	            } 
 		}
-        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
+        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca mï¿½s
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
 		for(int i=0;i<16;i++){
 	            if(arrayCheckBox2[i]) {
 	                arrayAcc[i] = 1;

@@ -1,4 +1,4 @@
-package dataManager;
+package simumatch.datamanager;
 
 /**
  * An Effect works as an c-struct with the following fields:
