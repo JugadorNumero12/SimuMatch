@@ -22,8 +22,8 @@ public class Partido {
 	
 	//Metodos Publicos (solo os interesan estos 2)
 	public Partido(Equipo loc, Equipo vis){
-		aforoL = local.aforoBase();
-		aforoV = visitante.aforoBase();
+		aforoL = loc.aforoBase();
+		aforoV = vis.aforoBase();
 		int maximLoc = loc.estadio.getAforoEqL();
 		int maximVis = loc.estadio.getAforoEqV();
 		ejecuta(loc.preparacion, true);
