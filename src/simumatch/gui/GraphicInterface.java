@@ -1,4 +1,10 @@
-package src;
+package simumatch.gui;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import simumatch.common.Action;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -1108,6 +1114,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 	                arrayPrep[i] = Action.get(arrayNomb[i]);
 	            } 
 		}
+		List<Action> list = Arrays.asList(arrayPrep);
         jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
     }
     
@@ -1119,9 +1126,19 @@ public class GraphicInterface extends javax.swing.JFrame {
 	            } 
 		}
 		
+		List<Action> list = Arrays.asList(arrayAcc);
+		//Separar la lista en local y visitante
+		//Al cargar preparatorias -> a Dani. getEffects
+		//Los efectos que me envía Dani los agrego a equipo
+		//A Marcos los 2 equipos para crear el Partido
+		//Guardar un partido en Main
 		
-		int[] array = {3,5,20,15,2};
-        lleganDatos(array);
+		//Para las acciones de cada turno
+		//Dani me devuelve efectos y a Marcos partido.turno(listas)
+		//devuelve clase Turno -> estado, toString
+		
+//		int[] array = {3,5,20,15,2};
+//        lleganDatos(array);
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
@@ -1131,16 +1148,16 @@ public class GraphicInterface extends javax.swing.JFrame {
     
     
     //Es una prueba
-    private void lleganDatos(int[] probabilidades){
-    	int i=0; String s="";
-    	while(i<probabilidades.length)
-    	{
-    		s+=String.valueOf(probabilidades[i]+ " | ");
-    		i++;
-    	}
-    	jTextArea1.setText(jTextArea1.getText()+s+"\n");
-    	jTextField1.setText("+3");
-    }
+//    private void lleganDatos(int[] probabilidades){
+//    	int i=0; String s="";
+//    	while(i<probabilidades.length)
+//    	{
+//    		s+=String.valueOf(probabilidades[i]+ " | ");
+//    		i++;
+//    	}
+//    	jTextArea1.setText(jTextArea1.getText()+s+"\n");
+//    	jTextField1.setText("+3");
+//    }
 
     /**
      * @param args the command line arguments
