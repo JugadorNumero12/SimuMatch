@@ -15,33 +15,40 @@ public class Partido {
 	int equilibrio;
 	Arbitro arbitro = new Arbitro();
 	int duracion = 10;//el numero de turnos que va a durar el partido
-	public Turno turno[] = new Turno[duracion];
-	int turnoActual = -1;
+	public Turno turno[] = new Turno[duracion+1];
+	int turnoActual = 0;
 	//List<Effect> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	private Memento mementer= new Memento(this);
 	
 	//Metodos Publicos (solo os interesan estos 2)
 	public Partido(Equipo loc, Equipo vis){
-		aforoL = loc.aforoBase();
-		aforoV = vis.aforoBase();
-		int maximLoc = loc.estadio.getAforoEqL();
-		int maximVis = loc.estadio.getAforoEqV();
-		ejecuta(loc.preparacion, true);
-		ejecuta(vis.preparacion, false);
-		aforoL = Math.min(maximLoc, aforoL);
-		aforoV = Math.min(maximVis, aforoV);
 		local=loc;
 		visitante=vis;
+		arbitro = new Arbitro();
+		
+		aforoL = loc.aforoBase();
+		aforoV = vis.aforoBase();
 		animoL = loc.orgullo();
 		animoV = vis.orgullo();
-		//el punto de equilibrio del partido (el estado que se mantiene si nadie hace nada)
+		
 		equilibrio = estadoEstable(loc,vis);
+		
 		if(equilibrio>=0){tacL=1;tacV=2;}
 		 else			 {tacL=2;tacV=1;}
 		
-		arbitro = new Arbitro();
+		ejecuta(loc.preparacion, true);
+		ejecuta(vis.preparacion, false);
+		
+		aforoL = Math.min(loc.estadio.getAforoEqL(), aforoL);
+		aforoV = Math.min(loc.estadio.getAforoEqV(), aforoV);
+
 		loc.resetPreparatorias();
 		vis.resetPreparatorias();
+		
+		turno[0]= new Turno(equilibrio, this);
+		
+		recalculaTacticas();
+		recalculaAnimo();
 	}
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
 		
@@ -49,19 +56,18 @@ public class Partido {
 			System.out.println("El partido ya ha acabado");
 			return null;
 		}
+		if(turnoActual==0)return turno[0];
 		
 		ejecuta(accLoc, true);
 		ejecuta(accVis, false);
-		ejecutaActivas();
+		//ejecutaActivas(); TODO las acciones de n turno de duracion (1<n<partido)
+
+		turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
+	
+		mementer.restaura();
 		
 		recalculaTacticas();
 		recalculaAnimo();
-		
-		if(turnoActual>0)
-			turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
-		else turno[0]= new Turno(this);
-		
-		mementer.restaura();
 		
 		return turno[turnoActual];
 	}
@@ -133,7 +139,7 @@ public class Partido {
 	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
 		this.mementer.bonifTemp(scope, bonus, op, loc);
 	}
-	private int goles(){
+	int goles(){
 		return marL-marV;
 	}
 	private void recalculaAnimo() {
@@ -161,10 +167,6 @@ public class Partido {
 			if(tacL==2 && Math.random()<local.versatilidad())tacL=1;
 			if(tacV==1 && Math.random()<visitante.versatilidad())tacV=2;
 		}
-	}
-	private void ejecutaActivas() {
-		// TODO Aqui se ejecutan las acciones que duran n turnos (1<n<partido)
-		
 	}
 	private int generaTurno(double[] abanico){
 		int i, estado;
