@@ -1,14 +1,21 @@
 package simumatch.gui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import simumatch.common.Action;
+import simumatch.common.Effect;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import simumatch.datamanager.AbilitiesData;
+import simumatch.match.Partido;
+import simumatch.match.Turno;
 
 
 /**
@@ -22,9 +29,11 @@ public class GraphicInterface extends javax.swing.JFrame {
      */
     public GraphicInterface() {
         arrayCheckBox = new boolean[20];
-        arrayPrep = new Action[20];
         arrayCheckBox2 = new boolean[16];
-        arrayAcc = new Action[16];
+        arrayLocalP = new Action[10];
+        arrayVisitP = new Action[10];
+        arrayLocalM = new Action[8];
+        arrayVisitM = new Action[8];
         arrayNomb = new String[36];//20 preparatorias y 16 de partido
         initComponents();
         initNombres(arrayNomb);
@@ -323,7 +332,7 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox3)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jCheckBox8)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addComponent(jCheckBox2)
@@ -346,7 +355,7 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox13)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jCheckBox18)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addComponent(jCheckBox12)
@@ -1109,24 +1118,58 @@ public class GraphicInterface extends javax.swing.JFrame {
     //Lo importante son estos botones. Meto un 1 en la posición del array cuyo CheckBox esté seleccionado
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
         //Lo que hace el botón
-		for(int i=0;i<20;i++){
-	            if(arrayCheckBox[i]) {
-	                arrayPrep[i] = Action.get(arrayNomb[i]);
-	            } 
+    	int i;
+		for(i=0;i<10;i++){
+			if(arrayCheckBox[i]) {
+				arrayLocalP[i] = Action.get(arrayNomb[i]);
+	        } 
 		}
-		List<Action> list = Arrays.asList(arrayPrep);
-        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
+		for(i=10;i<20;i++){
+			if(arrayCheckBox[i]){
+				arrayVisitP[i] = Action.get(arrayNomb[i]);
+			}
+		}
+		ArrayList<Action> listLocalP = (ArrayList<Action>) Arrays.asList(arrayLocalP);//Lista con preparatorias del Local
+		ArrayList<Action> listVisitP = (ArrayList<Action>) Arrays.asList(arrayVisitP);//Lista con preparatorias del visitante
+		/*Set<Action> set = new HashSet<Action>();
+		set.addAll(listLocalP);
+		set.addAll(listVisitP);
+		ArrayList<Action> listUni= new ArrayList<Action>(set); //Lista con todas las preparatorias
+*/		AbilitiesData data = new AbilitiesData();
+		listEffectsP1 = data.getEffects(listLocalP);
+		listEffectsP2 = data.getEffects(listVisitP);
+		
+		//match = new Partido();
+		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
         //Lo que hace el botón
-		for(int i=0;i<16;i++){
+		for(int i=0;i<8;i++){
 	            if(arrayCheckBox2[i]) {
-	                arrayAcc[i] = Action.get(arrayNomb[i+20]);
+	                arrayLocalM[i] = Action.get(arrayNomb[i+20]);
 	            } 
 		}
+		for(int i=8;i<16;i++){
+            if(arrayCheckBox2[i]) {
+                arrayVisitM[i] = Action.get(arrayNomb[i+20]);
+            } 
+		}
+		ArrayList<Action> listLocalM = (ArrayList<Action>) Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
+		ArrayList<Action> listVisitM = (ArrayList<Action>) Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
+		/*Set<Action> set = new HashSet<Action>();
+		set.addAll(listLocalM);
+		set.addAll(listVisitM);
+		ArrayList<Action> listUni= new ArrayList<Action>(set); //Lista con todas las acc de partido*/
+		AbilitiesData data = new AbilitiesData();
+		listEffectsM1 = data.getEffects(listLocalM);
+		listEffectsM2 = data.getEffects(listVisitM);
+		turn = match.turno(listEffectsM1, listEffectsM2);
 		
-		List<Action> list = Arrays.asList(arrayAcc);
+		//Pintar
+		jTextField1.setText(String.valueOf(turn.estado));
+		jTextArea1.setText(turn.toString()+"\n");
+	
 		//Separar la lista en local y visitante
 		//Al cargar preparatorias -> a Dani. getEffects
 		//Los efectos que me envía Dani los agrego a equipo
@@ -1250,8 +1293,13 @@ public class GraphicInterface extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private boolean[] arrayCheckBox,arrayCheckBox2;
-    private Action[] arrayPrep,arrayAcc;
+    private Action[] arrayLocalP,arrayVisitP; //Preparatorias
+    private Action[] arrayLocalM,arrayVisitM;//De partido
     private String[] arrayNomb;
     private static final long serialVersionUID = 1L;
+    
+    private List<Effect> listEffectsP1,listEffectsP2,listEffectsM1,listEffectsM2;
+    private Partido match;
+    private Turno turn;
 }
 
