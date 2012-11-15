@@ -1,7 +1,7 @@
 package simumatch.datamanager;
 
 public enum Target {
-	LOCAL, VISITOR, BOTH;
+	SELF, OPPONENT, BOTH;
 	
 	/**
 	 * @param name

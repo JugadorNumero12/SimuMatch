@@ -1,7 +1,6 @@
 package simumatch.datamanager;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,7 +30,7 @@ import java.util.Map;
 public class AbilitiesData {
 	
 	/** The data collected */
-	private final Map<Action,Collection<Effect>> data = new HashMap<Action,Collection<Effect>>();
+	private final Map<Action,List<Effect>> data = new HashMap<Action,List<Effect>>();
 	
 	/**
 	 * Reads a file and adds its information to this object
@@ -50,14 +50,14 @@ public class AbilitiesData {
 				eof = true;
 				
 			} else {
-				Collection<Effect> effects = new ArrayList<Effect>();
+				List<Effect> effects = new ArrayList<Effect>();
 				
 				Effect effect;
 				while ( ( effect = readEffect( reader ) ) != null ) {
 					effects.add( effect );
 				}
 				
-				addAction( action, Collections.unmodifiableCollection( effects ) );
+				addAction( action, Collections.unmodifiableList( effects ) );
 			}
 		}
 	}
@@ -70,7 +70,7 @@ public class AbilitiesData {
 	 * @param effects
 	 *            The effect to add
 	 */
-	public void addAction ( Action action, Collection<Effect> effects ) {
+	public void addAction ( Action action, List<Effect> effects ) {
 		if ( action == null ) {
 			throw new NullPointerException( "action" );
 		}
@@ -78,11 +78,11 @@ public class AbilitiesData {
 			throw new NullPointerException( "effects" );
 		}
 		
-		data.put( action, Collections.unmodifiableCollection( new ArrayList<Effect>( effects ) ) );
+		data.put( action, Collections.unmodifiableList( new ArrayList<Effect>( effects ) ) );
 	}
 	
-	public Map<Action,Collection<Effect>> getData () {
-		return Collections.unmodifiableMap( new HashMap<Action,Collection<Effect>>( data ) );
+	public Map<Action,List<Effect>> getData () {
+		return Collections.unmodifiableMap( new HashMap<Action,List<Effect>>( data ) );
 	}
 	
 	/**
@@ -203,6 +203,8 @@ public class AbilitiesData {
 	 *             If the format is invalid
 	 */
 	private static boolean parsePermanent ( String string ) throws IOException {
+		string = string.toLowerCase();
+		
 		boolean perm;
 		if ( "perm".equals( string ) || "permanent".equals( string ) ) {
 			perm = true;
