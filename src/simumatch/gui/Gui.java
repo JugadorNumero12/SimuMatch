@@ -1142,20 +1142,20 @@ public class Gui extends javax.swing.JFrame {
         }
     }
     
-    //Lo importante son estos botones. Meto un 1 en la posición del array cuyo CheckBox esté seleccionado
+    //Lo importante son estos botones. Meto un 1 en la posiciï¿½n del array cuyo CheckBox estï¿½ seleccionado
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
 		for(int i=0;i<20;i++){
 	            if(arrayCheckBox[i]) {
 	                arrayPrep[i] = Action.get(arrayNomb[i]);
 	            } 
 		}
 		List<Action> list = Arrays.asList(arrayPrep);
-        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
+        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca mï¿½s
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
 		for(int i=0;i<16;i++){
 	            if(arrayCheckBox2[i]) {
 	                arrayAcc[i] = Action.get(arrayNomb[i+20]);
@@ -1165,7 +1165,7 @@ public class Gui extends javax.swing.JFrame {
 		List<Action> list = Arrays.asList(arrayAcc);
 		//Separar la lista en local y visitante
 		//Al cargar preparatorias -> a Dani. getEffects
-		//Los efectos que me envía Dani los agrego a equipo
+		//Los efectos que me envï¿½a Dani los agrego a equipo
 		//A Marcos los 2 equipos para crear el Partido
 		//Guardar un partido en Main
 		

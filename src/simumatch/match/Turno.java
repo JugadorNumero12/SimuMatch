@@ -6,7 +6,7 @@ public class Turno {
 	public int estado;
 	String local, visitante;
 	Partido partido;
-	Turno(int estado, Partido p){
+	Turno(int estado, Partido p, double aba[]){
 		this.estado = estado;
 		this.partido = p;
 		local= p.local.getName();
@@ -17,13 +17,13 @@ public class Turno {
 		else comentarista += numeroDeTurno+": ";
 		
 		switch(estado){
-		case  6 : com("¡Gol de "+ local+"!");break;
+		case  6 : com("ï¿½Gol de "+ local+"!");break;
 		case  5 : com(local+" esta dominado el juego, es cuestion de tiempo que marque");break;
 		case  1 : com(local+" tiene oportunidad de tomar la iniciativa");break;
 		case  0 : com("El partido esta muy igualado");break;
 		case -1 : com(visitante+" tiene oportunidad de tomar la iniciativa");break;
 		case -5 : com(visitante+" esta dominado el juego, es cuestion de tiempo que marque");break;
-		case -6 : com("¡Gol de "+ visitante+"!");break;
+		case -6 : com("ï¿½Gol de "+ visitante+"!");break;
 		default:
 			if(estado >6 || estado <-6){
 				System.out.println("Se ha llegado un estado incoherente: "+estado);
@@ -46,11 +46,12 @@ public class Turno {
 		}
 		
 		if(numeroDeTurno==partido.duracion){
-			com("¡Final del partido!");
+			com("ï¿½Final del partido!");
 			if(partido.goles()==0)com("EMPATE");
 			else if(partido.goles()> 0)com("Ganador: el equipo local: "+local);
 			else com("Ganador: el equipo visitante: "+visitante);
 		}
+		comentarista+=escribeAbanico(aba);
 		
 		comentarista+="\n["+partido.marL+"|"+partido.marV+"]\n\n";
 	}
@@ -60,8 +61,18 @@ public class Turno {
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
 	}
-	public double[] getAbanico(){
-		if(numeroDeTurno!=partido.turnoActual)return null;
-		return partido.lastAbanico;
+	private static String escribeAbanico(double[] aba) {
+		String r = "\n\n|+6 |+5 |+4 |+3 |+2 |+1 | 0 |-1 |-2 |-3 |-4 |-5 |-6 |";
+		r+="\n[";
+		for (int i=0;;){
+			r+=porcen2Char(aba[i])+'%';
+			if(++i<aba.length)r+='|';
+			else return r+']'; 
+		}
+	}
+	private static String porcen2Char(double prob) {
+		int n = Math.round((float)(100*Math.abs(prob)));
+		if(n<10)return " "+n;
+		return Integer.toString(n);
 	}
 }

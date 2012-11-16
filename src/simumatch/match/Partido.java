@@ -16,7 +16,6 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion+1];
 	int turnoActual = 0;
-	double[] lastAbanico = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 	private Memento mementer= new Memento(this);
 	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
@@ -48,10 +47,11 @@ public class Partido {
 		loc.resetPreparatorias();
 		vis.resetPreparatorias();
 		
-		turno[0]= new Turno(equilibrio, this);
-		//el turno 0 nunca se muestra, solo se usa como base para en 1
+		double[] firstAbanico = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		firstAbanico[estToPunt(equilibrio)]=1;
 		
-		lastAbanico[estToPunt(equilibrio)]=1;
+		turno[0]= new Turno(equilibrio, this, firstAbanico);
+		//el turno 0 nunca se muestra, solo se usa como base para en 1
 		
 		recalculaTacticas();
 		recalculaAnimo();
@@ -69,8 +69,9 @@ public class Partido {
 		
 		recalculaTacticas();
 		recalculaAnimo();
-
-		turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
+		
+		double [] abanico= calculaAbanico();
+		turno[turnoActual] = new Turno(generaTurno(abanico), this, abanico);
 	
 		mementer.restaura();
 		
@@ -187,12 +188,12 @@ public class Partido {
 		bonif( 0, pAnt-1, Math.max(0, animoV/animoL), abanico);
 		
 		
-		return lastAbanico=normalizar(abanico);
+		return normalizar(abanico);
 	}
 	private static void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
 		if(destino>12)destino=12;
-		for(int i=origen; i<=destino;i++ )
+		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
 	}
 	private static double[] normalizar(double[] input) {
@@ -201,7 +202,7 @@ public class Partido {
 		double sum = 0;
 		for(int i=0; i<len; i++)
 			if(input[i]<0)System.out.println("Warning! franja negativa en el abanico");
-			else sum+=input[i++];
+			else sum+=input[i];
 		for(int i=0; i<len; i++)
 			output[i]=Math.max(input[i]/sum, 0);
 		return output;

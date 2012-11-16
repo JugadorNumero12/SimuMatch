@@ -1178,7 +1178,6 @@ public class GraphicInterface extends javax.swing.JFrame {
 		//Pintar
 		jTextField1.setText(String.valueOf(turn.estado));
 		jTextArea1.setText(jTextArea1.getText()+turn.toString()+"\n");
-		jTextArea1.setText(jTextArea1.getText()+Arrays.toString(turn.getAbanico())+"\n");
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
