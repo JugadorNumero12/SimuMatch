@@ -1,6 +1,5 @@
 package simumatch.match;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import simumatch.team.Equipo;
@@ -40,8 +39,8 @@ public class Partido {
 		if(equilibrio>=0){tacL=1;tacV=2;}
 		 else			 {tacL=2;tacV=1;}
 		
-		ejecuta(loc.preparacion, true);
-		ejecuta(vis.preparacion, false);
+		ejecuta(loc.getPreparatorias(), true);
+		ejecuta(vis.getPreparatorias(), false);
 		
 		aforoL = Math.min(loc.estadio.getAforoL(), aforoL);
 		aforoV = Math.min(loc.estadio.getAforoV(), aforoV);
@@ -87,30 +86,15 @@ public class Partido {
 		return turno[turnoActual];
 	}
 	private void ejecuta(List<Effect> acc, boolean loc) {
-		List<Effect> turno, partido;
-		turno = vacia();
-		partido= vacia();
-		Effect a;
-		while(!acc.isEmpty()){//TODO iterar correctamente
-			a = acc.get(0);
-			if(a.isPermanent())partido.add(a);
-			else turno.add(a);
-			acc.remove(0);
-		}
-		ejecutaPerma(partido, loc);
-		ejecutaTurno(turno, loc);
+		for(Effect a: acc) ejecutaEffect(a, loc, a.isPermanent());
 	}
-	private void ejecutaPerma(List<Effect> perm, boolean loc) {
-		Effect a;
-		while(!perm.isEmpty()){//TODO iterar correctamente
-			a = perm.get(0);
+	private void ejecutaEffect(Effect a, boolean loc, boolean perm) {
 			if(a.getTarget()!=Target.OPPONENT)
-				bonifPer(a.getScope(), a.getBonus(), a.getOperator(), loc);
+				if(perm)bonifPer(a.getScope(), a.getBonus(), a.getOperator(), loc);
+				else bonifTem(a.getScope(), a.getBonus(), a.getOperator(), loc);
 			if(a.getTarget()!=Target.SELF)
-				bonifPer(a.getScope(), a.getBonus(), a.getOperator(), !loc);
-			
-			perm.remove(0);
-		}
+				if(perm)bonifPer(a.getScope(), a.getBonus(), a.getOperator(), !loc);
+				else bonifTem(a.getScope(), a.getBonus(), a.getOperator(), !loc);
 	}
 	private void bonifPer(Scope scope, double bonus, Operator op, boolean loc) {
 		switch(scope){
@@ -127,19 +111,6 @@ public class Partido {
 		break;
 		default:
 			System.out.println("No implementadas acciones permanentes de tipo "+scope);
-		}
-		
-	}
-	private void ejecutaTurno(List<Effect> inst, boolean loc) {
-		Effect a;
-		while(!inst.isEmpty()){//TODO iterar correctamente
-			a=inst.get(0);
-			if(a.getTarget()!=Target.OPPONENT)
-				bonifTem(a.getScope(), a.getBonus(), a.getOperator(), loc);
-			if(a.getTarget()!=Target.SELF)
-				bonifTem(a.getScope(), a.getBonus(), a.getOperator(), !loc);
-			
-			inst.remove(0);
 		}
 		
 	}
@@ -257,10 +228,6 @@ public class Partido {
 	}
 	static int puntToEst(int p){return p-6;}
 	static int estToPunt(int e){return e+6;}
-	static List<Effect> vacia(){
-		ArrayList<Effect> ar = new ArrayList<Effect>();
-		return ar;
-	}
 	private class Memento{
 		Partido p;
 		private double indOfL, indOfV ;

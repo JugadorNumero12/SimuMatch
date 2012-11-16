@@ -9,7 +9,6 @@ public class Equipo {
 		e.nivel=2;
 		e.orgullo=88;
 		e.versatilidad = 0.8;
-		e.aforoBase= 100;
 		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 1.5;
 		e.indiceOptimismo = 15;
@@ -21,7 +20,6 @@ public class Equipo {
 		e.nivel=2;
 		e.orgullo=100;
 		e.versatilidad = 0.8;
-		e.aforoBase= 90;
 		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 2.5;
 		e.indiceOptimismo = 6;
@@ -41,9 +39,9 @@ public class Equipo {
 	double indiceViloencia;//probablidad de juego sucio
 	int orgullo;//animo base al empezar el partido
 	public Estadio estadio;
-	public String nombre;
 	int aforoBase;
-	public List<Effect> preparacion;//las acciones preparadas para el proximo partido
+	private List<Effect> preparacion;//las acciones preparadas para el proximo partido
+	private String nombre;
 	
 	public Equipo(String nombre, int lvl, Estadio estadio, int aforoBase) throws Exception{
 		if(lvl<1||aforoBase<0)throw new Exception("Datos incorrectos: Equipo no puede tener nivel ni aforo negativo");
@@ -102,6 +100,15 @@ public class Equipo {
 	}
 	public int orgullo(){
 		return orgullo;
+	}
+	public String getName(){
+		return nombre;
+	}
+	public void setPerparatorias(List<Effect> accionesPreparatorias){
+		preparacion = accionesPreparatorias;
+	}
+	public List<Effect> getPreparatorias() {
+		return preparacion;
 	}
 	
 
