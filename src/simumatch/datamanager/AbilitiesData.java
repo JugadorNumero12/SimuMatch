@@ -120,6 +120,8 @@ public final class AbilitiesData {
 	/**
 	 * @param action
 	 *            Which action to retrieve effects
+	 * @param sorted
+	 *            Whether to sort the result list
 	 * @return The effects of the action
 	 */
 	public List<Effect> getEffects ( Action action, boolean sorted ) {
@@ -137,7 +139,9 @@ public final class AbilitiesData {
 	
 	/**
 	 * @param actions
-	 *            The action to retrieve effects from
+	 *            The actions to retrieve effects from
+	 * @param sorted
+	 *            Whether to sort the result list
 	 * @return The effects of the actions
 	 */
 	public List<Effect> getEffects ( Collection<Action> actions, boolean sorted ) {
@@ -145,6 +149,32 @@ public final class AbilitiesData {
 		
 		for ( Action action : actions ) {
 			effects.addAll( getEffects( action, false ) );
+		}
+		
+		if ( sorted ) {
+			Collections.sort( effects, COMPARATOR );
+		}
+		return Collections.unmodifiableList( effects );
+	}
+	
+	/**
+	 * @param actions
+	 *            The actions to retrieve effects from and their cardinality
+	 * @param sorted
+	 *            Whether to sort the result list
+	 * @return The effects of the actions
+	 */
+	public List<Effect> getEffects ( Map<Action,? extends Number> actions, boolean sorted ) {
+		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
+		
+		for ( Map.Entry<Action,? extends Number> entry : actions.entrySet() ) {
+			List<Effect> actionEffects = getEffects( entry.getKey(), false );
+			
+			// FIXME Do this in an efficient way
+			int times = entry.getValue().intValue();
+			for ( int i = 0; i < times; i++ ) {
+				effects.addAll( actionEffects );
+			}
 		}
 		
 		if ( sorted ) {
@@ -162,6 +192,7 @@ public final class AbilitiesData {
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
+	
 	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
