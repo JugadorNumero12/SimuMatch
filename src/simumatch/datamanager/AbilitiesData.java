@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ import simumatch.common.Target;
 public final class AbilitiesData {
 	
 	/** Effect comparator */
-	//private static final Comparator<Effect> COMPARATOR;
+	private static final Comparator<Effect> COMPARATOR = new EffectComparator();
 	
 	/** The data collected */
 	private final Map<Action,List<Effect>> data = new HashMap<Action,List<Effect>>();
@@ -102,7 +103,9 @@ public final class AbilitiesData {
 	 */
 	public List<Effect> getEffects ( Action action ) {
 		if ( data.containsKey( action ) ) {
-			return Collections.unmodifiableList( new ArrayList<Effect>( data.get( action ) ) );
+			List<Effect> effects = new ArrayList<Effect>( data.get( action ) );
+			Collections.sort( effects, COMPARATOR );
+			return Collections.unmodifiableList( effects );
 			
 		} else {
 			return Collections.emptyList();
@@ -115,13 +118,16 @@ public final class AbilitiesData {
 	 * @return The effects of the actions
 	 */
 	public List<Effect> getEffects ( Collection<Action> actions ) {
-		List<Effect> effects = new ArrayList<Effect>();
+		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
 		
 		for ( Action action : actions ) {
-			effects.addAll( getEffects( action ) );
+			if ( data.containsKey( action ) ) {
+				List<Effect> actionEffects = data.get( action );
+				effects.addAll( actionEffects );
+			}
 		}
 		
-		//Collections.sort( effects, COMPARATOR );
+		Collections.sort( effects, COMPARATOR );
 		return Collections.unmodifiableList( effects );
 	}
 	
