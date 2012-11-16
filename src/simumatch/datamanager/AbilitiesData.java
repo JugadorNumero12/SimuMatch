@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,18 +41,42 @@ public final class AbilitiesData {
 	 *             if anything goes wrong
 	 */
 	public void loadFile ( File file ) throws IOException {
-		loadFromReader( new BufferedReader( new FileReader( file ) ) );
+		loadFromReader( new FileReader( file ) );
 	}
 	
+	/**
+	 * Reads a URL and adds its information to this object
+	 * 
+	 * @param url
+	 *            The url to read from
+	 * @throws IOException
+	 *             if anything goes wrong
+	 */
 	public void loadUrl ( URL url ) throws IOException {
-		loadFromReader( new BufferedReader( new InputStreamReader( url.openStream() ) ) );
+		loadFromReader( new InputStreamReader( url.openStream() ) );
 	}
 	
-	public void loadFromReader ( BufferedReader reader ) throws IOException {
+	/**
+	 * Reads a reader and adds its information to this object
+	 * 
+	 * @param br
+	 *            The reader to read from
+	 * @throws IOException
+	 *             if anything goes wrong
+	 */
+	public void loadFromReader ( Reader reader ) throws IOException {
+		// Use a BufferedReader
+		BufferedReader br;
+		if ( reader instanceof BufferedReader ) {
+			br = (BufferedReader) reader;
+		} else {
+			br = new BufferedReader( reader );
+		}
 		
+		// Read everything
 		boolean eof = false;
 		while ( !eof ) {
-			Action action = readAction( reader );
+			Action action = readAction( br );
 			if ( action == null ) {
 				eof = true;
 				
@@ -59,7 +84,7 @@ public final class AbilitiesData {
 				List<Effect> effects = new ArrayList<Effect>();
 				
 				Effect effect;
-				while ( ( effect = readEffect( reader ) ) != null ) {
+				while ( ( effect = readEffect( br ) ) != null ) {
 					effects.add( effect );
 				}
 				
