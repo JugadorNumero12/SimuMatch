@@ -44,6 +44,8 @@ public class GraphicInterface extends javax.swing.JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        e1 = Equipo.equipo_de_prueba1();
+        e2 = Equipo.equipo_de_prueba2();
         
         initComponents();
         initNombres(arrayNomb);
@@ -1146,12 +1148,10 @@ public class GraphicInterface extends javax.swing.JFrame {
 		set.addAll(listVisitP);
 		ArrayList<Action> listUni= new ArrayList<Action>(set); //Lista con todas las preparatorias
 */		AbilitiesData data = new AbilitiesData();
-		listEffectsP1 = data.getEffects(listLocalP);
-		listEffectsP2 = data.getEffects(listVisitP);
+		listEffectsP1 = data.getEffects(listLocalP,true);
+		listEffectsP2 = data.getEffects(listVisitP,true);
 		
-		Equipo e1 = Equipo.equipo_de_prueba1();
 		e1.setPerparatorias(listEffectsP1);
-		Equipo e2 = Equipo.equipo_de_prueba2();
 		e2.setPerparatorias(listEffectsP2);
 		match = new Partido(e1,e2);
 		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca m�s
@@ -1171,8 +1171,8 @@ public class GraphicInterface extends javax.swing.JFrame {
 		}
 		List<Action> listLocalM = Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
 		List<Action> listVisitM = Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
-		listEffectsM1 = data.getEffects(listLocalM);
-		listEffectsM2 = data.getEffects(listVisitM);
+		listEffectsM1 = data.getEffects(listLocalM,true);
+		listEffectsM2 = data.getEffects(listVisitM,true);
 		turn = match.turno(listEffectsM1, listEffectsM2);
 		
 		//Pintar
@@ -1285,5 +1285,6 @@ public class GraphicInterface extends javax.swing.JFrame {
     private Partido match;
     private Turno turn;
 	private AbilitiesData data;
+	private Equipo e1,e2;
 }
 
