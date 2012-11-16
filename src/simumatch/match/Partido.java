@@ -189,7 +189,7 @@ public class Partido {
 		
 		return lastAbanico=normalizar(abanico);
 	}
-	private void bonif(int origen, int destino, double mult, double aba[]){
+	private static void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
 		if(destino>12)destino=12;
 		for(int i=origen; i<=destino;i++ )
