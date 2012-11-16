@@ -8,7 +8,7 @@ import simumatch.common.Operator;
 /**
  * Compares <tt>Effect</tt>s so products appear before additions and subtractions
  */
-public class EffectComparator implements Comparator<Effect> {
+public final class EffectComparator implements Comparator<Effect> {
 	
 	@Override
 	public int compare ( Effect effect1, Effect effect2 ) {
@@ -16,13 +16,16 @@ public class EffectComparator implements Comparator<Effect> {
 			throw new NullPointerException();
 		}
 		
-		if ( effect1.getOperator() == Operator.PRODUCT && ( effect2.getOperator() != Operator.PRODUCT ) ) {
+		return compareOperators( effect1.getOperator(), effect2.getOperator() );
+	}
+	
+	private static int compareOperators ( Operator op1, Operator op2 ) {
+		if ( op1 == Operator.PRODUCT && op2 != Operator.PRODUCT ) {
 			return -1;
-		} else if ( ( effect1.getOperator() != Operator.PRODUCT && ( effect2.getOperator() == Operator.PRODUCT ) ) ) {
+		} else if ( op1 != Operator.PRODUCT && op2 == Operator.PRODUCT ) {
 			return 1;
 		} else {
 			return 0;
 		}
-		
 	}
 }
