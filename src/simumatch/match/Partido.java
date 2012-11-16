@@ -126,7 +126,7 @@ public class Partido {
 	private void recalculaAnimo() {
 		animoL+=goles();
 		animoV-=goles();
-		int estado = actual().estado;
+		int estado = actual().getEstado();
 		if(estado>0){
 			animoL+=estado*local.indiceOptimismo();
 			animoV-=estado/visitante.indiceFrialdad();
@@ -139,7 +139,7 @@ public class Partido {
 		animoV=(2*animoV+aforoV)/3;
 	}
 	private void recalculaTacticas() {
-		int estado = actual().estado;
+		int estado = actual().getEstado();
 		if(estado<0){
 			if(tacL==1 && Math.random()<local.versatilidad())tacL=2;
 			if(tacV==2 && Math.random()<visitante.versatilidad())tacV=1;
@@ -163,7 +163,7 @@ public class Partido {
 	private double[] calculaAbanico() {
 		double abanico[] = new double [13];
 		int eAnt, pAnt;
-		eAnt = (turnoActual>0)?turno[turnoActual-1].estado:equilibrio;
+		eAnt = (turnoActual>0)?turno[turnoActual-1].getEstado():equilibrio;
 		pAnt = puntToEst(eAnt);
 		double l = abanico.length;
 		for(int i=0; i<l; i++)abanico[i]=100;

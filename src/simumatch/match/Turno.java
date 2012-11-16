@@ -1,11 +1,11 @@
 package simumatch.match;
 
 public class Turno {
-	String comentarista = "Turno ";
-	int numeroDeTurno;
-	public int estado;
-	String local, visitante;
-	Partido partido;
+	private String comentarista = "Turno ";
+	private int numeroDeTurno;
+	private int estado= 7;
+	private String local, visitante;
+	private Partido partido;
 	Turno(int estado, Partido p, double aba[]){
 		this.estado = estado;
 		this.partido = p;
@@ -17,13 +17,13 @@ public class Turno {
 		else comentarista += numeroDeTurno+": ";
 		
 		switch(estado){
-		case  6 : com("�Gol de "+ local+"!");break;
+		case  6 : com("¡Gol de "+ local+"!");break;
 		case  5 : com(local+" esta dominado el juego, es cuestion de tiempo que marque");break;
 		case  1 : com(local+" tiene oportunidad de tomar la iniciativa");break;
 		case  0 : com("El partido esta muy igualado");break;
 		case -1 : com(visitante+" tiene oportunidad de tomar la iniciativa");break;
 		case -5 : com(visitante+" esta dominado el juego, es cuestion de tiempo que marque");break;
-		case -6 : com("�Gol de "+ visitante+"!");break;
+		case -6 : com("¡Gol de "+ visitante+"!");break;
 		default:
 			if(estado >6 || estado <-6){
 				System.out.println("Se ha llegado un estado incoherente: "+estado);
@@ -46,7 +46,7 @@ public class Turno {
 		}
 		
 		if(numeroDeTurno==partido.duracion){
-			com("�Final del partido!");
+			com("¡Final del partido!");
 			if(partido.goles()==0)com("EMPATE");
 			else if(partido.goles()> 0)com("Ganador: el equipo local: "+local);
 			else com("Ganador: el equipo visitante: "+visitante);
@@ -74,5 +74,8 @@ public class Turno {
 		int n = Math.round((float)(100*Math.abs(prob)));
 		if(n<10)return " "+n;
 		return Integer.toString(n);
+	}
+	public int getEstado() {
+		return estado;
 	}
 }
