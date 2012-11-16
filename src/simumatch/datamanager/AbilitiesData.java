@@ -122,10 +122,12 @@ public final class AbilitiesData {
 	 *            Which action to retrieve effects
 	 * @return The effects of the action
 	 */
-	public List<Effect> getEffects ( Action action ) {
+	public List<Effect> getEffects ( Action action, boolean sorted ) {
 		if ( data.containsKey( action ) ) {
 			List<Effect> effects = new ArrayList<Effect>( data.get( action ) );
-			Collections.sort( effects, COMPARATOR );
+			if ( sorted ) {
+				Collections.sort( effects, COMPARATOR );
+			}
 			return Collections.unmodifiableList( effects );
 			
 		} else {
@@ -138,17 +140,16 @@ public final class AbilitiesData {
 	 *            The action to retrieve effects from
 	 * @return The effects of the actions
 	 */
-	public List<Effect> getEffects ( Collection<Action> actions ) {
+	public List<Effect> getEffects ( Collection<Action> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
 		
 		for ( Action action : actions ) {
-			if ( data.containsKey( action ) ) {
-				List<Effect> actionEffects = data.get( action );
-				effects.addAll( actionEffects );
-			}
+			effects.addAll( getEffects( action, false ) );
 		}
 		
-		Collections.sort( effects, COMPARATOR );
+		if ( sorted ) {
+			Collections.sort( effects, COMPARATOR );
+		}
 		return Collections.unmodifiableList( effects );
 	}
 	
@@ -161,7 +162,6 @@ public final class AbilitiesData {
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
-	
 	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
