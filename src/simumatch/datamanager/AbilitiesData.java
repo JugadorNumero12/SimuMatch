@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,20 +20,7 @@ import simumatch.common.Scope;
 import simumatch.common.Target;
 
 /**
- * This class represents the "DataBase" and implements methods in order to:
- * - acces de data
- * - fill the data
- * 
- * The data would be represented as a HasMap<Action, ArrayList<Effect>>
- * -----------------------------------------------------
- * | ACTION1 | Effect1 Effect2 Effect3 |
- * | ACTION2 | Effect1 |
- * | ACTION3 | Effect1 Effect2 |
- * | ACTION4 | Effect1 Effect2 Effect3 |
- * | ACTION5 | Effect1 |
- * | ACTION6 | Effect1 Effect2 Effect3 Effect4 |
- * -----------------------------------------------------
- * 
+ * A class that stores data about the abilities of the game, as a single map from <tt>Action</tt>s to <tt>Effect</tt>s.
  */
 public final class AbilitiesData {
 	
@@ -51,7 +39,14 @@ public final class AbilitiesData {
 	 *             if anything goes wrong
 	 */
 	public void loadFile ( File file ) throws IOException {
-		BufferedReader reader = new BufferedReader( new FileReader( file ) );
+		loadFromReader( new BufferedReader( new FileReader( file ) ) );
+	}
+	
+	public void loadUrl ( URL url ) throws IOException {
+		loadFromReader( new BufferedReader( new InputStreamReader( url.openStream() ) ) );
+	}
+	
+	public void loadFromReader ( BufferedReader reader ) throws IOException {
 		
 		boolean eof = false;
 		while ( !eof ) {
@@ -73,7 +68,7 @@ public final class AbilitiesData {
 	}
 	
 	/**
-	 * Adds an action to this object
+	 * Adds an action to this object. If the action already exists, the effects are replaced.
 	 * 
 	 * @param action
 	 *            The action to add
