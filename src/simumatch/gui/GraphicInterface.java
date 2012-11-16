@@ -1,9 +1,12 @@
 package simumatch.gui;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import simumatch.common.Action;
 import simumatch.common.Effect;
 /*
@@ -33,6 +36,15 @@ public class GraphicInterface extends javax.swing.JFrame {
         listEffectsP2 = new LinkedList<Effect>();
         listEffectsM1 = new LinkedList<Effect>();
         listEffectsM2 = new LinkedList<Effect>();
+        data = new AbilitiesData();
+        try {
+			data.loadFile(new File("./animadora.txt"));
+			data.loadFile(new File("./empresario.txt"));
+			data.loadFile(new File("./ultra.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
         initComponents();
         initNombres(arrayNomb);
         
@@ -1159,7 +1171,6 @@ public class GraphicInterface extends javax.swing.JFrame {
 		}
 		List<Action> listLocalM = Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
 		List<Action> listVisitM = Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
-		AbilitiesData data = new AbilitiesData();
 		listEffectsM1 = data.getEffects(listLocalM);
 		listEffectsM2 = data.getEffects(listVisitM);
 		turn = match.turno(listEffectsM1, listEffectsM2);
@@ -1167,6 +1178,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 		//Pintar
 		jTextField1.setText(String.valueOf(turn.estado));
 		jTextArea1.setText(jTextArea1.getText()+turn.toString()+"\n");
+		jTextArea1.setText(jTextArea1.getText()+turn.getAbanico()+"\n");
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
@@ -1272,5 +1284,6 @@ public class GraphicInterface extends javax.swing.JFrame {
     private List<Effect> listEffectsP1,listEffectsP2,listEffectsM1,listEffectsM2;
     private Partido match;
     private Turno turn;
+	private AbilitiesData data;
 }
 

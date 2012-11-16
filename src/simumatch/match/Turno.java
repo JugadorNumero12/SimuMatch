@@ -60,7 +60,7 @@ public class Turno {
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
 	}
-	double[] getAbanico(){
+	public double[] getAbanico(){
 		if(numeroDeTurno!=partido.turnoActual)return null;
 		return partido.lastAbanico;
 	}
