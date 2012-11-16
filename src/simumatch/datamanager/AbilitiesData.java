@@ -250,7 +250,7 @@ public final class AbilitiesData {
 	private static Scope parseScope ( String str ) throws IOException {
 		Scope scope = Scope.get( str );
 		if ( scope == null ) {
-			throw new IOException( "Invalid scope name" );
+			throw new IOException( "Invalid scope name '" + scope + "'" );
 		}
 		
 		return scope;
