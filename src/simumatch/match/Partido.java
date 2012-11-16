@@ -17,6 +17,7 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion+1];
 	int turnoActual = 0;
+	double[] lastAbanico;
 	private Memento mementer= new Memento(this);
 	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
@@ -213,7 +214,7 @@ public class Partido {
 		bonif( 0, pAnt-1, Math.max(0, animoV/animoL), abanico);
 		
 		
-		return normalizar(abanico);
+		return lastAbanico=normalizar(abanico);
 	}
 	private void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
