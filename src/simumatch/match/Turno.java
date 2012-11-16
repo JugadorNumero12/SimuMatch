@@ -9,8 +9,8 @@ public class Turno {
 	Turno(int estado, Partido p){
 		this.estado = estado;
 		this.partido = p;
-		local= p.local.nombre;
-		visitante= p.visitante.nombre;
+		local= p.local.getName();
+		visitante= p.visitante.getName();
 		numeroDeTurno = partido.turnoActual;
 
 		if(partido.turnoActual==partido.duracion/2)comentarista = "Descanso("+numeroDeTurno+") ";

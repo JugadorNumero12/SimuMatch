@@ -1125,9 +1125,9 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     
-    //Lo importante son estos botones. Meto un 1 en la posición del array cuyo CheckBox esté seleccionado
+    //Lo importante son estos botones. Meto un 1 en la posiciï¿½n del array cuyo CheckBox estï¿½ seleccionado
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
     	int i;
 		for(i=0;i<10;i++){
 			if(arrayCheckBox[i]) {
@@ -1150,15 +1150,15 @@ public class GraphicInterface extends javax.swing.JFrame {
 		listEffectsP2 = data.getEffects(listVisitP);
 		
 		Equipo e1 = Equipo.equipo_de_prueba1();
-		e1.preparacion = listEffectsP1;
+		e1.setPerparatorias(listEffectsP1);
 		Equipo e2 = Equipo.equipo_de_prueba2();
-		e2.preparacion = listEffectsP2;
+		e2.setPerparatorias(listEffectsP2);
 		match = new Partido(e1,e2);
-		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca más
+		jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca mï¿½s
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el botón
+        //Lo que hace el botï¿½n
 		for(int i=0;i<8;i++){
 	            if(arrayCheckBox2[i]) {
 	                arrayLocalM[i] = Action.get(arrayNomb[i+20]);
