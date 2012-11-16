@@ -14,6 +14,7 @@ import simumatch.match.Partido;
 import simumatch.match.Turno;
 import simumatch.team.Equipo;
 
+@SuppressWarnings("unused")
 public class GraphicInterface extends javax.swing.JFrame {
 
 	/**
@@ -1153,10 +1154,6 @@ public class GraphicInterface extends javax.swing.JFrame {
 		}
 		List<Action> listLocalM = Arrays.asList(arrayLocalM);//Lista con acc de partido del Local
 		List<Action> listVisitM = Arrays.asList(arrayVisitM);//Lista con acc de partido del visitante
-		/*Set<Action> set = new HashSet<Action>();
-		set.addAll(listLocalM);
-		set.addAll(listVisitM);
-		ArrayList<Action> listUni= new ArrayList<Action>(set); //Lista con todas las acc de partido*/
 		AbilitiesData data = new AbilitiesData();
 		listEffectsM1 = data.getEffects(listLocalM);
 		listEffectsM2 = data.getEffects(listVisitM);
@@ -1164,40 +1161,13 @@ public class GraphicInterface extends javax.swing.JFrame {
 		
 		//Pintar
 		jTextField1.setText(String.valueOf(turn.estado));
-		jTextArea1.setText(turn.toString()+"\n");
-	
-		//Separar la lista en local y visitante
-		//Al cargar preparatorias -> a Dani. getEffects
-		//Los efectos que me envía Dani los agrego a equipo
-		//A Marcos los 2 equipos para crear el Partido
-		//Guardar un partido en Main
-		
-		//Para las acciones de cada turno
-		//Dani me devuelve efectos y a Marcos partido.turno(listas)
-		//devuelve clase Turno -> estado, toString
-		
-//		int[] array = {3,5,20,15,2};
-//        lleganDatos(array);
+		jTextArea1.setText(jTextArea1.getText()+turn.toString()+"\n");
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
     	jTextField1.setText("");
     }
     
-    
-    
-    //Es una prueba
-//    private void lleganDatos(int[] probabilidades){
-//    	int i=0; String s="";
-//    	while(i<probabilidades.length)
-//    	{
-//    		s+=String.valueOf(probabilidades[i]+ " | ");
-//    		i++;
-//    	}
-//    	jTextArea1.setText(jTextArea1.getText()+s+"\n");
-//    	jTextField1.setText("+3");
-//    }
-
     /**
      * @param args the command line arguments
      */
