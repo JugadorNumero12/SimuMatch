@@ -16,7 +16,7 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion+1];
 	int turnoActual = 0;
-	double[] lastAbanico;
+	double[] lastAbanico = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 	private Memento mementer= new Memento(this);
 	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
@@ -51,6 +51,8 @@ public class Partido {
 		turno[0]= new Turno(equilibrio, this);
 		//el turno 0 nunca se muestra, solo se usa como base para en 1
 		
+		lastAbanico[estToPunt(equilibrio)]=1;
+		
 		recalculaTacticas();
 		recalculaAnimo();
 	}
@@ -64,13 +66,13 @@ public class Partido {
 		ejecuta(accLoc, true);
 		ejecuta(accVis, false);
 		//TODO ejecutaActivas(); 
+		
+		recalculaTacticas();
+		recalculaAnimo();
 
 		turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
 	
 		mementer.restaura();
-		
-		recalculaTacticas();
-		recalculaAnimo();
 		
 		return turno[turnoActual];
 	}
