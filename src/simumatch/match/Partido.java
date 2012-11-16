@@ -17,10 +17,13 @@ public class Partido {
 	int duracion = 10;//el numero de turnos que va a durar el partido
 	public Turno turno[] = new Turno[duracion+1];
 	int turnoActual = 0;
-	//List<Effect> activas;//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	private Memento mementer= new Memento(this);
+	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
-	//Metodos Publicos (solo os interesan estos 2)
+	
+	/**
+	 * Metodos Publicos (solo os interesan estos 2)
+	 * */
 	public Partido(Equipo loc, Equipo vis){
 		local=loc;
 		visitante=vis;
@@ -39,13 +42,14 @@ public class Partido {
 		ejecuta(loc.preparacion, true);
 		ejecuta(vis.preparacion, false);
 		
-		aforoL = Math.min(loc.estadio.getAforoEqL(), aforoL);
-		aforoV = Math.min(loc.estadio.getAforoEqV(), aforoV);
+		aforoL = Math.min(loc.estadio.getAforoL(), aforoL);
+		aforoV = Math.min(loc.estadio.getAforoV(), aforoV);
 
 		loc.resetPreparatorias();
 		vis.resetPreparatorias();
 		
 		turno[0]= new Turno(equilibrio, this);
+		//el turno 0 nunca se muestra, solo se usa como base para en 1
 		
 		recalculaTacticas();
 		recalculaAnimo();
@@ -56,11 +60,10 @@ public class Partido {
 			System.out.println("El partido ya ha acabado");
 			return null;
 		}
-		if(turnoActual==0)return turno[0];
 		
 		ejecuta(accLoc, true);
 		ejecuta(accVis, false);
-		//ejecutaActivas(); TODO las acciones de n turno de duracion (1<n<partido)
+		//TODO ejecutaActivas(); 
 
 		turno[turnoActual] = new Turno(generaTurno(calculaAbanico()), this);
 	
@@ -72,7 +75,10 @@ public class Partido {
 		return turno[turnoActual];
 	}
 	
-	//Privado. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
+	
+	/** 
+	 * Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
+	 * */
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
@@ -154,8 +160,8 @@ public class Partido {
 			animoV+=estado*visitante.indiceOptimismo();
 			animoL-=estado/local.indiceFrialdad();
 		}
-		animoL=(animoL+aforoL)/2;
-		animoV=(animoV+aforoV)/2;
+		animoL=(2*animoL+aforoL)/3;
+		animoV=(2*animoV+aforoV)/3;
 	}
 	private void recalculaTacticas() {
 		int estado = actual().estado;
@@ -169,12 +175,11 @@ public class Partido {
 		}
 	}
 	private int generaTurno(double[] abanico){
-		int i, estado;
 		if(turnoActual==duracion/2)
 			return equilibrio;
-		double tirada = Math.random();
-		for (i=0; tirada>0; i++)
-			tirada-=abanico[i];
+		int estado, i=0;
+		for (double tirada= Math.random(); tirada>0; i++)
+			if((tirada-=abanico[i]) <=0) break;
 		estado = Partido.puntToEst(i);
 		if(estado> 5)marL++;
 		if(estado<-5)marV++;
@@ -188,8 +193,8 @@ public class Partido {
 		double l = abanico.length;
 		for(int i=0; i<l; i++)abanico[i]=100;
 		
-		double indicess[] = {6, 4.5, 3, 2.5, 1.5};
-		mul_adyacen(indicess,   pAnt, abanico);
+		double indi_est[] = {6, 4.5, 3, 2.5, 1.5};
+		mul_adyacen(indi_est, pAnt, abanico);
 
 		if(eAnt>0){
 			if(tacL==1)bonif(pAnt, 13, local.indiceOfensivo(),abanico);
@@ -200,29 +205,31 @@ public class Partido {
 			if(tacV==1)bonif(pAnt, 13, visitante.indiceOfensivo(),abanico);
 		}
 		
-		double indices[] = {5,4,3,2};
-		mul_adyacen(indices, estToPunt(equilibrio), abanico);
+		double indi_equi[] = {4.5, 3, 2.5, 1.5};
+		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
 	
 		
-		bonif(pAnt+1, 13, Math.max(1,animoL/animoV), abanico);
-		bonif( 0, pAnt-1, Math.max(1,animoV/animoL), abanico);
+		bonif(pAnt+1, 12, Math.max(0, animoL/animoV), abanico);
+		bonif( 0, pAnt-1, Math.max(0, animoV/animoL), abanico);
 		
 		
 		return normalizar(abanico);
 	}
 	private void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
-		if(destino>13)destino=12;
-		for(int i=origen; i<destino;i++ )
+		if(destino>12)destino=12;
+		for(int i=origen; i<=destino;i++ )
 			aba[i]*=mult;
 	}
 	private static double[] normalizar(double[] input) {
-		int len=  input.length;
+		int len = input.length;
 		double output[] = new double[len];
 		double sum = 0;
-		for(int i=0; i<len; sum+=input[i++]);
 		for(int i=0; i<len; i++)
-			output[i]=input[i]/sum;
+			if(input[i]<0)System.out.println("Warning! franja negativa en el abanico");
+			else sum+=input[i++];
+		for(int i=0; i<len; i++)
+			output[i]=Math.max(input[i]/sum, 0);
 		return output;
 	}
 	private static void mul_adyacen(double indices[], int p, double abanico[]){
@@ -234,15 +241,18 @@ public class Partido {
 		for(int i=0; i<ps.length; i++)abanico[i]*=indice;
 	}
 	private static int[] adyacentes(int punto, int grado) {
-		if(grado>12)return null;
+		int g = Math.abs(grado);
+		if(g>12)return null;
 		int[] r = new int[2];
 		int s=1;
 		boolean b;
-		if(b=punto<punto+grado)r = new int[s--];
-		if(punto<14-grado)r[s]=punto+grado;
+		if(b= punto-g < 0)r =new int[s--];
+		if(punto+g < 13)  r[s]=punto+g;
 		else r = new int[1];
-		if(b)r[0]=punto-grado;
-		return r;//debuelve un vector con los DOS PUNTOS separados "grado" de "punto"
+		if(!b) r[0]=punto-g;
+		return r;
+		//debuelve un vector con los DOS PUNTOS separados "grado" de "punto"
+		//no funciona bien para puntos de origen que no existen
 	}
 	static int puntToEst(int p){return p-6;}
 	static int estToPunt(int e){return e+6;}

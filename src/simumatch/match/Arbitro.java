@@ -1,6 +1,6 @@
 package simumatch.match;
 
-//import Equipo.Equipo;
+//import simumatch.Equipo;
 
 class Arbitro{
 	double atencion;//probabilidad de pillar las faltas
@@ -19,5 +19,4 @@ class Arbitro{
 		if(e!=sobornado)return false;
 		return true;
 	}*/
-	
 }

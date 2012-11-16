@@ -5,28 +5,28 @@ import java.util.List;
 
 public class Equipo {
 	public static Equipo equipo_de_prueba1(){
-		Equipo e1 = new Equipo("Optimistas");
-		e1.nivel=2;
-		e1.orgullo=88;
-		e1.versatilidad = 0.8;
-		e1.aforoBase= 100;
-		e1.indiceDefensivo = 1;
-		e1.indiceOfensivo = 2;
-		e1.indiceOptimismo = 15;
-		e1.indiceFrialdad = 15;
-		return e1;
+		Equipo e = new Equipo("Optimistas");
+		e.nivel=2;
+		e.orgullo=88;
+		e.versatilidad = 0.8;
+		e.aforoBase= 100;
+		e.indiceDefensivo = 1.5;
+		e.indiceOfensivo = 1.5;
+		e.indiceOptimismo = 15;
+		e.indiceFrialdad = 15;
+		return e;
 	}
 	public static Equipo equipo_de_prueba2(){
-		Equipo e1 = new Equipo("Ofensivos");
-		e1.nivel=2;
-		e1.orgullo=100;
-		e1.versatilidad = 0.8;
-		e1.aforoBase= 90;
-		e1.indiceDefensivo = 1.5;
-		e1.indiceOfensivo = 3;
-		e1.indiceOptimismo = 6;
-		e1.indiceFrialdad = 3;
-		return e1;
+		Equipo e = new Equipo("Ofensivos");
+		e.nivel=2;
+		e.orgullo=100;
+		e.versatilidad = 0.8;
+		e.aforoBase= 90;
+		e.indiceDefensivo = 1.5;
+		e.indiceOfensivo = 4;
+		e.indiceOptimismo = 6;
+		e.indiceFrialdad = 3;
+		return e;
 	}
 	
 	int nivel;//el nivel de juego medio del equipo
