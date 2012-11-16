@@ -218,16 +218,16 @@ public final class AbilitiesData {
 	}
 	
 	/**
-	 * @param str
+	 * @param string
 	 *            String to parse
 	 * @return A <tt>Scope</tt> object read from <tt>str</tt>
 	 * @throws IOException
 	 *             If the format is invalid
 	 */
-	private static Scope parseScope ( String str ) throws IOException {
-		Scope scope = Scope.get( str );
+	private static Scope parseScope ( String string ) throws IOException {
+		Scope scope = Scope.get( string );
 		if ( scope == null ) {
-			throw new IOException( "Invalid scope name '" + scope + "'" );
+			throw new IOException( "Invalid scope name '" + string + "'" );
 		}
 		
 		return scope;
