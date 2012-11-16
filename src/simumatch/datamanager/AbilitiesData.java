@@ -123,22 +123,9 @@ public final class AbilitiesData {
 	 * @return The effects of the action
 	 */
 	public List<Effect> getEffects ( Action action ) {
-		return getEffects( action, true );
-	}
-	
-	/**
-	 * @param action
-	 *            Which action to retrieve effects
-	 * @param sorted
-	 *            Whether the returned list is sorted acoording to openad application priority
-	 * @return The effects of the action
-	 */
-	public List<Effect> getEffects ( Action action, boolean sorted ) {
 		if ( data.containsKey( action ) ) {
 			List<Effect> effects = new ArrayList<Effect>( data.get( action ) );
-			if ( sorted ) {
-				Collections.sort( effects, COMPARATOR );
-			}
+			Collections.sort( effects, COMPARATOR );
 			return Collections.unmodifiableList( effects );
 			
 		} else {
@@ -149,29 +136,19 @@ public final class AbilitiesData {
 	/**
 	 * @param actions
 	 *            The action to retrieve effects from
-	 * @param sorted
-	 *            Whether the returned list is sorted acoording to openad application priority
 	 * @return The effects of the actions
 	 */
 	public List<Effect> getEffects ( Collection<Action> actions ) {
-		return getEffects( actions, true );
-	}
-	
-	/**
-	 * @param actions
-	 *            The action to retrieve effects from
-	 * @return The effects of the actions
-	 */
-	public List<Effect> getEffects ( Collection<Action> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
 		
 		for ( Action action : actions ) {
-			effects.addAll( getEffects( action, false ) );
+			if ( data.containsKey( action ) ) {
+				List<Effect> actionEffects = data.get( action );
+				effects.addAll( actionEffects );
+			}
 		}
 		
-		if ( sorted ) {
-			Collections.sort( effects, COMPARATOR );
-		}
+		Collections.sort( effects, COMPARATOR );
 		return Collections.unmodifiableList( effects );
 	}
 	

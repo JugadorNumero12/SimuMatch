@@ -23,7 +23,7 @@ public class Equipo {
 		e.versatilidad = 0.8;
 		e.aforoBase= 90;
 		e.indiceDefensivo = 1.5;
-		e.indiceOfensivo = 4;
+		e.indiceOfensivo = 2.5;
 		e.indiceOptimismo = 6;
 		e.indiceFrialdad = 3;
 		return e;
