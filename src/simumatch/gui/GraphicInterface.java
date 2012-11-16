@@ -2,6 +2,7 @@ package simumatch.gui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import simumatch.common.Action;
 import simumatch.common.Effect;
@@ -28,6 +29,10 @@ public class GraphicInterface extends javax.swing.JFrame {
         arrayLocalM = new Action[8];
         arrayVisitM = new Action[8];
         arrayNomb = new String[36];//20 preparatorias y 16 de partido
+        listEffectsP1 = new LinkedList<Effect>();
+        listEffectsP2 = new LinkedList<Effect>();
+        listEffectsM1 = new LinkedList<Effect>();
+        listEffectsM2 = new LinkedList<Effect>();
         initComponents();
         initNombres(arrayNomb);
         
@@ -784,7 +789,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
         //   add your handling code here:
-        if(jCheckBox10.isEnabled()){
+        if(jCheckBox10.isSelected()){
             arrayCheckBox[9] = true;
         }
         else {
@@ -794,7 +799,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         //   add your handling code here:
-        if(jCheckBox1.isEnabled()){
+        if(jCheckBox1.isSelected()){
             arrayCheckBox[0] = true;
         }
         else {
@@ -805,7 +810,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox21ActionPerformed
         //   add your handling code here:
-        if(jCheckBox21.isEnabled()){
+        if(jCheckBox21.isSelected()){
             arrayCheckBox2[0] = true;
         }
         else {
@@ -815,7 +820,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox22ActionPerformed
         //   add your handling code here:
-        if(jCheckBox22.isEnabled()){
+        if(jCheckBox22.isSelected()){
             arrayCheckBox2[1] = true;
         }
         else {
@@ -825,7 +830,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox23ActionPerformed
         //   add your handling code here:
-        if(jCheckBox23.isEnabled()){
+        if(jCheckBox23.isSelected()){
             arrayCheckBox2[2] = true;
         }
         else {
@@ -835,7 +840,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox24ActionPerformed
         //   add your handling code here:
-        if(jCheckBox24.isEnabled()){
+        if(jCheckBox24.isSelected()){
             arrayCheckBox2[3] = true;
         }
         else {
@@ -845,7 +850,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox25ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         //   add your handling code here:
-        if(jCheckBox25.isEnabled()){
+        if(jCheckBox25.isSelected()){
             arrayCheckBox2[4] = true;
         }
         else {
@@ -855,7 +860,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 	
 	private void jCheckBox26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox25ActionPerformed
         //   add your handling code here:
-            if(jCheckBox26.isEnabled()){
+            if(jCheckBox26.isSelected()){
             arrayCheckBox2[5] = true;
         }
         else {
@@ -865,7 +870,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox27ActionPerformed
         //   add your handling code here:
-        if(jCheckBox27.isEnabled()){
+        if(jCheckBox27.isSelected()){
             arrayCheckBox2[6] = true;
         }
         else {
@@ -875,7 +880,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox28ActionPerformed
         //   add your handling code here:
-        if(jCheckBox28.isEnabled()){
+        if(jCheckBox28.isSelected()){
             arrayCheckBox2[7] = true;
         }
         else {
@@ -885,7 +890,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox29ActionPerformed
         //   add your handling code here:
-        if(jCheckBox29.isEnabled()){
+        if(jCheckBox29.isSelected()){
             arrayCheckBox2[8] = true;
         }
         else {
@@ -895,7 +900,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox30ActionPerformed
         //   add your handling code here:
-        if(jCheckBox30.isEnabled()){
+        if(jCheckBox30.isSelected()){
             arrayCheckBox2[9] = true;
         }
         else {
@@ -905,7 +910,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox31ActionPerformed
         //   add your handling code here:
-        if(jCheckBox31.isEnabled()){
+        if(jCheckBox31.isSelected()){
             arrayCheckBox2[10] = true;
         }
         else {
@@ -915,7 +920,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox32ActionPerformed
         //   add your handling code here:
-        if(jCheckBox32.isEnabled()){
+        if(jCheckBox32.isSelected()){
             arrayCheckBox2[11] = true;
         }
         else {
@@ -925,7 +930,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox33ActionPerformed
         //   add your handling code here:
-        if(jCheckBox33.isEnabled()){
+        if(jCheckBox33.isSelected()){
             arrayCheckBox2[12] = true;
         }
         else {
@@ -935,7 +940,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox35ActionPerformed
         //   add your handling code here:
-        if(jCheckBox35.isEnabled()){
+        if(jCheckBox35.isSelected()){
             arrayCheckBox2[14] = true;
         }
         else {
@@ -945,7 +950,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void jCheckBox34ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         //   add your handling code here:
-        if(jCheckBox34.isEnabled()){
+        if(jCheckBox34.isSelected()){
             arrayCheckBox2[13] = true;
         }
         else {
@@ -955,7 +960,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 	
 	private void jCheckBox36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox34ActionPerformed
         //   add your handling code here:
-            if(jCheckBox36.isEnabled()){
+            if(jCheckBox36.isSelected()){
             arrayCheckBox2[15] = true;
         }
         else {
@@ -964,7 +969,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox34ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
+        if(jCheckBox2.isSelected()){
             arrayCheckBox[1] = true;
         }
         else {
@@ -972,7 +977,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox3.isEnabled()){
+        if(jCheckBox3.isSelected()){
             arrayCheckBox[2] = true;
         }
         else {
@@ -980,7 +985,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox4.isEnabled()){
+        if(jCheckBox4.isSelected()){
             arrayCheckBox[3] = true;
         }
         else {
@@ -988,7 +993,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox5.isEnabled()){
+        if(jCheckBox5.isSelected()){
             arrayCheckBox[4] = true;
         }
         else {
@@ -996,7 +1001,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox6.isEnabled()){
+        if(jCheckBox6.isSelected()){
             arrayCheckBox[5] = true;
         }
         else {
@@ -1004,7 +1009,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox7.isEnabled()){
+        if(jCheckBox7.isSelected()){
             arrayCheckBox[6] = true;
         }
         else {
@@ -1012,7 +1017,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox8.isEnabled()){
+        if(jCheckBox8.isSelected()){
             arrayCheckBox[7] = true;
         }
         else {
@@ -1020,7 +1025,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox9.isEnabled()){
+        if(jCheckBox9.isSelected()){
             arrayCheckBox[8] = true;
         }
         else {
@@ -1028,7 +1033,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox11.isEnabled()){
+        if(jCheckBox11.isSelected()){
             arrayCheckBox[10] = true;
         }
         else {
@@ -1036,7 +1041,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox12.isEnabled()){
+        if(jCheckBox12.isSelected()){
             arrayCheckBox[11] = true;
         }
         else {
@@ -1044,7 +1049,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox13.isEnabled()){
+        if(jCheckBox13.isSelected()){
             arrayCheckBox[12] = true;
         }
         else {
@@ -1052,7 +1057,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox14ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox14.isEnabled()){
+        if(jCheckBox14.isSelected()){
             arrayCheckBox[13] = true;
         }
         else {
@@ -1060,7 +1065,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox15.isEnabled()){
+        if(jCheckBox15.isSelected()){
             arrayCheckBox[14] = true;
         }
         else {
@@ -1068,7 +1073,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox16ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox16.isEnabled()){
+        if(jCheckBox16.isSelected()){
             arrayCheckBox[15] = true;
         }
         else {
@@ -1076,7 +1081,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox17ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox17.isEnabled()){
+        if(jCheckBox17.isSelected()){
             arrayCheckBox[16] = true;
         }
         else {
@@ -1084,7 +1089,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox18ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox18.isEnabled()){
+        if(jCheckBox18.isSelected()){
             arrayCheckBox[17] = true;
         }
         else {
@@ -1092,7 +1097,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox19ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox19.isEnabled()){
+        if(jCheckBox19.isSelected()){
             arrayCheckBox[18] = true;
         }
         else {
@@ -1100,7 +1105,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         }
     }
     private void jCheckBox20ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox20.isEnabled()){
+        if(jCheckBox20.isSelected()){
             arrayCheckBox[19] = true;
         }
         else {

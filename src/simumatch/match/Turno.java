@@ -17,13 +17,13 @@ public class Turno {
 		else comentarista += numeroDeTurno+": ";
 		
 		switch(estado){
-		case  6 : com("¡Gol de"+ local+"!");break;
+		case  6 : com("�Gol de "+ local+"!");break;
 		case  5 : com(local+" esta dominado el juego, es cuestion de tiempo que marque");break;
 		case  1 : com(local+" tiene oportunidad de tomar la iniciativa");break;
 		case  0 : com("El partido esta muy igualado");break;
 		case -1 : com(visitante+" tiene oportunidad de tomar la iniciativa");break;
 		case -5 : com(visitante+" esta dominado el juego, es cuestion de tiempo que marque");break;
-		case -6 : com("¡Gol de"+ visitante+"!");break;
+		case -6 : com("�Gol de "+ visitante+"!");break;
 		default:
 			if(estado >6 || estado <-6){
 				System.out.println("Se ha llegado un estado incoherente: "+estado);
@@ -34,19 +34,19 @@ public class Turno {
 			else 	 com(visitante+" lleva la iniciativa");
 		}
 		
-		if(partido.animoL>2*partido.animoV)com("Parece que "+local+" está mucho más animado que "+visitante);
-		else if(partido.animoV>2*partido.animoL)com("Parece que "+visitante+" está mucho más animado que "+local);
+		if(partido.animoL>2*partido.animoV)com("Parece que "+local+" esta mucho mas animado que "+visitante);
+		else if(partido.animoV>2*partido.animoL)com("Parece que "+visitante+" esta mucho mas animado que "+local);
 		
 		if(estado>0){
-			if(partido.tacL==2)com("Parece que "+local+" no está aprovechando su ventaja, si yo fuera el entrenador me enfadaría mucho");
-			if(partido.tacV==1)com("Parece que "+visitante+" no está defendiendo debidamente, es una oportunidad magnifica para marcar");
+			if(partido.tacL==2)com("Parece que "+local+" no esta aprovechando su ventaja, si yo fuera el entrenador me enfadaria mucho");
+			if(partido.tacV==1)com("Parece que "+visitante+" no esta defendiendo debidamente, es una oportunidad magnifica para marcar");
 		}else if(estado<0){
-			if(partido.tacV==2)com("Parece que "+visitante+" no está aprovechando su ventaja, si yo fuera el entrenador me enfadaría mucho");
-			if(partido.tacL==1)com("Parece que "+local+" no está defendiendo debidamente, es una oportunidad magnifica para marcar");
+			if(partido.tacV==2)com("Parece que "+visitante+" no esta aprovechando su ventaja, si yo fuera el entrenador me enfadaria mucho");
+			if(partido.tacL==1)com("Parece que "+local+" no esta defendiendo debidamente, es una oportunidad magnifica para marcar");
 		}
 		
 		if(numeroDeTurno==partido.duracion){
-			com("¡Final del partido!");
+			com("�Final del partido!");
 			if(partido.goles()==0)com("EMPATE");
 			else if(partido.goles()> 0)com("Ganador: el equipo local: "+local);
 			else com("Ganador: el equipo visitante: "+visitante);
