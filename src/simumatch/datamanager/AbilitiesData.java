@@ -168,12 +168,10 @@ public final class AbilitiesData {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
 		
 		for ( Map.Entry<Action,? extends Number> entry : actions.entrySet() ) {
-			List<Effect> actionEffects = getEffects( entry.getKey(), false );
-			
-			// FIXME Do this in an efficient way
 			int times = entry.getValue().intValue();
-			for ( int i = 0; i < times; i++ ) {
-				effects.addAll( actionEffects );
+			
+			for ( Effect effect : getEffects( entry.getKey(), false ) ) {
+				effects.add( effect.getScaled( times ) );
 			}
 		}
 		

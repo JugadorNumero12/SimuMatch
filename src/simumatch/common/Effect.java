@@ -1,5 +1,8 @@
 package simumatch.common;
 
+/**
+ * Represents an effect on an attribute of the match
+ */
 public final class Effect {
 	
 	/** Which attribute this effect affects */
@@ -75,6 +78,19 @@ public final class Effect {
 		return permanent;
 	}
 	
+	public Effect getScaled ( int times ) {
+		double scaled;
+		
+		if ( operator == Operator.PRODUCT ) {
+			scaled = Math.pow( bonus, times );
+			
+		} else {
+			scaled = bonus * times;
+		}
+		
+		return new Effect( scope, target, operator, scaled, permanent );
+	}
+	
 	@Override
 	public int hashCode () {
 		int hc = 0;
@@ -108,7 +124,7 @@ public final class Effect {
 			&& operator.equals( effect.operator ) && permanent == effect.permanent;
 	}
 	
-	public String toString() {
-		return "Effect(" + scope + "," + operator + bonus + "," + target + "," + (permanent?"PERM":"TEMP") + ")"; 
+	public String toString () {
+		return "Effect(" + scope + "," + operator + bonus + "," + target + "," + ( permanent ? "PERM" : "TEMP" ) + ")";
 	}
 }
