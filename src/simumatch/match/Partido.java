@@ -219,8 +219,8 @@ public class Partido {
 		if(g>12)return null;
 		int[] r = new int[2];
 		int s=1;
-		boolean b;
-		if(b= punto-g < 0)r =new int[s--];
+		boolean b = punto-g < 0;
+		if(b )r =new int[s--];
 		if(punto+g < 13)  r[s]=punto+g;
 		else r = new int[1];
 		if(!b) r[0]=punto-g;
