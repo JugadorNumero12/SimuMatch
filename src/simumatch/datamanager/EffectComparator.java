@@ -19,19 +19,24 @@ public final class EffectComparator implements Comparator<Effect> {
 		if ( aux != 0 ) {
 			return aux;
 		}
+		
 		aux = compareScope( effect1.getScope(), effect2.getScope() );
 		if ( aux != 0 ) {
 			return aux;
 		}
+		
 		aux = compareTarget( effect1.getTarget(), effect2.getTarget() );
 		if ( aux != 0 ) {
 			return aux;
 		}
+		
 		aux = compareBonus( effect1.getBonus(), effect2.getBonus() );
 		if ( aux != 0 ) {
 			return aux;
 		}
-		return comparePermanent( effect1.isPermanent(), effect2.isPermanent() );
+		
+		aux = comparePermanent( effect1.isPermanent(), effect2.isPermanent() );
+		return aux;
 		
 	}
 	
@@ -53,11 +58,16 @@ public final class EffectComparator implements Comparator<Effect> {
 		return tg1.compareTo( tg2 );
 	}
 	
-	private static int compareBonus ( Double db1, Double db2 ) {
-		return db1.compareTo( db2 );
+	private static int compareBonus ( double db1, double db2 ) {
+		return db1 == db2 ? 0 : db1 < db2 ? -1 : +1;
 	}
 	
-	private static int comparePermanent ( Boolean bl1, Boolean bl2 ) {
-		return bl1.compareTo( bl2 );
+	private static int comparePermanent ( boolean bl1, boolean bl2 ) {
+		// If bl1 and bl2 are the same => 0
+		// Else, if bl1 is true, then bl2 is false=> -1
+		// Else, bl2 is false and bl1 true => +1
+		return bl1 == bl2 ? 0
+		     : bl1 ? -1
+		     : +1;
 	}
 }
