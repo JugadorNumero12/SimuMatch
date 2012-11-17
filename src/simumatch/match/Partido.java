@@ -107,10 +107,16 @@ public class Partido {
 		break;
 		case TEAM_LEVEL:
 			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
+			if(mementer.inited)mementer.equilibrio=op.apply(mementer.equilibrio, (loc?1:(-1))*bonus);
 		break;
 		case ATMOSPHERE:
-			if(loc)animoL= op.apply(animoL, bonus);
-			else   animoV= op.apply(animoV, bonus);
+			if(loc){
+				animoL= op.apply(animoL, bonus);
+				if(mementer.inited)mementer.animoL=op.apply(mementer.animoL, bonus);
+			}else{
+				animoV= op.apply(animoV, bonus);
+				if(mementer.inited)mementer.animoV=op.apply(mementer.animoV, bonus);
+			}
 		break;
 		default:
 			System.out.println("No implementadas acciones permanentes de tipo "+scope);
