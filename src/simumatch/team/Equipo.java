@@ -6,8 +6,8 @@ import java.util.List;
 public class Equipo {
 	public static Equipo equipo_de_prueba1(){
 		Equipo e = new Equipo("Optimistas");
-		e.nivel=2;
-		e.orgullo=88;
+		e.nivel=4;
+		e.orgullo=100;
 		e.versatilidad = 0.8;
 		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 1.5;
@@ -16,14 +16,14 @@ public class Equipo {
 		return e;
 	}
 	public static Equipo equipo_de_prueba2(){
-		Equipo e = new Equipo("Ofensivos");
+		Equipo e = new Equipo("Agresivos");
 		e.nivel=2;
 		e.orgullo=100;
 		e.versatilidad = 0.8;
 		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 2.5;
-		e.indiceOptimismo = 6;
-		e.indiceFrialdad = 3;
+		e.indiceOptimismo = 5;
+		e.indiceFrialdad = 5;
 		return e;
 	}
 	
