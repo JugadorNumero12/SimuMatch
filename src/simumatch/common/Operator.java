@@ -48,30 +48,44 @@ public enum Operator {
 	private final String string;
 	
 	/**
-	 * @param string String representation of the operator
+	 * @param string
+	 *            String representation of the operator
 	 */
 	private Operator ( String string ) {
 		this.string = string;
 	}
 	
 	/**
-	 * Applies the operator to the given operands
+	 * Applies this operator to the given operands
 	 * 
 	 * @param a
 	 *            First operand
 	 * @param b
-	 *            Second operant
+	 *            Second operand
 	 * @return Result of the operation
 	 */
 	public abstract double apply ( double a, double b );
 	
-	public int apply ( int a, double b){
-		//added to eliminate Castings
-		return Math.round((float)apply((double)a, b));
+	/**
+	 * Applies this operator to the given operands.
+	 * <p>
+	 * This version of this method takes an <tt>int</tt> and a double and returns an <tt>int</tt> to accommodate to
+	 * specific use cases that turn out to be common. Note that this method just performs a call to
+	 * {@link #apply(double, double)} and rounds the result.
+	 * 
+	 * @param a
+	 *            First operand
+	 * @param b
+	 *            Second operand
+	 * @return Result of the operation
+	 */
+	public int apply ( int a, double b ) {
+		return (int) Math.round( apply( (double) a, b ) );
 	}
 	
 	/**
-	 * @param str String represetation of the operator
+	 * @param str
+	 *            String representation of the operator
 	 * @return The corresponding operator
 	 */
 	public static Operator get ( String str ) {
