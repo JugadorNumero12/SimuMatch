@@ -7,6 +7,11 @@ import simumatch.common.Operator;
 import simumatch.common.Scope;
 import simumatch.common.Target;
 
+/**
+ * A comparator that sorts <tt>Effect</tt>s by their intended applicaton order. In particular, effects that use a
+ * product are assigned higher priority that those using addition or subtraction. The sorting order of this class might
+ * not be consistent between versions.
+ */
 public final class EffectComparator implements Comparator<Effect> {
 	
 	@Override
@@ -46,7 +51,7 @@ public final class EffectComparator implements Comparator<Effect> {
 		} else if ( op1 != Operator.PRODUCT && op2 == Operator.PRODUCT ) {
 			return 1;
 		} else {
-			return 0;
+			return op1.compareTo( op2 );
 		}
 	}
 	
@@ -66,8 +71,6 @@ public final class EffectComparator implements Comparator<Effect> {
 		// If bl1 and bl2 are the same => 0
 		// Else, if bl1 is true, then bl2 is false=> -1
 		// Else, bl2 is false and bl1 true => +1
-		return bl1 == bl2 ? 0
-		     : bl1 ? -1
-		     : +1;
+		return bl1 == bl2 ? 0 : bl1 ? -1 : +1;
 	}
 }
