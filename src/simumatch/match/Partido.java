@@ -217,7 +217,7 @@ public class Partido {
 	}
 	private static void mul_adyacen(double prod, int p, int g, double abanico[]) {
 		int ps[]= adyacentes(p, g);
-		for(int i=0; i<ps.length; i++)abanico[i]*=prod;
+		for(int i=0; i<ps.length; i++)abanico[ps[i]]*=prod;
 	}
 	private static int[] adyacentes(int punto, int grado) {
 		int g = Math.abs(grado);
