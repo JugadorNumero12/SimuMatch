@@ -52,9 +52,7 @@ public class Partido {
 		
 		turno[0]= new Turno(equilibrio, this, firstAbanico);
 		//el turno 0 nunca se muestra, solo se usa como base para en 1
-		
-		recalculaTacticas();
-		recalculaAnimo();
+
 	}
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
 		
@@ -63,12 +61,12 @@ public class Partido {
 			return null;
 		}
 		
+		recalculaAnimo();
+		recalculaTacticas();
+		
 		ejecuta(accLoc, true);
 		ejecuta(accVis, false);
 		//TODO ejecutaActivas(); 
-		
-		recalculaTacticas();
-		recalculaAnimo();
 		
 		double [] abanico= calculaAbanico();
 		turno[turnoActual] = new Turno(generaTurno(abanico), this, abanico);
@@ -85,8 +83,8 @@ public class Partido {
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
-	Turno actual(){
-		return turno[turnoActual];
+	Turno anterior(){
+		return turno[turnoActual-1];
 	}
 	private void ejecuta(List<Effect> acc, boolean loc) {
 		for(Effect a: acc) ejecutaEffect(a, loc, a.isPermanent());
@@ -130,22 +128,22 @@ public class Partido {
 		return marL-marV;
 	}
 	private void recalculaAnimo() {
-		animoL+=goles();
-		animoV-=goles();
-		int estado = actual().getEstado();
+		animoL+=goles()*10;
+		animoV-=goles()*10;
+		int estado = anterior().getEstado();
 		if(estado>0){
 			animoL+=estado*local.indiceOptimismo();
 			animoV-=estado/visitante.indiceFrialdad();
 		}else
 		if(estado<0){
-			animoV+=estado*visitante.indiceOptimismo();
-			animoL-=estado/local.indiceFrialdad();
+			animoV-=estado*visitante.indiceOptimismo();
+			animoL+=estado/local.indiceFrialdad();
 		}
 		animoL=(2*animoL+aforoL)/3;
 		animoV=(2*animoV+aforoV)/3;
 	}
 	private void recalculaTacticas() {
-		int estado = actual().getEstado();
+		int estado = anterior().getEstado();
 		if(estado<0){
 			if(tacL==1 && Math.random()<local.versatilidad())tacL=2;
 			if(tacV==2 && Math.random()<visitante.versatilidad())tacV=1;
@@ -170,7 +168,7 @@ public class Partido {
 		double abanico[] = new double [13];
 		int eAnt, pAnt;
 		eAnt = (turnoActual>0)?turno[turnoActual-1].getEstado():equilibrio;
-		pAnt = puntToEst(eAnt);
+		pAnt = estToPunt(eAnt);
 		double l = abanico.length;
 		for(int i=0; i<l; i++)abanico[i]=100;
 		
@@ -213,13 +211,13 @@ public class Partido {
 			output[i]=Math.max(input[i]/sum, 0);
 		return output;
 	}
-	private static void mul_adyacen(double indices[], int p, double abanico[]){
-		for(int i=0; i<indices.length; i++)
-			mul_adyacen(indices[i], p, i, abanico);
+	private static void mul_adyacen(double prods[], int p, double abanico[]){
+		for(int i=0; i<prods.length; i++)
+			mul_adyacen(prods[i], p, i, abanico);
 	}
-	private static void mul_adyacen(double indice, int p, int g, double abanico[]) {
-		int ps[]= adyacentes(p,g);
-		for(int i=0; i<ps.length; i++)abanico[i]*=indice;
+	private static void mul_adyacen(double prod, int p, int g, double abanico[]) {
+		int ps[]= adyacentes(p, g);
+		for(int i=0; i<ps.length; i++)abanico[i]*=prod;
 	}
 	private static int[] adyacentes(int punto, int grado) {
 		int g = Math.abs(grado);

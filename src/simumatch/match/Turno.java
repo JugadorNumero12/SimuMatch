@@ -67,17 +67,16 @@ public class Turno {
 		}
 		comentarista+=escribeAbanico(aba);
 		
-		comentarista+="\n["+partido.marL+"|"+partido.marV+"]\n\n";
+		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n";
 	}
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
 	}
 	private static String escribeAbanico(double[] aba) {
-		String r = "\n\n|+6 |+5 |+4 |+3 |+2 |+1 | 0 |-1 |-2 |-3 |-4 |-5 |-6 |";
-		r+="\n[";
-		for (int i=0;;){
-			r+=porcen2Char(aba[i])+'%';
-			if(++i<aba.length)r+='|';
+		String r = "\n[";
+		for (int i=aba.length;;){
+			r+=porcen2Char(aba[--i])+'%';
+			if(i>0)r+='|';
 			else return r+']'; 
 		}
 	}
