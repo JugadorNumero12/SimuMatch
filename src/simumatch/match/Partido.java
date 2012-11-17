@@ -56,7 +56,7 @@ public class Partido {
 	}
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
 		
-		if(turnoActual++>duracion){
+		if(++turnoActual>duracion){
 			System.out.println("El partido ya ha acabado");
 			return null;
 		}
