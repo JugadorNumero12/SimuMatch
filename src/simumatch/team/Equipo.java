@@ -7,23 +7,23 @@ public class Equipo {
 	public static Equipo equipo_de_prueba1(){
 		Equipo e = new Equipo("Optimistas");
 		e.nivel=4;
-		e.orgullo=100;
+		e.orgullo=150;
 		e.versatilidad = 0.8;
-		e.indiceDefensivo = 1.5;
-		e.indiceOfensivo = 1.5;
-		e.indiceOptimismo = 15;
+		e.indiceDefensivo = 4;
+		e.indiceOfensivo = 2;
+		e.indiceOptimismo = 10;
 		e.indiceFrialdad = 15;
 		return e;
 	}
 	public static Equipo equipo_de_prueba2(){
 		Equipo e = new Equipo("Agresivos");
-		e.nivel=2;
+		e.nivel=1;
 		e.orgullo=100;
 		e.versatilidad = 0.8;
-		e.indiceDefensivo = 1.5;
+		e.indiceDefensivo = 2;
 		e.indiceOfensivo = 2.5;
 		e.indiceOptimismo = 5;
-		e.indiceFrialdad = 5;
+		e.indiceFrialdad = 8;
 		return e;
 	}
 	

@@ -177,19 +177,19 @@ public class Partido {
 
 		if(eAnt>0){
 			if(tacL==1)bonif(pAnt, 13, local.indiceOfensivo(),abanico);
-			if(tacV==2)bonif(0, pAnt, 1/visitante.indiceDefensivo(),abanico);
+			if(tacV==2)bonif(pAnt, 13, 1/visitante.indiceDefensivo(),abanico);
 		}else
 		if(eAnt<0){
+			if(tacV==1)bonif(0, pAnt, visitante.indiceOfensivo(),abanico);
 			if(tacL==2)bonif(0, pAnt, 1/local.indiceDefensivo(),abanico);
-			if(tacV==1)bonif(pAnt, 13, visitante.indiceOfensivo(),abanico);
 		}
 		
 		double indi_equi[] = {4.5, 3, 2.5, 1.5};
 		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
 	
 		
-		bonif(pAnt+1, 12, Math.max(0, animoL/animoV), abanico);
-		bonif( 0, pAnt-1, Math.max(0, animoV/animoL), abanico);
+		bonif(pAnt+1, pAnt+3, Math.max(0, animoL/animoV), abanico);
+		bonif(pAnt-3, pAnt-1, Math.max(0, animoV/animoL), abanico);
 		
 		
 		return normalizar(abanico);
