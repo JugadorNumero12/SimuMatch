@@ -14,9 +14,9 @@ public class Partido {
 	int equilibrio;
 	Arbitro arbitro = new Arbitro();
 	int duracion = 10;//el numero de turnos que va a durar el partido
-	public Turno turno[] = new Turno[duracion+1];
 	int turnoActual = 0;
 	private Memento mementer= new Memento(this);
+	private Turno turno[] = new Turno[duracion+1];
 	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
 	
@@ -218,6 +218,10 @@ public class Partido {
 	private static int[] adyacentes(int punto, int grado) {
 		int g = Math.abs(grado);
 		if(g>12)return null;
+		if(g==0){
+			int self[]={punto};
+			return self;
+		}
 		int[] r = new int[2];
 		int s=1;
 		boolean b = punto-g < 0;

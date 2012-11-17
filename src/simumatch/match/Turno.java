@@ -6,6 +6,20 @@ public class Turno {
 	private int estado= 7;
 	private String local, visitante;
 	private Partido partido;
+	
+	/**
+	 * Metodos Publicos
+	 */
+	public int getEstado() {
+		return estado;
+	}
+	public String toString(){
+		return comentarista;
+	}
+	
+	/**
+	 *Constructora: No es publica, si necesitas crear turnos pidelos a Partido.turno(..)
+	 */
 	Turno(int estado, Partido p, double aba[]){
 		this.estado = estado;
 		this.partido = p;
@@ -55,9 +69,6 @@ public class Turno {
 		
 		comentarista+="\n["+partido.marL+"|"+partido.marV+"]\n\n";
 	}
-	public String toString(){
-		return comentarista;
-	}
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
 	}
@@ -74,8 +85,5 @@ public class Turno {
 		int n = Math.round((float)(100*Math.abs(prob)));
 		if(n<10)return " "+n;
 		return Integer.toString(n);
-	}
-	public int getEstado() {
-		return estado;
 	}
 }
