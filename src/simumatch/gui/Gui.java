@@ -1,1293 +1,1084 @@
 package simumatch.gui;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.awt.EventQueue;
 
-import simumatch.common.Action;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JFrame;
 import javax.swing.GroupLayout;
-import javax.swing.JCheckBox;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPanel;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 import javax.swing.JSpinner;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import simumatch.common.Effect;
 
 
-/**
- * Graphic interphace moved to Eclipse editor
- */
-public class Gui extends javax.swing.JFrame {
+import java.awt.Toolkit;
+import java.util.LinkedList;
+
+public class Gui {
+
+	private JFrame frmJugadorNumero;
+	private JTextField textField;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_4;
+	private JPanel panel_5;
+	private JButton btnSiguiente;
+	private JTextArea textArea;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JSpinner spinner_30;
+	private JSpinner spinner_31;
+	private JSpinner spinner_32;
+	private JSpinner spinner_33;
+	private JSpinner spinner_34;
+	private JSpinner spinner_35;
+	private JSpinner spinner_36;
+	private JSpinner spinner_37;
+	private JSpinner spinner_38;
+	private JSpinner spinner_39;
+	private JSpinner spinner_40;
+	private JSpinner spinner_41;
+	private JSpinner spinner_42;
+	private JSpinner spinner_43;
+	private JSpinner spinner_44;
+	private JSpinner spinner_45;
+	private JSpinner spinner_46;
+	private JSpinner spinner_47;
+	private JSpinner spinner_48;
+	private JSpinner spinner_49;
+	private JButton button;
+	private JSpinner spinner;
+	private JSpinner spinner_1;
+	private JSpinner spinner_2;
+	private JSpinner spinner_3;
+	private JSpinner spinner_4;
+	private JSpinner spinner_5;
+	private JSpinner spinner_6;
+	private JSpinner spinner_7;
+	private JSpinner spinner_8;
+	private JSpinner spinner_9;
+	private JSpinner spinner_10;
+	private JSpinner spinner_11;
+	private JSpinner spinner_12;
+	private JSpinner spinner_13;
+	private JSpinner spinner_14;
+	private JSpinner spinner_15;
+	private JSpinner spinner_16;
+	private JSpinner spinner_17;
+	private JSpinner spinner_18;
+	private JSpinner spinner_19;
+	private JSpinner spinner_20;
+	private JSpinner spinner_21;
+	private JSpinner spinner_22;
+	private JSpinner spinner_23;
+	private JSpinner spinner_24;
+	private JSpinner spinner_25;
+	private JSpinner spinner_26;
+	private JSpinner spinner_27;
+	private JSpinner spinner_28;
+	private JSpinner spinner_29;
+	private JButton btnCargar;
+	private LinkedList<Effect> listEffectsP1,listEffectsP2,listEffectsM1,listEffectsM2;
 
 	/**
-     * Creates new form GraphicInterface
-     */
-    public Gui() {
-        arrayCheckBox = new boolean[20];
-        arrayPrep = new Action[20];
-        arrayCheckBox2 = new boolean[16];
-        arrayAcc = new Action[16];
-        arrayNomb = new String[36];//20 preparatorias y 16 de partido
-        initComponents();
-        initNombres(arrayNomb);
-        
-    }
-    
-    private void initNombres(String[] arrayNombres){
-    	//Preparatorias
-    	arrayNombres[0] = jCheckBox1.getText();
-    	arrayNombres[1] = jCheckBox2.getText();
-    	arrayNombres[2] = jCheckBox3.getText();
-    	arrayNombres[3] = jCheckBox4.getText();
-    	arrayNombres[4] = jCheckBox5.getText();
-    	arrayNombres[5] = jCheckBox6.getText();
-    	arrayNombres[6] = jCheckBox7.getText();
-    	arrayNombres[7] = jCheckBox8.getText();
-    	arrayNombres[8] = jCheckBox9.getText();
-    	arrayNombres[9] = jCheckBox10.getText();
-    	arrayNombres[10] = jCheckBox11.getText();
-    	arrayNombres[11] = jCheckBox12.getText();
-    	arrayNombres[12] = jCheckBox13.getText();
-    	arrayNombres[13] = jCheckBox14.getText();
-    	arrayNombres[14] = jCheckBox15.getText();
-    	arrayNombres[15] = jCheckBox16.getText();
-    	arrayNombres[16] = jCheckBox17.getText();
-    	arrayNombres[17] = jCheckBox18.getText();
-    	arrayNombres[18] = jCheckBox19.getText();
-    	arrayNombres[19] = jCheckBox20.getText();
-    	
-    	//De partido
-    	arrayNombres[20] = jCheckBox21.getText();
-    	arrayNombres[21] = jCheckBox22.getText();
-    	arrayNombres[22] = jCheckBox23.getText();
-    	arrayNombres[23] = jCheckBox24.getText();
-    	arrayNombres[24] = jCheckBox25.getText();
-    	arrayNombres[25] = jCheckBox26.getText();
-    	arrayNombres[26] = jCheckBox27.getText();
-    	arrayNombres[27] = jCheckBox28.getText();
-    	arrayNombres[28] = jCheckBox29.getText();
-    	arrayNombres[29] = jCheckBox30.getText();
-    	arrayNombres[30] = jCheckBox31.getText();
-    	arrayNombres[31] = jCheckBox32.getText();
-    	arrayNombres[32] = jCheckBox33.getText();
-    	arrayNombres[33] = jCheckBox34.getText();
-    	arrayNombres[34] = jCheckBox35.getText();
-    	arrayNombres[35] = jCheckBox36.getText();
-    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
-        jCheckBox19 = new javax.swing.JCheckBox();
-        jCheckBox20 = new javax.swing.JCheckBox();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jCheckBox21 = new javax.swing.JCheckBox();
-        jCheckBox22 = new javax.swing.JCheckBox();
-        jCheckBox23 = new javax.swing.JCheckBox();
-        jCheckBox24 = new javax.swing.JCheckBox();
-        jCheckBox25 = new javax.swing.JCheckBox();
-        jCheckBox26 = new javax.swing.JCheckBox();
-        jCheckBox27 = new javax.swing.JCheckBox();
-        jCheckBox28 = new javax.swing.JCheckBox();
-        jSeparator3 = new javax.swing.JSeparator();
-        jCheckBox29 = new javax.swing.JCheckBox();
-        jCheckBox30 = new javax.swing.JCheckBox();
-        jCheckBox31 = new javax.swing.JCheckBox();
-        jCheckBox32 = new javax.swing.JCheckBox();
-        jCheckBox33 = new javax.swing.JCheckBox();
-        jCheckBox34 = new javax.swing.JCheckBox();
-        jCheckBox35 = new javax.swing.JCheckBox();
-        jCheckBox36 = new javax.swing.JCheckBox();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Jugador Numero 12");
-        //setPreferredSize(new java.awt.Dimension(915, 600));
-        setResizable(true);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Variables de entrada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificadores de preparativos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Cargar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox1.setText("MOTIVARSE");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox2.setText("PINTARSE");
-		jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox3.setText("PELEA_AFICIONES");
-		jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox4.setText("CREAR_PANCARTA");
-		jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox5.setText("PROMOCIONAR_EQUIPO");
-		jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox6.setText("HACKEAR_PAGINA");
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox7.setText("ORGANIZAR_CENA");
-		jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox8.setText("ORGANIZAR_HOMENAJE");
-		jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox9.setText("CONTRATAR_RRPP");
-		jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox9ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox10.setText("FINANCIAR_EVENTO");
-        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox10ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox11.setText("MOTIVARSE");
-		jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox11ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox12.setText("PINTARSE");
-		jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox12ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox13.setText("PELEA_AFICIONES");
-		jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox13ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox14.setText("CREAR_PANCARTA");
-		jCheckBox14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox14ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox15.setText("PROMOCIONAR_EQUIPO");
-		jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox15ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox16.setText("HACKEAR_PAGINA");
-        jCheckBox16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox16ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox17.setText("ORGANIZAR_CENA");
-		jCheckBox17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox17ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox18.setText("ORGANIZAR_HOMENAJE");
-		jCheckBox18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox18ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox19.setText("CONTRATAR_RRPP");
-		jCheckBox19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox19ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox20.setText("FINANCIAR_EVENTO");
-		jCheckBox20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox20ActionPerformed(evt);
-            }
-        });
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3Layout.setHorizontalGroup(
-        	jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel3Layout.createSequentialGroup()
-        			.addGap(160)
-        			.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-        			.addGap(0, 668, Short.MAX_VALUE))
-        		.addGroup(jPanel3Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jCheckBox10)
-        				.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        					.addComponent(jCheckBox1)
-        					.addComponent(jCheckBox8)
-        					.addComponent(jCheckBox6)
-        					.addComponent(jCheckBox4)
-        					.addComponent(jCheckBox3)
-        					.addComponent(jCheckBox5)
-        					.addComponent(jCheckBox7)
-        					.addComponent(jCheckBox9)
-        					.addComponent(jCheckBox2))
-        				.addComponent(jCheckBox20))
-        			.addGap(59)
-        			.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addComponent(jCheckBox16)
-        							.addGap(30))
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        								.addComponent(jCheckBox17)
-        								.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        									.addComponent(jCheckBox13)
-        									.addComponent(jCheckBox19)))
-        							.addGap(28)))
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-        							.addComponent(jSeparator2, GroupLayout.PREFERRED_SIZE, 12, GroupLayout.PREFERRED_SIZE)
-        							.addGap(215))
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addGap(51)
-        							.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-        							.addContainerGap())))
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jCheckBox14)
-        						.addComponent(jCheckBox15)
-        						.addComponent(jCheckBox12)
-        						.addComponent(jCheckBox11)
-        						.addComponent(jCheckBox18))
-        					.addContainerGap(309, Short.MAX_VALUE))))
-        );
-        jPanel3Layout.setVerticalGroup(
-        	jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(jPanel3Layout.createSequentialGroup()
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addComponent(jCheckBox2)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox10))
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addComponent(jCheckBox1)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox6)
-        							.addPreferredGap(ComponentPlacement.RELATED))
-        						.addGroup(jPanel3Layout.createSequentialGroup()
-        							.addComponent(jSeparator2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addGap(21)))
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(jCheckBox3)
-        						.addComponent(jCheckBox8))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox4)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox5)
-        					.addGap(25)))
-        			.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox7)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox9)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox20))
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addGap(57)
-        					.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-        		.addGroup(Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel3Layout.createSequentialGroup()
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addComponent(jCheckBox11)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox16)
-        					.addPreferredGap(ComponentPlacement.RELATED))
-        				.addGroup(jPanel3Layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jCheckBox18))
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox14)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox15)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox12)
-        				.addPreferredGap(ComponentPlacement.RELATED))
-        			.addGroup(jPanel3Layout.createSequentialGroup()
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox17)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox19)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jCheckBox13))
-        			.addContainerGap(15, Short.MAX_VALUE))
-        );
-        jPanel3.setLayout(jPanel3Layout);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones inmediatas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("Cargar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox21.setText("SALTO_ESPONTANEO");
-        jCheckBox21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox21ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox22.setText("INICIAR_OLA");
-        jCheckBox22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox22ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox23.setText("PUNTERO_LASER");
-        jCheckBox23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox23ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox24.setText("TIRAR_BENGALA");
-        jCheckBox24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox24ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox25.setText("BEBER_CERVEZA");
-        jCheckBox25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox25ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox26.setText("ENTREVISTA_INTERMEDIO");
-        jCheckBox26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox26ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox27.setText("RETRANSMITIR_PARTIDO");
-        jCheckBox27.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox27ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox28.setText("HABLAR_SPEAKER");
-        jCheckBox28.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox28ActionPerformed(evt);
-            }
-        });
-
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jCheckBox29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox29.setText("SALTO_ESPONTANEO");
-        jCheckBox29.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox29ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox30.setText("INICIAR_OLA");
-        jCheckBox30.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox30ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox31.setText("PUNTERO_LASER");
-        jCheckBox31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox31ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox32.setText("TIRAR_BENGALA");
-        jCheckBox32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox32ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox33.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox33.setText("BEBER_CERVEZA");
-        jCheckBox33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox33ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox34.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox34.setText("ENTREVISTA_INTERMEDIO");
-        jCheckBox34.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox34ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox35.setText("RETRANSMITIR_PARTIDO");
-        jCheckBox35.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox35ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCheckBox36.setText("HABLAR_SPEAKER");
-        jCheckBox36.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox36ActionPerformed(evt);
-            }
-        });
-        
-        JCheckBox jCheckBox37 = new JCheckBox("ACTIVAR_SOBORNO");
-        jCheckBox37.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        jCheckBox37.setFont(new Font("Tahoma", Font.BOLD, 11));
-        
-        JSpinner spinner = new JSpinner();
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4Layout.setHorizontalGroup(
-        	jPanel4Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(jPanel4Layout.createSequentialGroup()
-        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jCheckBox25)
-        				.addComponent(jCheckBox26)
-        				.addGroup(jPanel4Layout.createSequentialGroup()
-        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jCheckBox27)
-        						.addComponent(jCheckBox28)
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        								.addComponent(jCheckBox23)
-        								.addComponent(jCheckBox22)
-        								.addComponent(jCheckBox24)
-        								.addComponent(jCheckBox21))
-        							.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        								.addGroup(jPanel4Layout.createSequentialGroup()
-        									.addGap(205)
-        									.addComponent(jSeparator3, GroupLayout.PREFERRED_SIZE, 12, GroupLayout.PREFERRED_SIZE))
-        								.addGroup(jPanel4Layout.createSequentialGroup()
-        									.addGap(87)
-        									.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        										.addComponent(jCheckBox30)
-        										.addGroup(jPanel4Layout.createSequentialGroup()
-        											.addComponent(jCheckBox29)
-        											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        											.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        											.addPreferredGap(ComponentPlacement.UNRELATED))
-        										.addComponent(jCheckBox31)
-        										.addComponent(jCheckBox32)
-        										.addComponent(jCheckBox33)
-        										.addComponent(jCheckBox34)
-        										.addComponent(jCheckBox35)
-        										.addComponent(jCheckBox36))))))
-        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addGap(38)
-        							.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addGap(3)
-        							.addComponent(jCheckBox37)))))
-        			.addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-        	jPanel4Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(jPanel4Layout.createSequentialGroup()
-        			.addContainerGap(20, Short.MAX_VALUE)
-        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(jPanel4Layout.createSequentialGroup()
-        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING, false)
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addComponent(jSeparator3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
-        								.addComponent(jCheckBox29)
-        								.addComponent(jCheckBox37)
-        								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox30)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox31)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox32))
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addComponent(jCheckBox21)
-        							.addGap(3)
-        							.addComponent(jCheckBox22)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox23)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox24)))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addComponent(jCheckBox25)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox26)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox27)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox28))
-        						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addComponent(jCheckBox33)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox34)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox35)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jCheckBox36)))
-        					.addGap(37))
-        				.addGroup(jPanel4Layout.createSequentialGroup()
-        					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-        					.addGap(21))))
-        );
-        jPanel4.setLayout(jPanel4Layout);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
-        				.addComponent(jPanel3, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-        				.addComponent(jPanel4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
-        			.addContainerGap(347, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(22, Short.MAX_VALUE))
-        );
-        jPanel1.setLayout(jPanel1Layout);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salida Generada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        jPanel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Siguiente");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
-        );
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de valores generados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 583, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        		.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
-        getContentPane().setLayout(layout);
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-
-    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox10.isEnabled()){
-            arrayCheckBox[9] = true;
-        }
-        else {
-            arrayCheckBox[9] = false;
-        }
-    }//GEN-LAST:event_jCheckBox10ActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox1.isEnabled()){
-            arrayCheckBox[0] = true;
-        }
-        else {
-            arrayCheckBox[0] = false;
-        }
-        
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jCheckBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox21ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox21.isEnabled()){
-            arrayCheckBox2[0] = true;
-        }
-        else {
-            arrayCheckBox2[0] = false;
-        }
-    }//GEN-LAST:event_jCheckBox21ActionPerformed
-
-    private void jCheckBox22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox22ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox22.isEnabled()){
-            arrayCheckBox2[1] = true;
-        }
-        else {
-            arrayCheckBox2[1] = false;
-        }
-    }//GEN-LAST:event_jCheckBox22ActionPerformed
-
-    private void jCheckBox23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox23ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox23.isEnabled()){
-            arrayCheckBox2[2] = true;
-        }
-        else {
-            arrayCheckBox2[2] = false;
-        }
-    }//GEN-LAST:event_jCheckBox23ActionPerformed
-
-    private void jCheckBox24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox24ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox24.isEnabled()){
-            arrayCheckBox2[3] = true;
-        }
-        else {
-            arrayCheckBox2[3] = false;
-        }
-    }//GEN-LAST:event_jCheckBox24ActionPerformed
-
-    private void jCheckBox25ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //   add your handling code here:
-        if(jCheckBox25.isEnabled()){
-            arrayCheckBox2[4] = true;
-        }
-        else {
-            arrayCheckBox2[4] = false;
-        }
-    }                                           
-	
-	private void jCheckBox26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox25ActionPerformed
-        //   add your handling code here:
-            if(jCheckBox26.isEnabled()){
-            arrayCheckBox2[5] = true;
-        }
-        else {
-            arrayCheckBox2[5] = false;
-        }
-    }//GEN-LAST:event_jCheckBox25ActionPerformed
-
-    private void jCheckBox27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox27ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox27.isEnabled()){
-            arrayCheckBox2[6] = true;
-        }
-        else {
-            arrayCheckBox2[6] = false;
-        }
-    }//GEN-LAST:event_jCheckBox27ActionPerformed
-
-    private void jCheckBox28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox28ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox28.isEnabled()){
-            arrayCheckBox2[7] = true;
-        }
-        else {
-            arrayCheckBox2[7] = false;
-        }
-    }//GEN-LAST:event_jCheckBox28ActionPerformed
-
-    private void jCheckBox29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox29ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox29.isEnabled()){
-            arrayCheckBox2[8] = true;
-        }
-        else {
-            arrayCheckBox2[8] = false;
-        }
-    }//GEN-LAST:event_jCheckBox29ActionPerformed
-
-    private void jCheckBox30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox30ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox30.isEnabled()){
-            arrayCheckBox2[9] = true;
-        }
-        else {
-            arrayCheckBox2[9] = false;
-        }
-    }//GEN-LAST:event_jCheckBox30ActionPerformed
-
-    private void jCheckBox31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox31ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox31.isEnabled()){
-            arrayCheckBox2[10] = true;
-        }
-        else {
-            arrayCheckBox2[10] = false;
-        }
-    }//GEN-LAST:event_jCheckBox31ActionPerformed
-
-    private void jCheckBox32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox32ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox32.isEnabled()){
-            arrayCheckBox2[11] = true;
-        }
-        else {
-            arrayCheckBox2[11] = false;
-        }
-    }//GEN-LAST:event_jCheckBox32ActionPerformed
-
-    private void jCheckBox33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox33ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox33.isEnabled()){
-            arrayCheckBox2[12] = true;
-        }
-        else {
-            arrayCheckBox2[12] = false;
-        }
-    }//GEN-LAST:event_jCheckBox33ActionPerformed
-
-    private void jCheckBox35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox35ActionPerformed
-        //   add your handling code here:
-        if(jCheckBox35.isEnabled()){
-            arrayCheckBox2[14] = true;
-        }
-        else {
-            arrayCheckBox2[14] = false;
-        }
-    }//GEN-LAST:event_jCheckBox35ActionPerformed
-
-    private void jCheckBox34ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //   add your handling code here:
-        if(jCheckBox34.isEnabled()){
-            arrayCheckBox2[13] = true;
-        }
-        else {
-            arrayCheckBox2[13] = false;
-        }
-    }                                           
-	
-	private void jCheckBox36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox34ActionPerformed
-        //   add your handling code here:
-            if(jCheckBox36.isEnabled()){
-            arrayCheckBox2[15] = true;
-        }
-        else {
-            arrayCheckBox2[15] = false;
-        }
-    }//GEN-LAST:event_jCheckBox34ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox2.isEnabled()){
-            arrayCheckBox[1] = true;
-        }
-        else {
-            arrayCheckBox[1] = false;
-        }
-    }
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox3.isEnabled()){
-            arrayCheckBox[2] = true;
-        }
-        else {
-            arrayCheckBox[2] = false;
-        }
-    }
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox4.isEnabled()){
-            arrayCheckBox[3] = true;
-        }
-        else {
-            arrayCheckBox[3] = false;
-        }
-    }
-    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox5.isEnabled()){
-            arrayCheckBox[4] = true;
-        }
-        else {
-            arrayCheckBox[4] = false;
-        }
-    }
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox6.isEnabled()){
-            arrayCheckBox[5] = true;
-        }
-        else {
-            arrayCheckBox[5] = false;
-        }
-    }
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox7.isEnabled()){
-            arrayCheckBox[6] = true;
-        }
-        else {
-            arrayCheckBox[6] = false;
-        }
-    }
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox8.isEnabled()){
-            arrayCheckBox[7] = true;
-        }
-        else {
-            arrayCheckBox[7] = false;
-        }
-    }
-    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox9.isEnabled()){
-            arrayCheckBox[8] = true;
-        }
-        else {
-            arrayCheckBox[8] = false;
-        }
-    }
-    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox11.isEnabled()){
-            arrayCheckBox[10] = true;
-        }
-        else {
-            arrayCheckBox[10] = false;
-        }
-    }
-    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox12.isEnabled()){
-            arrayCheckBox[11] = true;
-        }
-        else {
-            arrayCheckBox[11] = false;
-        }
-    }
-    private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox13.isEnabled()){
-            arrayCheckBox[12] = true;
-        }
-        else {
-            arrayCheckBox[12] = false;
-        }
-    }
-    private void jCheckBox14ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox14.isEnabled()){
-            arrayCheckBox[13] = true;
-        }
-        else {
-            arrayCheckBox[13] = false;
-        }
-    }
-    private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox15.isEnabled()){
-            arrayCheckBox[14] = true;
-        }
-        else {
-            arrayCheckBox[14] = false;
-        }
-    }
-    private void jCheckBox16ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox16.isEnabled()){
-            arrayCheckBox[15] = true;
-        }
-        else {
-            arrayCheckBox[15] = false;
-        }
-    }
-    private void jCheckBox17ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox17.isEnabled()){
-            arrayCheckBox[16] = true;
-        }
-        else {
-            arrayCheckBox[16] = false;
-        }
-    }
-    private void jCheckBox18ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox18.isEnabled()){
-            arrayCheckBox[17] = true;
-        }
-        else {
-            arrayCheckBox[17] = false;
-        }
-    }
-    private void jCheckBox19ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox19.isEnabled()){
-            arrayCheckBox[18] = true;
-        }
-        else {
-            arrayCheckBox[18] = false;
-        }
-    }
-    private void jCheckBox20ActionPerformed(java.awt.event.ActionEvent evt){
-        if(jCheckBox20.isEnabled()){
-            arrayCheckBox[19] = true;
-        }
-        else {
-            arrayCheckBox[19] = false;
-        }
-    }
-    
-    //Lo importante son estos botones. Meto un 1 en la posici�n del array cuyo CheckBox est� seleccionado
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el bot�n
-		for(int i=0;i<20;i++){
-	            if(arrayCheckBox[i]) {
-	                arrayPrep[i] = Action.get(arrayNomb[i]);
-	            } 
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		/*try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}*/
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		List<Action> list = Arrays.asList(arrayPrep);
-        jButton1.setEnabled(false); //En cuanto se pulse una vez, nunca m�s
-    }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        //Lo que hace el bot�n
-		for(int i=0;i<16;i++){
-	            if(arrayCheckBox2[i]) {
-	                arrayAcc[i] = Action.get(arrayNomb[i+20]);
-	            } 
-		}
-		
-		List<Action> list = Arrays.asList(arrayAcc);
-		//Separar la lista en local y visitante
-		//Al cargar preparatorias -> a Dani. getEffects
-		//Los efectos que me env�a Dani los agrego a equipo
-		//A Marcos los 2 equipos para crear el Partido
-		//Guardar un partido en Main
-		
-		//Para las acciones de cada turno
-		//Dani me devuelve efectos y a Marcos partido.turno(listas)
-		//devuelve clase Turno -> estado, toString
-		
-//		int[] array = {3,5,20,15,2};
-//        lleganDatos(array);
-    }
-    
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){
-    	jTextField1.setText("");
-    }
-    
-    
-    
-    //Es una prueba
-//    private void lleganDatos(int[] probabilidades){
-//    	int i=0; String s="";
-//    	while(i<probabilidades.length)
-//    	{
-//    		s+=String.valueOf(probabilidades[i]+ " | ");
-//    		i++;
-//    	}
-//    	jTextArea1.setText(jTextArea1.getText()+s+"\n");
-//    	jTextField1.setText("+3");
-//    }
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui window = new Gui();
+					window.frmJugadorNumero.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GraphicInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GraphicInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GraphicInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphicInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+	/**
+	 * Create the application.
+	 */
+	public Gui() {
+		listEffectsP1 = new LinkedList<Effect>();
+        listEffectsP2 = new LinkedList<Effect>();
+        listEffectsM1 = new LinkedList<Effect>();
+        listEffectsM2 = new LinkedList<Effect>();
+        
+		initialize();
+	}
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GraphicInterface().setVisible(true);
-                //CheckBox de la 1 a la 20 son las preparatorias, y de la 21 a la 36 son las de turno
-            }
-        });
-    }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox20;
-    private javax.swing.JCheckBox jCheckBox21;
-    private javax.swing.JCheckBox jCheckBox22;
-    private javax.swing.JCheckBox jCheckBox23;
-    private javax.swing.JCheckBox jCheckBox24;
-    private javax.swing.JCheckBox jCheckBox25;
-    private javax.swing.JCheckBox jCheckBox26;
-    private javax.swing.JCheckBox jCheckBox27;
-    private javax.swing.JCheckBox jCheckBox28;
-    private javax.swing.JCheckBox jCheckBox29;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox30;
-    private javax.swing.JCheckBox jCheckBox31;
-    private javax.swing.JCheckBox jCheckBox32;
-    private javax.swing.JCheckBox jCheckBox33;
-    private javax.swing.JCheckBox jCheckBox34;
-    private javax.swing.JCheckBox jCheckBox35;
-    private javax.swing.JCheckBox jCheckBox36;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    // End of variables declaration//GEN-END:variables
-    
-    private boolean[] arrayCheckBox,arrayCheckBox2;
-    private Action[] arrayPrep,arrayAcc;
-    private String[] arrayNomb;
-    private static final long serialVersionUID = 1L;
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmJugadorNumero = new JFrame();
+		frmJugadorNumero.setIconImage(Toolkit.getDefaultToolkit().getImage(Gui.class.getResource("/simumatch/gui/numero12.png")));
+		frmJugadorNumero.setTitle("Jugador Numero 12");
+		frmJugadorNumero.setBounds(100, 100, 1280, 700);
+		frmJugadorNumero.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Variables de entrada", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Salida generada", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GroupLayout groupLayout = new GroupLayout(frmJugadorNumero.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 397, GroupLayout.PREFERRED_SIZE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		
+		panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "Registro de valores generados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		panel_5 = new JPanel();
+		panel_5.setBorder(new TitledBorder(null, "Resultado actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		
+		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
+		gl_panel_5.setHorizontalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_5.createSequentialGroup()
+					.addGap(31)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(176, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_5.createSequentialGroup()
+					.addContainerGap(191, Short.MAX_VALUE)
+					.addComponent(btnSiguiente, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+					.addGap(31))
+		);
+		gl_panel_5.setVerticalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_5.createSequentialGroup()
+					.addGap(48)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSiguiente, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(19, Short.MAX_VALUE))
+		);
+		panel_5.setLayout(gl_panel_5);
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+		);
+		panel_4.setLayout(gl_panel_4);
+		panel_1.setLayout(gl_panel_1);
+		
+		panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(null, "Modificadores de preparativos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Acciones inmediatas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 757, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+					.addGap(12)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE))
+		);
+		
+		spinner_30 = new JSpinner();
+		spinner_30.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_30.setName("SALTO_ESPONTANEO");
+		
+		spinner_31 = new JSpinner();
+		spinner_31.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_31.setName("INICIAR_OLA");
+		
+		spinner_32 = new JSpinner();
+		spinner_32.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_32.setName("PUNTERO_LASER");
+		
+		spinner_33 = new JSpinner();
+		spinner_33.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_33.setName("TIRAR_BENGALA");
+		
+		spinner_34 = new JSpinner();
+		spinner_34.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_34.setName("BEBER_CERVEZA");
+		
+		JLabel lblNewLabel = new JLabel("Salto espont.");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		spinner_35 = new JSpinner();
+		spinner_35.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_35.setName("ENTREVISTA_INTERMEDIO");
+		
+		spinner_36 = new JSpinner();
+		spinner_36.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_36.setName("RETRANSMITIR_PARTIDO");
+		
+		spinner_37 = new JSpinner();
+		spinner_37.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_37.setName("HABLAR_SPEAKER");
+		
+		spinner_38 = new JSpinner();
+		spinner_38.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_38.setName("ACTIVAR_SOBORNO");
+		
+		spinner_39 = new JSpinner();
+		spinner_39.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_39.setName("DOBLAR_APUESTA");
+		
+		JLabel lblEntrevistaDesc = new JLabel("Entrevista desc.");
+		lblEntrevistaDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblIniciarOla = new JLabel("Iniciar ola");
+		lblIniciarOla.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblPunteroLaser = new JLabel("Puntero laser");
+		lblPunteroLaser.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblTirarVengala = new JLabel("Tirar bengala");
+		lblTirarVengala.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblBeberCerveza = new JLabel("Beber cerveza");
+		lblBeberCerveza.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblRetransmision = new JLabel("Retransmision");
+		lblRetransmision.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblHablarSpeaker = new JLabel("Hablar speaker");
+		lblHablarSpeaker.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblActivarSoborno = new JLabel("Activar soborno");
+		lblActivarSoborno.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblDoblarApuesta = new JLabel("Doblar apuesta");
+		lblDoblarApuesta.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_8 = new JLabel("Equipo Local");
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		spinner_40 = new JSpinner();
+		spinner_40.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_40.setName("SALTO_ESPONTANEO");
+		
+		spinner_41 = new JSpinner();
+		spinner_41.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_41.setName("INICIAR_OLA");
+		
+		spinner_42 = new JSpinner();
+		spinner_42.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_42.setName("PUNTERO_LASER");
+		
+		spinner_43 = new JSpinner();
+		spinner_43.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_43.setName("TIRAR_BENGALA");
+		
+		spinner_44 = new JSpinner();
+		spinner_44.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_44.setName("BEBER_CERVEZA");
+		
+		JLabel label_9 = new JLabel("Salto espont.");
+		label_9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		spinner_45 = new JSpinner();
+		spinner_45.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_45.setName("ENTREVISTA_INTERMEDIO");
+		
+		spinner_46 = new JSpinner();
+		spinner_46.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_46.setName("RETRANSMITIR_PARTIDO");
+		
+		spinner_47 = new JSpinner();
+		spinner_47.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_47.setName("HABLAR_SPEAKER");
+		
+		spinner_48 = new JSpinner();
+		spinner_48.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_48.setName("ACTIVAR_SOBORNO");
+		
+		spinner_49 = new JSpinner();
+		spinner_49.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_49.setName("DOBLAR_APUESTA");
+		
+		JLabel label_10 = new JLabel("Entrevista desc.");
+		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_11 = new JLabel("Iniciar ola");
+		label_11.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_12 = new JLabel("Puntero laser");
+		label_12.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_13 = new JLabel("Tirar bengala");
+		label_13.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_14 = new JLabel("Beber cerveza");
+		label_14.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_15 = new JLabel("Retransmision");
+		label_15.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_16 = new JLabel("Hablar speaker");
+		label_16.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_17 = new JLabel("Activar soborno");
+		label_17.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_18 = new JLabel("Doblar apuesta");
+		label_18.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblEquipoVisitante_1 = new JLabel("Equipo Visitante");
+		lblEquipoVisitante_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		button = new JButton("Cargar");
+		button.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_30, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_31, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblIniciarOla, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_32, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblPunteroLaser, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_33, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblTirarVengala, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_34, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblBeberCerveza, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)))
+					.addGap(22)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_38, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblActivarSoborno, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_37, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblHablarSpeaker, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_36, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblRetransmision, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_35, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblEntrevistaDesc, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+							.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel_3.createSequentialGroup()
+								.addComponent(spinner_39, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblDoblarApuesta, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))))
+					.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_40, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+							.addGap(49)
+							.addComponent(spinner_45, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_41, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(spinner_46, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_15, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_42, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(spinner_47, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_16, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_43, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(spinner_48, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_17, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(spinner_44, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_14, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+							.addGap(22)
+							.addComponent(spinner_49, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(label_18, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addGap(167)
+							.addComponent(lblEquipoVisitante_1)
+							.addGap(48)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)))
+					.addGap(18))
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(33)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_40, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addComponent(spinner_45, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_41, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addComponent(spinner_46, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_15, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_42, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addComponent(spinner_47, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_16, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_43, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addComponent(spinner_48, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_17, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_44, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_14, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addComponent(spinner_49, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addGap(6)
+									.addComponent(label_18, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGap(31)
+							.addComponent(lblEquipoVisitante_1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_30, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel)
+								.addComponent(spinner_35, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblEntrevistaDesc, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_31, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_36, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIniciarOla, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblRetransmision, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_32, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_37, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPunteroLaser, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblHablarSpeaker, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_33, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_38, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTirarVengala, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblActivarSoborno, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_34, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblBeberCerveza, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_39, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDoblarApuesta, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addGap(31)
+							.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(45, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap(229, Short.MAX_VALUE)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		panel_3.setLayout(gl_panel_3);
+		
+		spinner = new JSpinner();
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner.setName("MOTIVARSE");
+		
+		spinner_1 = new JSpinner();
+		spinner_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_1.setName("PINTARSE");
+		
+		spinner_2 = new JSpinner();
+		spinner_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_2.setName("PELEA_AFICIONES");
+		
+		spinner_3 = new JSpinner();
+		spinner_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_3.setName("CREAR_PANCARTA");
+		
+		spinner_4 = new JSpinner();
+		spinner_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_4.setName("PROMOCIONAR_EQUIPO");
+		
+		spinner_5 = new JSpinner();
+		spinner_5.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_5.setName("HACKEAR_PAGINA");
+		
+		spinner_6 = new JSpinner();
+		spinner_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_6.setName("ORGANIZAR_CENA");
+		
+		spinner_7 = new JSpinner();
+		spinner_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_7.setName("ORGANIZAR_HOMENAJE");
+		
+		spinner_8 = new JSpinner();
+		spinner_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_8.setName("CONTRATAR_RRPP");
+		
+		spinner_9 = new JSpinner();
+		spinner_9.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_9.setName("FINANCIAR_EVENTO");
+		
+		spinner_10 = new JSpinner();
+		spinner_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_10.setName("MEJORAR_GRADAS");
+		
+		spinner_11 = new JSpinner();
+		spinner_11.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_11.setName("SOBORNAR_LINIER");
+		
+		spinner_12 = new JSpinner();
+		spinner_12.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_12.setName("INCENTIVO_ECONOMICO");
+		
+		spinner_13 = new JSpinner();
+		spinner_13.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_13.setName("ASCENDER_TRABAJO");
+		
+		spinner_14 = new JSpinner();
+		spinner_14.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_14.setName("APOSTAR");
+		
+		spinner_15 = new JSpinner();
+		spinner_15.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_15.setName("MOTIVARSE");
+		
+		spinner_16 = new JSpinner();
+		spinner_16.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_16.setName("PINTARSE");
+		
+		spinner_17 = new JSpinner();
+		spinner_17.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_17.setName("PELEA_AFICIONES");
+		
+		spinner_18 = new JSpinner();
+		spinner_18.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_18.setName("CREAR_PANCARTA");
+		
+		spinner_19 = new JSpinner();
+		spinner_19.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_19.setName("PROMOCIONAR_EQUIPO");
+		
+		spinner_20 = new JSpinner();
+		spinner_20.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_20.setName("HACKEAR_PAGINA");
+		
+		spinner_21 = new JSpinner();
+		spinner_21.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_21.setName("ORGANIZAR_CENA");
+		
+		spinner_22 = new JSpinner();
+		spinner_22.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_22.setName("ORGANIZAR_HOMENAJE");
+		
+		spinner_23 = new JSpinner();
+		spinner_23.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_23.setName("CONTRATAR_RRPP");
+		
+		spinner_24 = new JSpinner();
+		spinner_24.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_24.setName("FINANCIAR_EVENTO");
+		
+		spinner_25 = new JSpinner();
+		spinner_25.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_25.setName("MEJORAR_GRADAS");
+		
+		spinner_26 = new JSpinner();
+		spinner_26.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_26.setName("SOBORNAR_LINIER");
+		
+		spinner_27 = new JSpinner();
+		spinner_27.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_27.setName("INCENTIVO_ECONOMICO");
+		
+		spinner_28 = new JSpinner();
+		spinner_28.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_28.setName("ASCENDER_TRABAJO");
+		
+		spinner_29 = new JSpinner();
+		spinner_29.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		spinner_29.setName("APOSTAR");
+		
+		JLabel lblMotivarse = new JLabel("Motivarse");
+		lblMotivarse.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblHackearpagina = new JLabel("Hackear pagina");
+		lblHackearpagina.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblMejorargradas = new JLabel("Mejorar gradas");
+		lblMejorargradas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label = new JLabel("Motivarse");
+		label.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_1 = new JLabel("Hackear pagina");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_2 = new JLabel("Mejorar gradas");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		btnCargar = new JButton("Cargar");
+		btnCargar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblPintarse = new JLabel("Pintarse");
+		lblPintarse.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_3 = new JLabel("Pintarse");
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblPelea = new JLabel("Pelea");
+		lblPelea.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_4 = new JLabel("Pelea");
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblPancarta = new JLabel("Pancarta");
+		lblPancarta.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_5 = new JLabel("Pancarta");
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblPromocionarEquipo = new JLabel("Promocionar\r\nequipo");
+		lblPromocionarEquipo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_6 = new JLabel("Promocionar\r\nequipo");
+		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblOrgCena = new JLabel("Org. Cena");
+		lblOrgCena.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel label_7 = new JLabel("Org. Cena");
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblOrgHomenaje = new JLabel("Org. Homenaje");
+		lblOrgHomenaje.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblRrppNuevo = new JLabel("RRPP nuevo");
+		lblRrppNuevo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblFinanciacin = new JLabel("Financiacion");
+		lblFinanciacin.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblSoborno = new JLabel("Soborno");
+		lblSoborno.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblIncentivo = new JLabel("Incentivo");
+		lblIncentivo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblAscenderTr = new JLabel("Ascender Trb.");
+		lblAscenderTr.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblApostar = new JLabel("Apostar");
+		lblApostar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblFinanciacin_1 = new JLabel("Financiacion");
+		lblFinanciacin_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblRrppNuevo_1 = new JLabel("RRPP nuevo");
+		lblRrppNuevo_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblOrgHomenaje_1 = new JLabel("Org. Homenaje");
+		lblOrgHomenaje_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblSoborno_1 = new JLabel("Soborno");
+		lblSoborno_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblIncentivo_1 = new JLabel("Incentivo");
+		lblIncentivo_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblAscenderTrb = new JLabel("Ascender Trb.");
+		lblAscenderTrb.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblApostar_1 = new JLabel("Apostar");
+		lblApostar_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblEquipoLocal = new JLabel("Equipo Local");
+		lblEquipoLocal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		JLabel lblEquipoVisitante = new JLabel("Equipo Visitante");
+		lblEquipoVisitante.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMotivarse)
+								.addComponent(lblPintarse, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPelea, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPancarta, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPromocionarEquipo, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblHackearpagina)
+								.addComponent(lblOrgCena, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(lblFinanciacin, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblRrppNuevo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblOrgHomenaje, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+							.addGap(18)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+								.addComponent(spinner_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+									.addComponent(spinner_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(spinner_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(spinner_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(spinner_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblMejorargradas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblSoborno, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIncentivo, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblApostar, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAscenderTr, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(155)
+							.addComponent(lblEquipoLocal)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addComponent(spinner_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addComponent(spinner_16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addComponent(spinner_17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addComponent(spinner_18, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addComponent(spinner_19, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(spinner_20, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_21, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_22, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_23, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_24, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_2.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(lblFinanciacin_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblRrppNuevo_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblOrgHomenaje_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+							.addComponent(lblEquipoVisitante, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+							.addGap(39)))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnCargar, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(spinner_29, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblApostar_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(spinner_28, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblAscenderTrb, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(spinner_27, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblIncentivo_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(spinner_26, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSoborno_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(spinner_25, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)))
+					.addGap(5))
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel_2.createSequentialGroup()
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblMotivarse))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblPintarse, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblPelea, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblPancarta, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblPromocionarEquipo, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_panel_2.createSequentialGroup()
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+									.addComponent(spinner_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblMejorargradas, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+									.addComponent(spinner_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panel_2.createSequentialGroup()
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblSoborno, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblIncentivo, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblAscenderTr, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblApostar, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_panel_2.createSequentialGroup()
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_18, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+											.addComponent(spinner_19, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblHackearpagina))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOrgCena, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOrgHomenaje, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblRrppNuevo, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblFinanciacin, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_20, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_21, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_22, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOrgHomenaje_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_23, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblRrppNuevo_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_24, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblFinanciacin_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_25, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_26, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblSoborno_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_27, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIncentivo_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_28, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAscenderTrb, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(spinner_29, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblApostar_1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(31)
+							.addComponent(lblEquipoLocal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(11)
+							.addComponent(btnCargar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(15, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(18)
+							.addComponent(lblEquipoVisitante, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
+		);
+		panel_2.setLayout(gl_panel_2);
+		panel.setLayout(gl_panel);
+		frmJugadorNumero.getContentPane().setLayout(groupLayout);
+	}
 }
-
