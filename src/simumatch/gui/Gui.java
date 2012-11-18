@@ -33,17 +33,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class Gui {
 
 	private JFrame frmJugadorNumero;
 	private JTextField textField;
+	private JTextArea textArea;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JButton btnSiguiente;
-	private JTextArea textArea;
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JSpinner spinner_30;
@@ -108,6 +109,7 @@ public class Gui {
     private HashMap<Action,Number> prepHashL,prepHashV,matchHashL,matchHashV;
 	private JSpinner[] arraySpinsP;
 	private JSpinner[] arraySpinsM;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -306,21 +308,20 @@ public class Gui {
 		);
 		panel_5.setLayout(gl_panel_5);
 		
-		textArea = new JTextArea();
-		textArea.setEditable(false);
+		scrollPane = new JScrollPane();
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
 		);
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		scrollPane.setViewportView(textArea);
 		panel_4.setLayout(gl_panel_4);
 		panel_1.setLayout(gl_panel_1);
 		
