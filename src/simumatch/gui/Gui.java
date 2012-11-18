@@ -17,11 +17,22 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import simumatch.common.Action;
 import simumatch.common.Effect;
+import simumatch.datamanager.AbilitiesData;
+import simumatch.match.Partido;
+import simumatch.match.Turno;
+import simumatch.team.Equipo;
 
 
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Gui {
 
@@ -87,7 +98,16 @@ public class Gui {
 	private JSpinner spinner_28;
 	private JSpinner spinner_29;
 	private JButton btnCargar;
-	private LinkedList<Effect> listEffectsP1,listEffectsP2,listEffectsM1,listEffectsM2;
+	private List<Effect> listEffectsP1,listEffectsP2,listEffectsM1,listEffectsM2;
+	private AbilitiesData data;
+	private Equipo e1;
+	private Equipo e2;
+	private Partido match;
+    private Turno turn;
+    
+    private HashMap<Action,Number> prepHashL,prepHashV,matchHashL,matchHashV;
+	private JSpinner[] arraySpinsP;
+	private JSpinner[] arraySpinsM;
 
 	/**
 	 * Launch the application.
@@ -128,8 +148,74 @@ public class Gui {
         listEffectsP2 = new LinkedList<Effect>();
         listEffectsM1 = new LinkedList<Effect>();
         listEffectsM2 = new LinkedList<Effect>();
+        data = new AbilitiesData();
+        try {
+			data.loadFile(new File("./animadora.txt"));
+			data.loadFile(new File("./empresario.txt"));
+			data.loadFile(new File("./ultra.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        e1 = Equipo.equipo_de_prueba1();
+        e2 = Equipo.equipo_de_prueba2();
         
 		initialize();
+		arraySpinsP = new JSpinner[] {spinner,spinner_1,spinner_2,spinner_3,spinner_4,spinner_5,spinner_6,spinner_7,spinner_8,spinner_9,
+								spinner_10,spinner_11,spinner_12,spinner_13,spinner_14,spinner_15,spinner_16,spinner_17,spinner_18,
+								spinner_19,spinner_20,spinner_21,spinner_22,spinner_23,spinner_24,spinner_25,spinner_26,spinner_27,spinner_28,
+								spinner_29};
+		arraySpinsM = new JSpinner[] {spinner_30,spinner_31,spinner_32,spinner_33,spinner_34,spinner_35,spinner_36,spinner_37,spinner_38,
+								spinner_39,spinner_40,spinner_41,spinner_42,spinner_43,spinner_44,spinner_45,spinner_46,spinner_47,
+								spinner_48,spinner_49};
+		prepHashL = new HashMap<Action,Number>();
+		prepHashV = new HashMap<Action,Number>();
+		matchHashL = new HashMap<Action,Number>();
+		matchHashV = new HashMap<Action,Number>();
+	}
+	
+	//Load button from preparatory actions
+	protected void bntCargarActionPerformed(ActionEvent arg0) {
+		int i;
+		//Local
+		for(i=0;i<15;i++){
+			prepHashL.put(Action.get(arraySpinsP[i].getName()) , (Number) arraySpinsP[i].getValue());
+		}
+		//Visitor
+		for(i=15;i<30;i++){
+			prepHashV.put(Action.get(arraySpinsP[i].getName()) , (Number) arraySpinsP[i].getValue());
+		}
+		listEffectsP1 = data.getEffects(prepHashL, true);
+		listEffectsP2 = data.getEffects(prepHashV, true);
+		e1.setPerparatorias(listEffectsP1);
+		e2.setPerparatorias(listEffectsP2);
+		match = new Partido(e1,e2);
+		btnCargar.setEnabled(false);
+	}
+	
+	//Load button from match actions
+	protected void buttonActionPerformed(ActionEvent arg0) {
+		int i;
+		//Local
+		for(i=0;i<10;i++){
+			matchHashL.put(Action.get(arraySpinsM[i].getName()) , (Number) arraySpinsM[i].getValue());
+		}
+		//Visitor
+		for(i=10;i<20;i++){
+			matchHashV.put(Action.get(arraySpinsM[i].getName()) , (Number) arraySpinsM[i].getValue());
+		}
+		listEffectsM1 = data.getEffects(matchHashL, true);
+		listEffectsM2 = data.getEffects(matchHashV, true);
+		turn = match.turno(listEffectsM1, listEffectsM2);
+		
+		//Paint
+		textField.setText(String.valueOf(turn.getEstado()));
+		textArea.setText(textArea.getText()+turn+"\n");
+	}
+
+	//Next button for next match turn
+	protected void btnSiguienteActionPerformed(ActionEvent e) {
+		textField.setText("");
+		
 	}
 
 	/**
@@ -191,6 +277,11 @@ public class Gui {
 		textField.setColumns(10);
 		
 		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSiguienteActionPerformed(e);
+			}
+		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
 		gl_panel_5.setHorizontalGroup(
@@ -403,6 +494,11 @@ public class Gui {
 		lblEquipoVisitante_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		button = new JButton("Cargar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				buttonActionPerformed(arg0);
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
@@ -739,6 +835,11 @@ public class Gui {
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		btnCargar = new JButton("Cargar");
+		btnCargar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				bntCargarActionPerformed(arg0);
+			}
+		});
 		btnCargar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JLabel lblPintarse = new JLabel("Pintarse");
