@@ -217,7 +217,9 @@ public class Gui {
 	//Next button for next match turn
 	protected void btnSiguienteActionPerformed(ActionEvent e) {
 		textField.setText("");
-		
+		for(int i=0;i<20;i++){
+			arraySpinsM[i].setValue(0);
+		}
 	}
 
 	/**
