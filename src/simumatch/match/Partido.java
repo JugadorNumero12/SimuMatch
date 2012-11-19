@@ -18,11 +18,11 @@ public class Partido {
 	int turnoActual = 0;
 	private Memento mementer= new Memento(this);
 	private Turno turno[] = new Turno[duracion+1];
-	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
+	//List<Effect> activas; //Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
 	
 	//Metodos Publicos (solo os interesan estos 2)
-	/**
+	/** new Partido:
 	 * Crea un partido a partir de los equipos que lo juegan
 	 * */
 	public Partido(Equipo loc, Equipo vis){
@@ -54,7 +54,7 @@ public class Partido {
 		
 		turno[0]= new Turno(equilibrio, this, firstAbanico);
 	}
-	/**
+	/** Turno turno:
 	 *Genera un turno nuevo a partir de las acciones realizadas por cada equipo
 	 */
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
@@ -181,6 +181,10 @@ public class Partido {
 			if(tacV==1 && Math.random()<visitante.versatilidad())tacV=2;
 		}
 	}
+	/** int generaTurno:
+	 * Dado el abanico, genera el estado aleatorio,
+	 * y actualiza el macador si se ha marcado
+	 */
 	private int generaTurno(double[] abanico){
 		if(turnoActual==duracion/2)
 			return equilibrio;
@@ -192,7 +196,7 @@ public class Partido {
 		if(estado<-5)marV++;
 		return estado;
 	}
-	/**
+	/** double[] calculaAbanico:
 	 * Metodo para generar el abnico de probabilidades
 	 * devuelve un abanico con una probabilidad asociada a cada uno de los 13 estados
 	 */
@@ -241,9 +245,11 @@ public class Partido {
 		
 		return normalizar(abanico);
 	}
-	/**
+	/** void bonif:
 	 * Dado un vector aba, un numero mult y unos indices origen y destino
-	 * multiplica todos los elementos entre "origen" y "destino" por "mult" 
+	 * multiplica todos los elementos de "aba" entre "origen" y "destino" por "mult"
+	 * Ej: bonif(1, 3,  2, {1,1,1,1,1}) => {1,2,2,2,1} 
+	 * Ej: bonif(0, 1, 10, {4,3,2,1,0}) => {40,30,2,1,0}
 	 */
 	private static void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
@@ -251,9 +257,11 @@ public class Partido {
 		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
 	}
-	/**
+	/** double[] normalizar:
 	 * Dado un vector devuelve uno proporcional 
-	 * para el que el sumatorio de los elementos == 1
+	 * para el que el sumatorio de los elementos sea 1.
+	 * Ej: normalizar({4,2,5}) returns {4/11, 2/11, 5/11}
+	 * Ej: normalizar({1,1,1,1}) returns {1/4, 1/4, 1/4, 1/4}
 	 */
 	private static double[] normalizar(double[] input) {
 		int len = input.length;
@@ -266,14 +274,22 @@ public class Partido {
 			output[i]=Math.max(input[i]/sum, 0);
 		return output;
 	}
-	/**
+	/** void mul_adyacen:
 	 * Dado un vector "prods" de multiplicadores y un punto "p" de un "abanico"
 	 * aplica los multiplicadores desde "p" en puntos adyacentes cada vez más alejados
+	 * Ej: mul_adyacen({3,2,1,0}, 4, {1,1,1,1,1,1,1,1,1}) => {1,0,1,2,3,2,1,0,1}
+	 * Ej: mul_adyacen({33, 0.5, 0}, 3, {2,2,2,2,2}) => {2,0,1,66,1}
 	*/
 	private static void mul_adyacen(double prods[], int p, double abanico[]){
 		for(int i=0; i<prods.length; i++)
 			mul_adyacen(prods[i], p, i, abanico);
 	}
+	/** void mul_adyacen:
+	 * Dado un multiplicador "prod", un punto "p" de un "abanico", y una distancia "g"
+	 * multiplica los puntos "p"+"g" y "p"-"g" del "abanico" por "prod"
+	 * Ej: mul_adyacen(9, 3, 2, {1,1,1,1,1,1}) => {1,9,1,1,1,9}
+	 * Ej: mul_adyacen(0.5, 2, 0, {2,2,2,2}) => {2,2,1,2}
+	 */
 	private static void mul_adyacen(double prod, int p, int g, double abanico[]) {
 		int ps[]= adyacentes(p, g);
 		for(int i=0; i<ps.length; i++)abanico[ps[i]]*=prod;
@@ -281,6 +297,8 @@ public class Partido {
 	/**
 	 * Dado un "punto" y una distancia "grado"
 	 * devuelve los dos puntos alejados "grado" de "punto"
+	 * Ej: adyacentes  1 returns {0,2}
+	 * Ej: adyacentes 12 returns {11} (el 13 no existe}
 	 */
 	private static int[] adyacentes(int punto, int grado){
 		int g = Math.abs(grado);

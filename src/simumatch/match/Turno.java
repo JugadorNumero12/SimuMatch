@@ -11,10 +11,10 @@ public class Turno {
 	 * Metodos Publicos
 	 */
 	public int getEstado() {
-		return estado;
+		return estado; //el estado resultado
 	}
 	public String toString(){
-		return comentarista;
+		return comentarista; //el resumen del turno
 	}
 	
 	/**
