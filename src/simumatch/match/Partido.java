@@ -107,13 +107,31 @@ public class Partido {
 			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
 			if(mementer.inited)mementer.equilibrio=op.apply(mementer.equilibrio, (loc?1:(-1))*bonus);
 		break;
-		case ATMOSPHERE:
+		case ENCOURAGE:
 			if(loc){
 				animoL= op.apply(animoL, bonus);
 				if(mementer.inited)mementer.animoL=op.apply(mementer.animoL, bonus);
 			}else{
 				animoV= op.apply(animoV, bonus);
 				if(mementer.inited)mementer.animoV=op.apply(mementer.animoV, bonus);
+			}
+		break;
+		case OFFENSIVE_SPIRIT:
+			if(loc){
+				local.setIOf(op.apply(local.indiceOfensivo(), bonus));
+				if(mementer.inited)mementer.indOfL=op.apply(mementer.indOfL, bonus);
+			}else{
+				visitante.setIOf(op.apply(visitante.indiceOfensivo(), bonus));
+				if(mementer.inited)mementer.indOfV=op.apply(mementer.indOfV, bonus);
+			}	
+		break;
+		case DEFENSIVE_SPIRIT:
+			if(loc){
+				local.setIDf(op.apply(local.indiceDefensivo(), bonus));
+				if(mementer.inited)mementer.indDeL=op.apply(mementer.indDeL, bonus);
+			}else{
+				visitante.setIDf(op.apply(visitante.indiceDefensivo(), bonus));
+				if(mementer.inited)mementer.indDeV=op.apply(mementer.indDeV, bonus);
 			}
 		break;
 		default:
@@ -258,7 +276,7 @@ public class Partido {
 				modificated=true;
 				p.equilibrio= op.apply(p.equilibrio, bono);
 				break;
-			case ATMOSPHERE:
+			case ENCOURAGE:
 				init();
 				modificated=true;
 				if(loc)p.animoL =op.apply(p.animoL, bono);
