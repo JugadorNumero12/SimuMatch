@@ -211,13 +211,14 @@ public class Partido {
 		
 		if(-6<eAnt && eAnt>6){
 			//si se marca gol, no se aplica este bonificador
-			double indi_est[] = {6, 4.5, 3, 2.5, 1.5};
+			double indi_est[] = {5.75, 5, 4.25, 3.5, 2.75, 2, 1.25};
 			mul_adyacen(indi_est, pAnt, abanico);
-			//el estado anterior multiplica su prob por 6
-			//los dos estados adyacentes multiplican por 4.5
-			//los dos estados a distancia 2 del eAnt multiplican por 3
-			//los dos estados a distancia 3 del eAnt multiplican por 2.5
-			//los dos estados a distancia 4 del eAnt multiplican por 1.5
+			//el estado anterior multiplica su prob por 6.25
+			//los dos estados adyacentes multiplican por 5.5
+			//los dos estados a distancia 2 del eAnt multiplican por 4.75
+			//los dos estados a distancia 3 del eAnt multiplican por 4
+			// ...
+			//los dos estados a distancia 6 del eAnt multiplican por 1.75
 		}
 
 		if(eAnt>0){//el Local lleva la iniciativa
@@ -240,9 +241,10 @@ public class Partido {
 		//los dos estados a distancia 2 del equilibrio multiplican por 1.25
 	
 		
-		//los animos bonifican los 3 estados beneficiosos más proximos al eAnt
-		bonif(pAnt+1, pAnt+3, animoL/Math.max(animoV, 0.1), abanico);
-		bonif(pAnt-3, pAnt-1, animoV/Math.max(animoL, 0.1), abanico);
+		//los animos bonifican todos estados que mejoren el estado
+		//pero cada vez menoscuanto más lo mejoren, menos se bonifican
+		bonif_decremental(true,  pAnt+1, 2*animoL/Math.max(animoV, 0.1), 0.5, abanico);
+		bonif_decremental(false, pAnt-1, 2*animoV/Math.max(animoL, 0.1), 0.5, abanico);
 		
 		return normalizar(abanico);
 	}
@@ -257,6 +259,21 @@ public class Partido {
 		if(destino>12)destino=12;
 		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
+	}
+	/**void bonif_decremental:
+	 *Dado un vector anbanico, una posicion inicial, una base de multiplicacion y un factor dif
+	 *multiplica la posIni por la base, el siguiente por base-dif, el siguiente por base-2dif, etc
+	 *cuando se llega a limite se deja de restar y se conserva la base hasta el final del vector
+	 *Ej: bonif_decremental(true,  1, 4, 1, {1,1,1,1,1}) => {1,4,3,2,1}
+	 *Ej: bonif_decremental(false, 4, 2, 0.2, {3,3,3,3,3}) => {3,6, 4.2, 4.8 , 5.4, 6}
+	 */
+	private void bonif_decremental(boolean creciendo, int posIni, double base, double dif, double[] abanico) {
+		int j=(creciendo)?1:-1;
+		int limite= (base>1)?1:0; //es diferente si se bonifica o penaliza
+		for(int i= posIni; i<abanico.length && i>=0; i+=j){
+			abanico[i]*= base;
+			if(base>limite+dif)base-=dif;
+		}
 	}
 	/** double[] normalizar:
 	 * Dado un vector devuelve uno proporcional 
