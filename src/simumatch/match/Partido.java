@@ -188,43 +188,69 @@ public class Partido {
 		if(estado<-5)marV++;
 		return estado;
 	}
+	/**
+	 * Metodo para generar el abnico de probabilidades
+	 * devuelve un abanico con una probabilidad asociada a cada uno de los 13 estados
+	 */
 	private double[] calculaAbanico() {
 		double abanico[] = new double [13];
-		int eAnt, pAnt;
+		int eAnt, pAnt; //estado anterior, el punto del abanico correspondiente
 		eAnt = (turnoActual>0)?turno[turnoActual-1].getEstado():equilibrio;
 		pAnt = estToPunt(eAnt);
-		double l = abanico.length;
-		for(int i=0; i<l; i++)abanico[i]=100;
+		int l = abanico.length;
+		for(int i=0; i<l; i++)abanico[i]=100;//inicialízo el abanico con valores iguales distintos de 0
 		
 		
-		if(-6<eAnt&&eAnt>6){//si se marca, no se aplica el bono de estado anterior
+		if(-6<eAnt && eAnt>6){
+			//si se marca gol, no se aplica este bonificador
 			double indi_est[] = {6, 4.5, 3, 2.5, 1.5};
 			mul_adyacen(indi_est, pAnt, abanico);
+			//el estado anterior multiplica su prob por 6
+			//los dos estados adyacentes multiplican por 4.5
+			//los dos estados a distancia 2 del eAnt multiplican por 3
+			//los dos estados a distancia 3 del eAnt multiplican por 2.5
+			//los dos estados a distancia 4 del eAnt multiplican por 1.5
 		}
 
-		if(eAnt>0){
-			if(tacL==1)bonif(pAnt, 13, local.indiceOfensivo(),abanico);
-			if(tacV==2)bonif(pAnt, 13, 1/visitante.indiceDefensivo(),abanico);
+		if(eAnt>0){//el Local lleva la iniciativa
+			if(tacL==1)//si local tiene tactica ofensiva aplica el bono
+				bonif(pAnt, l, local.indiceOfensivo(),abanico);
+			if(tacV==2)//si visitante tiene tactica defensiva penaliza al local
+				bonif(pAnt, l, 1/visitante.indiceDefensivo(),abanico);
 		}else
-		if(eAnt<0){
-			if(tacV==1)bonif(0, pAnt, visitante.indiceOfensivo(),abanico);
-			if(tacL==2)bonif(0, pAnt, 1/local.indiceDefensivo(),abanico);
+		if(eAnt<0){//el Visitante lleva la iniciativa
+			if(tacV==1)//si visitante tiene tactica ofensiva aplica el bono
+				bonif(0, pAnt, visitante.indiceOfensivo(),abanico);
+			if(tacL==2)//si local tiene tactica defensiva penaliza al visitante
+				bonif(0, pAnt, 1/local.indiceDefensivo(),abanico);
 		}
 		
 		double indi_equi[] = {2.75, 2, 1.25};
 		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
+		//el estado de equilibrio multiplica su prob por 2.75
+		//los dos estados adyacentes multiplican por 2
+		//los dos estados a distancia 2 del equilibrio multiplican por 1.25
 	
+		//la fraccion de animos bonifica a los 3 estados más proximos al actual
 		bonif(pAnt+1, pAnt+3, Math.max(0, animoL/animoV), abanico);
 		bonif(pAnt-3, pAnt-1, Math.max(0, animoV/animoL), abanico);
 		
 		return normalizar(abanico);
 	}
+	/**
+	 * Dado un vector aba, un numero mult y unos indices origen y destino
+	 * multiplica todos los elementos entre "origen" y "destino" por "mult" 
+	 */
 	private static void bonif(int origen, int destino, double mult, double aba[]){
 		if(origen<0)origen=0;
 		if(destino>12)destino=12;
 		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
 	}
+	/**
+	 * Dado un vector devuelve uno proporcional 
+	 * para el que el sumatorio de los elementos == 1
+	 */
 	private static double[] normalizar(double[] input) {
 		int len = input.length;
 		double output[] = new double[len];
@@ -236,6 +262,10 @@ public class Partido {
 			output[i]=Math.max(input[i]/sum, 0);
 		return output;
 	}
+	/**
+	 * Dado un vector "prods" de multiplicadores y un punto "p" de un "abanico"
+	 * aplica los multiplicadores desde "p" en puntos adyacentes cada vez más alejados
+	*/
 	private static void mul_adyacen(double prods[], int p, double abanico[]){
 		for(int i=0; i<prods.length; i++)
 			mul_adyacen(prods[i], p, i, abanico);
@@ -244,6 +274,10 @@ public class Partido {
 		int ps[]= adyacentes(p, g);
 		for(int i=0; i<ps.length; i++)abanico[ps[i]]*=prod;
 	}
+	/**
+	 * Dado un "punto" y una distancia "grado"
+	 * devuelve los dos puntos alejados "grado" de "punto"
+	 */
 	private static int[] adyacentes(int punto, int grado){
 		int g = Math.abs(grado);
 		if(g>12)return null;
