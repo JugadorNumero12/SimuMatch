@@ -67,7 +67,7 @@ public class Turno {
 		}
 		comentarista+=escribeAbanico(aba);
 		
-		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n";
+		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n";
 	}
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
