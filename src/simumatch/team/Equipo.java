@@ -9,7 +9,7 @@ public class Equipo {
 		e.nivel=4;
 		e.orgullo=150;
 		e.versatilidad = 0.8;
-		e.indiceDefensivo = 4;
+		e.indiceDefensivo = 2;
 		e.indiceOfensivo = 2;
 		e.indiceOptimismo = 10;
 		e.indiceFrialdad = 15;
@@ -21,7 +21,7 @@ public class Equipo {
 		e.orgullo=100;
 		e.versatilidad = 0.8;
 		e.indiceDefensivo = 2;
-		e.indiceOfensivo = 2.5;
+		e.indiceOfensivo = 3;
 		e.indiceOptimismo = 5;
 		e.indiceFrialdad = 8;
 		return e;
