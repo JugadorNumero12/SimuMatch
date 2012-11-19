@@ -190,7 +190,6 @@ public final class AbilitiesData {
 	 * @throws IOException
 	 *             If anything goes wrong
 	 */
-	
 	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
 		
