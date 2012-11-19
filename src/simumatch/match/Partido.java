@@ -184,7 +184,7 @@ public class Partido {
 			if(tacL==2)bonif(0, pAnt, 1/local.indiceDefensivo(),abanico);
 		}
 		
-		double indi_equi[] = {4.5, 3, 2.5, 1.5};
+		double indi_equi[] = {2.75,2,1.25};//{4.5, 3, 2.5, 1.5};
 		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
 	
 		
