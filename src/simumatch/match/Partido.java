@@ -104,6 +104,7 @@ public class Partido {
 			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
 			if(mementer.inited)mementer.equilibrio=op.apply(mementer.equilibrio, (loc?1:(-1))*bonus);
 			break;
+		case ATMOSPHERE:
 		case ENCOURAGE:
 			if(loc){
 				animoL= op.apply(animoL, bonus);
@@ -268,6 +269,7 @@ public class Partido {
 				modificated=true;
 				p.equilibrio= op.apply(p.equilibrio, bono);
 				break;
+			case ATMOSPHERE:
 			case ENCOURAGE:
 				init();
 				modificated=true;
