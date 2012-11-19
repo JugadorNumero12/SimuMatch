@@ -13,7 +13,7 @@ public class Partido {
 	int marL=0; int marV=0;
 	int equilibrio;
 	Arbitro arbitro = new Arbitro();
-	int duracion = 10;//el numero de turnos que va a durar el partido
+	int duracion = 10;
 	int turnoActual = 0;
 	private Memento mementer= new Memento(this);
 	private Turno turno[] = new Turno[duracion+1];
@@ -51,8 +51,6 @@ public class Partido {
 		firstAbanico[estToPunt(equilibrio)]=1;
 		
 		turno[0]= new Turno(equilibrio, this, firstAbanico);
-		//el turno 0 nunca se muestra, solo se usa como base para en 1
-
 	}
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
 		
@@ -75,7 +73,6 @@ public class Partido {
 		
 		return turno[turnoActual];
 	}
-	
 	
 	/** 
 	 * Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
@@ -102,11 +99,11 @@ public class Partido {
 		case PEOPLE:
 			if(loc)aforoL= op.apply(aforoL, bonus);
 			else   aforoV= op.apply(aforoV, bonus);
-		break;
+			break;
 		case TEAM_LEVEL:
 			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
 			if(mementer.inited)mementer.equilibrio=op.apply(mementer.equilibrio, (loc?1:(-1))*bonus);
-		break;
+			break;
 		case ENCOURAGE:
 			if(loc){
 				animoL= op.apply(animoL, bonus);
@@ -115,7 +112,7 @@ public class Partido {
 				animoV= op.apply(animoV, bonus);
 				if(mementer.inited)mementer.animoV=op.apply(mementer.animoV, bonus);
 			}
-		break;
+			break;
 		case OFFENSIVE_SPIRIT:
 			if(loc){
 				local.setIOf(op.apply(local.indiceOfensivo(), bonus));
@@ -124,7 +121,7 @@ public class Partido {
 				visitante.setIOf(op.apply(visitante.indiceOfensivo(), bonus));
 				if(mementer.inited)mementer.indOfV=op.apply(mementer.indOfV, bonus);
 			}	
-		break;
+			break;
 		case DEFENSIVE_SPIRIT:
 			if(loc){
 				local.setIDf(op.apply(local.indiceDefensivo(), bonus));
@@ -133,11 +130,10 @@ public class Partido {
 				visitante.setIDf(op.apply(visitante.indiceDefensivo(), bonus));
 				if(mementer.inited)mementer.indDeV=op.apply(mementer.indDeV, bonus);
 			}
-		break;
+			break;
 		default:
 			System.out.println("No implementadas acciones permanentes de tipo "+scope);
 		}
-		
 	}
 	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
 		this.mementer.bonifTemp(scope, bonus, op, loc);
@@ -205,10 +201,8 @@ public class Partido {
 		double indi_equi[] = {2.75,2,1.25};//{4.5, 3, 2.5, 1.5};
 		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
 	
-		
 		bonif(pAnt+1, pAnt+3, Math.max(0, animoL/animoV), abanico);
 		bonif(pAnt-3, pAnt-1, Math.max(0, animoV/animoL), abanico);
-		
 		
 		return normalizar(abanico);
 	}
@@ -237,7 +231,7 @@ public class Partido {
 		int ps[]= adyacentes(p, g);
 		for(int i=0; i<ps.length; i++)abanico[ps[i]]*=prod;
 	}
-	private static int[] adyacentes(int punto, int grado) {
+	private static int[] adyacentes(int punto, int grado){
 		int g = Math.abs(grado);
 		if(g>12)return null;
 		if(g==0){
@@ -247,13 +241,11 @@ public class Partido {
 		int[] r = new int[2];
 		int s=1;
 		boolean b = punto-g < 0;
-		if(b )r =new int[s--];
+		if(b ) r = new int[s--];
 		if(punto+g < 13)  r[s]=punto+g;
 		else r = new int[1];
 		if(!b) r[0]=punto-g;
 		return r;
-		//debuelve un vector con los DOS PUNTOS separados "grado" de "punto"
-		//no funciona bien para puntos de origen que no existen
 	}
 	static int puntToEst(int p){return p-6;}
 	static int estToPunt(int e){return e+6;}
@@ -297,7 +289,6 @@ public class Partido {
 			default:
 				System.out.println("No implementadas acciones permanentes de tipo "+atrib);
 			}
-			
 		}
 		
 		Memento(Partido par){this.p= par;}
