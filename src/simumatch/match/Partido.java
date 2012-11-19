@@ -196,8 +196,11 @@ public class Partido {
 		double l = abanico.length;
 		for(int i=0; i<l; i++)abanico[i]=100;
 		
-		double indi_est[] = {6, 4.5, 3, 2.5, 1.5};
-		mul_adyacen(indi_est, pAnt, abanico);
+		
+		if(-6<eAnt&&eAnt>6){//si se marca, no se aplica el bono de estado anterior
+			double indi_est[] = {6, 4.5, 3, 2.5, 1.5};
+			mul_adyacen(indi_est, pAnt, abanico);
+		}
 
 		if(eAnt>0){
 			if(tacL==1)bonif(pAnt, 13, local.indiceOfensivo(),abanico);
@@ -208,7 +211,7 @@ public class Partido {
 			if(tacL==2)bonif(0, pAnt, 1/local.indiceDefensivo(),abanico);
 		}
 		
-		double indi_equi[] = {2.75,2,1.25};//{4.5, 3, 2.5, 1.5};
+		double indi_equi[] = {2.75, 2, 1.25};
 		mul_adyacen(indi_equi, estToPunt(equilibrio), abanico);
 	
 		bonif(pAnt+1, pAnt+3, Math.max(0, animoL/animoV), abanico);
