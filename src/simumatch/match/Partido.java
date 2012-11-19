@@ -239,9 +239,10 @@ public class Partido {
 		//los dos estados adyacentes multiplican por 2
 		//los dos estados a distancia 2 del equilibrio multiplican por 1.25
 	
-		//la fraccion de animos bonifica a los 3 estados más proximos al actual
-		bonif(pAnt+1, pAnt+3, Math.max(0, animoL/animoV), abanico);
-		bonif(pAnt-3, pAnt-1, Math.max(0, animoV/animoL), abanico);
+		
+		//los animos bonifican los 3 estados beneficiosos más proximos al eAnt
+		bonif(pAnt+1, pAnt+3, animoL/Math.max(animoV, 0.1), abanico);
+		bonif(pAnt-3, pAnt-1, animoV/Math.max(animoL, 0.1), abanico);
 		
 		return normalizar(abanico);
 	}
