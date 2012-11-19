@@ -27,8 +27,10 @@ public class Turno {
 		visitante= p.visitante.getName();
 		numeroDeTurno = partido.turnoActual;
 
-		if(partido.turnoActual==partido.duracion/2)comentarista = "Descanso("+numeroDeTurno+") ";
+		if(numeroDeTurno==partido.descanso)comentarista = "Descanso ("+numeroDeTurno+") ";
 		else comentarista += numeroDeTurno+": ";
+		
+		comentarista+="[Resultado: "+estado+"]\n";
 		
 		switch(estado){
 		case  6 : com("¡Gol de "+ local+"!");break;
@@ -67,7 +69,10 @@ public class Turno {
 		}
 		comentarista+=escribeAbanico(aba);
 		
-		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n";
+		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n";
+		
+		if(numeroDeTurno==partido.descanso-1)
+			comentarista+="Los jugadores se retiran del campo:\nComienza el DESCANSO\n";
 	}
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";

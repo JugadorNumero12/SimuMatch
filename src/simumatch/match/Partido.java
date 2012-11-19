@@ -14,6 +14,7 @@ public class Partido {
 	int equilibrio;
 	Arbitro arbitro = new Arbitro();
 	int duracion = 10;
+	int descanso = duracion/2+(duracion%2);
 	int turnoActual = 0;
 	private Memento mementer= new Memento(this);
 	private Turno turno[] = new Turno[duracion+1];

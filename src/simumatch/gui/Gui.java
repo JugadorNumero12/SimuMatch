@@ -211,7 +211,7 @@ public class Gui {
 		
 		//Paint
 		textField.setText(String.valueOf(turn.getEstado()));
-		textArea.setText(textArea.getText()+turn+"Resultado: "+turn.getEstado()+"\n"+"\n");
+		textArea.setText(textArea.getText()+turn);
 	}
 
 	//Next button for next match turn
