@@ -1,7 +1,7 @@
 package simumatch.common;
 
 public enum Scope {
-	ATMOSPHERE,
+	ATMOSPHERE,//TODO esto es MUY confuso
 	TEAM_LEVEL,
 	PEOPLE,
 	ENCOURAGE,
