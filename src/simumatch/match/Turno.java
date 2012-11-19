@@ -62,6 +62,7 @@ public class Turno {
 		}
 		
 		comentarista+=escribeAbanico(aba);
+		if(numeroDeTurno==1)comentarista+="\n[Ventaja Local <<<------------------------->>> Ventaja Visitante]\n";
 		
 		if(numeroDeTurno==partido.duracion){
 			com("¡Final del partido!");
@@ -70,10 +71,10 @@ public class Turno {
 			else com("Ganador: el equipo visitante: "+visitante);
 		}
 		
-		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n";
+		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n\n";
 		
 		if(numeroDeTurno==partido.descanso-1)
-			comentarista+="Los jugadores se retiran del campo:\nComienza el DESCANSO\n";
+			comentarista+="Los jugadores se retiran del campo:\nComienza el DESCANSO\n\n";
 	}
 	void com(String comentario){
 		comentarista+="\n"+comentario+".";
