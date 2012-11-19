@@ -9,9 +9,9 @@ public class Equipo {
 		e.nivel=4;
 		e.orgullo=150;
 		e.versatilidad = 0.8;
-		e.indiceDefensivo = 2;
+		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 2;
-		e.indiceOptimismo = 10;
+		e.indiceOptimismo = 15;
 		e.indiceFrialdad = 15;
 		return e;
 	}
@@ -20,9 +20,9 @@ public class Equipo {
 		e.nivel=1;
 		e.orgullo=100;
 		e.versatilidad = 0.8;
-		e.indiceDefensivo = 2;
+		e.indiceDefensivo = 1.5;
 		e.indiceOfensivo = 3;
-		e.indiceOptimismo = 5;
+		e.indiceOptimismo = 8;
 		e.indiceFrialdad = 8;
 		return e;
 	}
