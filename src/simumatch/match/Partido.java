@@ -101,8 +101,8 @@ public class Partido {
 			else   aforoV= op.apply(aforoV, bonus);
 			break;
 		case TEAM_LEVEL:
-			equilibrio= op.apply(equilibrio, (loc?1:(-1))*bonus);
-			if(mementer.inited)mementer.equilibrio=op.apply(mementer.equilibrio, (loc?1:(-1))*bonus);
+			equilibrio= applyEquil(equilibrio, bonus, op, loc);
+			if(mementer.inited)mementer.equilibrio=applyEquil(mementer.equilibrio, bonus, op, loc);
 			break;
 		case ATMOSPHERE:
 		case ENCOURAGE:
@@ -138,6 +138,15 @@ public class Partido {
 	}
 	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
 		this.mementer.bonifTemp(scope, bonus, op, loc);
+	}
+	private static int applyEquil(int equilib, double bonus, Operator op, boolean loc){
+		String operador=op.toString();
+		if(operador=="+"||operador=="-")
+			return op.apply(equilib, loc?bonus:-bonus);
+		if(operador=="*"||operador=="/")
+			return op.apply(equilib, loc?bonus:1/bonus);
+		System.out.println("Operador desconocido, los valores pueden ser erroneos");
+		return op.apply(equilib, bonus);
 	}
 	int goles(){
 		return marL-marV;
@@ -267,7 +276,7 @@ public class Partido {
 			case TEAM_LEVEL:
 				init();
 				modificated=true;
-				p.equilibrio= op.apply(p.equilibrio, bono);
+				p.equilibrio= applyEquil(p.equilibrio, bono, op, loc);
 				break;
 			case ATMOSPHERE:
 			case ENCOURAGE:
