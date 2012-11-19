@@ -141,7 +141,7 @@ public class Partido {
 		}
 	}
 	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
-		this.mementer.bonifTemp(scope, bonus, op, loc);
+		mementer.bonifTemp(scope, bonus, op, loc);
 	}
 	private static int applyEquil(int equilib, double bonus, Operator op, boolean loc){
 		String operador=op.toString();
@@ -242,7 +242,7 @@ public class Partido {
 	
 		
 		//los animos bonifican todos estados que mejoren el estado
-		//pero cada vez menoscuanto más lo mejoren, menos se bonifican
+		//pero cada vez menos cuanto más lo mejoren, menos se bonifican
 		bonif_decremental(true,  pAnt+1, 2*animoL/Math.max(animoV, 0.1), 0.5, abanico);
 		bonif_decremental(false, pAnt-1, 2*animoV/Math.max(animoL, 0.1), 0.5, abanico);
 		
@@ -260,7 +260,7 @@ public class Partido {
 		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
 	}
-	/**void bonif_decremental:
+	/** void bonif_decremental:
 	 *Dado un vector anbanico, una posicion inicial, una base de multiplicacion y un factor dif
 	 *multiplica la posIni por la base, el siguiente por base-dif, el siguiente por base-2dif, etc
 	 *cuando se llega a limite se deja de restar y se conserva la base hasta el final del vector
