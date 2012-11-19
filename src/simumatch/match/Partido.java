@@ -20,8 +20,9 @@ public class Partido {
 	//List<Effect> activas=vacia();//Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
 	
+	//Metodos Publicos (solo os interesan estos 2)
 	/**
-	 * Metodos Publicos (solo os interesan estos 2)
+	 * Crea un partido a partir de los equipos que lo juegan
 	 * */
 	public Partido(Equipo loc, Equipo vis){
 		local=loc;
@@ -52,6 +53,9 @@ public class Partido {
 		
 		turno[0]= new Turno(equilibrio, this, firstAbanico);
 	}
+	/**
+	 *Genera un turno nuevo a partir de las acciones realizadas por cada equipo
+	 */
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
 		
 		if(++turnoActual>duracion){
@@ -74,9 +78,8 @@ public class Partido {
 		return turno[turnoActual];
 	}
 	
-	/** 
-	 * Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
-	 * */
+	//Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
+	
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
