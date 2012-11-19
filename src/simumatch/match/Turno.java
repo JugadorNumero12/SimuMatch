@@ -61,13 +61,14 @@ public class Turno {
 			if(partido.tacL==1)com("Parece que "+local+" no esta defendiendo debidamente, es una oportunidad magnifica para marcar");
 		}
 		
+		comentarista+=escribeAbanico(aba);
+		
 		if(numeroDeTurno==partido.duracion){
 			com("¡Final del partido!");
 			if(partido.goles()==0)com("EMPATE");
 			else if(partido.goles()> 0)com("Ganador: el equipo local: "+local);
 			else com("Ganador: el equipo visitante: "+visitante);
 		}
-		comentarista+=escribeAbanico(aba);
 		
 		comentarista+="\nMarcador: ["+partido.marL+"|"+partido.marV+"]\n\n";
 		
