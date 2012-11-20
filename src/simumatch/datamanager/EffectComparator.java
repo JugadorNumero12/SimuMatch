@@ -8,9 +8,9 @@ import simumatch.common.Scope;
 import simumatch.common.Target;
 
 /**
- * A comparator that sorts <tt>Effect</tt>s by their intended applicaton order. In particular, effects that use a
+ * A comparator that sorts <tt>Effect</tt>s by their intended application order. In particular, effects that use a
  * product are assigned higher priority that those using addition or subtraction. The sorting order of this class might
- * not be consistent between versions.
+ * not be consistent between different versions.
  */
 public final class EffectComparator implements Comparator<Effect> {
 	

@@ -33,12 +33,14 @@ public final class AbilitiesData {
 	private final Map<Action,List<Effect>> data = new HashMap<Action,List<Effect>>();
 	
 	/**
-	 * Reads a file and adds its information to this object
+	 * Reads a file and adds its information to this object.
 	 * 
 	 * @param file
 	 *            The file to read from
 	 * @throws IOException
-	 *             if anything goes wrong
+	 *             if anything I/O related goes wrong
+	 * @throws NullPointerException
+	 *             if <tt>file</tt> is <tt>null</tt>
 	 */
 	public void loadFile ( File file ) throws IOException {
 		loadFromReader( new FileReader( file ) );
@@ -51,6 +53,8 @@ public final class AbilitiesData {
 	 *            The url to read from
 	 * @throws IOException
 	 *             if anything goes wrong
+	 * @throws NullPointerException
+	 *             if <tt>url</tt> is <tt>null</tt>
 	 */
 	public void loadUrl ( URL url ) throws IOException {
 		loadFromReader( new InputStreamReader( url.openStream() ) );
@@ -63,8 +67,14 @@ public final class AbilitiesData {
 	 *            The reader to read from
 	 * @throws IOException
 	 *             if anything goes wrong
+	 * @throws NullPointerException
+	 *             if <tt>reader</tt> is <tt>null</tt>
 	 */
 	public void loadFromReader ( Reader reader ) throws IOException {
+		if ( reader == null ) {
+			throw new NullPointerException();
+		}
+		
 		// Use a BufferedReader
 		BufferedReader br;
 		if ( reader instanceof BufferedReader ) {
@@ -100,6 +110,8 @@ public final class AbilitiesData {
 	 *            The action to add
 	 * @param effects
 	 *            The effect to add
+	 * @throws NullPointerException
+	 *             if <tt>action</tt> or <tt>effects</tt> are <tt>null</tt> or <tt>effects</tt> contains a <tt>null</tt>
 	 */
 	public void addAction ( Action action, List<Effect> effects ) {
 		if ( action == null ) {
@@ -126,11 +138,13 @@ public final class AbilitiesData {
 	 */
 	public List<Effect> getEffects ( Action action, boolean sorted ) {
 		if ( data.containsKey( action ) ) {
-			List<Effect> effects = new ArrayList<Effect>( data.get( action ) );
 			if ( sorted ) {
+				List<Effect> effects = new ArrayList<Effect>( data.get( action ) );
 				Collections.sort( effects, COMPARATOR );
+				return Collections.unmodifiableList( effects );
+			} else {
+				return data.get( action );
 			}
-			return Collections.unmodifiableList( effects );
 			
 		} else {
 			return Collections.emptyList();
@@ -154,6 +168,7 @@ public final class AbilitiesData {
 		if ( sorted ) {
 			Collections.sort( effects, COMPARATOR );
 		}
+		
 		return Collections.unmodifiableList( effects );
 	}
 	
@@ -163,6 +178,10 @@ public final class AbilitiesData {
 	 * @param sorted
 	 *            Whether to sort the result list
 	 * @return The effects of the actions
+	 * @throws NullPointerException
+	 *             if <tt>actions</tt> contains a <tt>null</tt> value
+	 * @throws IllegalArgumentException
+	 *             if <tt>action</tt> contains a negative value.
 	 */
 	public List<Effect> getEffects ( Map<Action,? extends Number> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
