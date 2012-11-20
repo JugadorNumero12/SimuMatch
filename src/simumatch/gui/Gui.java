@@ -212,6 +212,9 @@ public class Gui {
 		//Paint
 		textField.setText(String.valueOf(turn.getEstado()));
 		textArea.setText(textArea.getText()+turn);
+		
+		//Disable
+		if(turn.terminado())button.setEnabled(false);
 	}
 
 	//Next button for next match turn
@@ -220,7 +223,6 @@ public class Gui {
 		for(int i=0;i<20;i++){
 			arraySpinsM[i].setValue(0);
 		}
-		if(turn.terminado())btnSiguiente.setEnabled(false);
 	}
 
 	/**
