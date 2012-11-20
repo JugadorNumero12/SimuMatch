@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/** An operator used to calculate bonuses in <tt>Effect</tt>s */
+/**
+ * An operator used to calculate bonuses in <tt>Effect</tt>s.
+ */
 public enum Operator {
 	/** Arithmetic addition */
 	ADDITION( "+" ) {
@@ -56,7 +58,7 @@ public enum Operator {
 	}
 	
 	/**
-	 * Applies this operator to the given operands
+	 * Applies this operator to the given operands.
 	 * 
 	 * @param a
 	 *            First operand
@@ -84,12 +86,14 @@ public enum Operator {
 	}
 	
 	/**
-	 * @param str
+	 * Returns an <tt>Operator</tt> based on its symbol.
+	 * 
+	 * @param symbol
 	 *            String representation of the operator
 	 * @return The corresponding operator
 	 */
-	public static Operator get ( String str ) {
-		return OPERATORS.get( str );
+	public static Operator get ( String symbol ) {
+		return OPERATORS.get( symbol );
 	}
 	
 	@Override

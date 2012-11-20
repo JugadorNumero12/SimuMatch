@@ -1,7 +1,7 @@
 package simumatch.common;
 
 /**
- * Represents an effect on an attribute of the match
+ * Represents an effect on an attribute of the match.
  */
 public final class Effect {
 	
@@ -22,15 +22,20 @@ public final class Effect {
 	
 	/**
 	 * @param scope
-	 *            Attribute this effect affects
+	 *            Attribute this effect affects to
 	 * @param target
-	 *            Target of the effect
+	 *            Target team of the effect
 	 * @param operator
-	 *            Operator used on the target's scope
+	 *            Operator used on the <tt>>target</tt>'s <tt>scope</tt>
 	 * @param bonus
 	 *            Numeric value of the effect
 	 * @param permanent
 	 *            Whether it lasts the whole match
+	 * 
+	 * @throws NullPointerException
+	 *             if any of the arguments is <tt>null</tt>
+	 * @throws IllegalArgumentException
+	 *             if <tt>bonus</tt> is negative
 	 */
 	public Effect ( Scope scope, Target target, Operator operator, double bonus, boolean permanent ) {
 		if ( scope == null ) {
@@ -78,7 +83,21 @@ public final class Effect {
 		return permanent;
 	}
 	
+	/**
+	 * Returns a new <tt>Effect</tt> object that is equivalent to this effect scaled <tt>times</tt> times.
+	 * <p>
+	 * For an {@link Operator#ADDITION addition} or {@link Operator#SUBTRACTION subtraction}, the resulting bonus is
+	 * <tt>this.bonus * times</tt>. For a {@link Operator#PRODUCT product}, the resulting bonus is
+	 * <tt>this.bonus ^ times</tt>, being <tt>^</tt> the exponentiation operator.
+	 * 
+	 * @param times Scale to be applied to this effect
+	 * @return A new <tt>Effect</tt> with the same attributes except for an scaled <tt>bonus</tt>
+	 */
 	public Effect getScaled ( int times ) {
+		if ( times < 0 ) {
+			throw new IllegalArgumentException( "times < 0 (" + times + ")" );
+		}
+		
 		double scaled;
 		
 		if ( operator == Operator.PRODUCT ) {
@@ -124,6 +143,7 @@ public final class Effect {
 			&& operator.equals( effect.operator ) && permanent == effect.permanent;
 	}
 	
+	@Override
 	public String toString () {
 		return "Effect(" + scope + "," + operator + bonus + "," + target + "," + ( permanent ? "PERM" : "TEMP" ) + ")";
 	}
