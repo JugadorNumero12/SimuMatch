@@ -122,7 +122,7 @@ public class Partido {
 	}
 	//Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
 	
-	// XXX Marcos, o pones este mñetodo privado/protegido/de paquete, o me dices qué hace, pero todo lo público tiene
+	// XXX Marcos, o pones este método privado/protegido/de paquete, o me dices qué hace, pero todo lo público tiene
 	// que estar documentado y yo no sé qué carajo hace esto. Lo que he escrito es pura deducción.
 	/**
 	 * Returns the stable state identifier for the given teams.
