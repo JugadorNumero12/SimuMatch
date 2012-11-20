@@ -18,7 +18,6 @@ public class Partido {
 	int turnoActual = 0;
 	private Memento mementer= new Memento(this);
 	private Turno turno[] = new Turno[duracion+1];
-	//List<Effect> activas; //Hay que llevar un contador con los turnos que les quedan, y ejecutarlas como AccTurno cada turno
 	
 	
 	//Metodos Publicos (solo os interesan estos 2)
@@ -68,8 +67,7 @@ public class Partido {
 		recalculaTacticas();
 		
 		ejecuta(accLoc, true);
-		ejecuta(accVis, false);
-		//TODO ejecutaActivas(); 
+		ejecuta(accVis, false); 
 		
 		double [] abanico= calculaAbanico();
 		turno[turnoActual] = new Turno(generaTurno(abanico), this, abanico);
@@ -242,7 +240,7 @@ public class Partido {
 	
 		
 		//los animos bonifican todos estados que mejoren el estado
-		//pero cada vez menoscuanto más lo mejoren, menos se bonifican
+		//pero cuanto más lo mejoren, menos se bonifican
 		bonif_decremental(true,  pAnt+1, 2*animoL/Math.max(animoV, 0.1), 0.5, abanico);
 		bonif_decremental(false, pAnt-1, 2*animoV/Math.max(animoL, 0.1), 0.5, abanico);
 		
@@ -260,7 +258,7 @@ public class Partido {
 		for(int i=origen; i<=destino; i++)
 			aba[i]*=mult;
 	}
-	/**void bonif_decremental:
+	/** void bonif_decremental:
 	 *Dado un vector anbanico, una posicion inicial, una base de multiplicacion y un factor dif
 	 *multiplica la posIni por la base, el siguiente por base-dif, el siguiente por base-2dif, etc
 	 *cuando se llega a limite se deja de restar y se conserva la base hasta el final del vector
