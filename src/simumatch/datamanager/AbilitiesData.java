@@ -134,7 +134,7 @@ public final class AbilitiesData {
 	 *            Which action to retrieve effects
 	 * @param sorted
 	 *            Whether to sort the result list
-	 * @return The effects of the action
+	 * @return The effects of the <tt>action</tt>
 	 */
 	public List<Effect> getEffects ( Action action, boolean sorted ) {
 		if ( data.containsKey( action ) ) {
@@ -156,7 +156,7 @@ public final class AbilitiesData {
 	 *            The actions to retrieve effects from
 	 * @param sorted
 	 *            Whether to sort the result list
-	 * @return The effects of the actions
+	 * @return The effects of the <tt>actions</tt>
 	 */
 	public List<Effect> getEffects ( Collection<Action> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
@@ -181,7 +181,7 @@ public final class AbilitiesData {
 	 * @throws NullPointerException
 	 *             if <tt>actions</tt> contains a <tt>null</tt> value
 	 * @throws IllegalArgumentException
-	 *             if <tt>action</tt> contains a negative value.
+	 *             if <tt>actions</tt> contains a negative value.
 	 */
 	public List<Effect> getEffects ( Map<Action,? extends Number> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
@@ -209,7 +209,7 @@ public final class AbilitiesData {
 	 *            The object used to read information
 	 * @return An action read from the <tt>reader</tt>
 	 * @throws IOException
-	 *             If anything goes wrong
+	 *             If anything I/O related goes wrong
 	 */
 	private static Action readAction ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
@@ -233,7 +233,7 @@ public final class AbilitiesData {
 	 *            The object used to read information
 	 * @return An effect read from the <tt>reader</tt>
 	 * @throws IOException
-	 *             If anything goes wrong
+	 *             If anything I/O related goes wrong
 	 */
 	private static Effect readEffect ( BufferedReader reader ) throws IOException {
 		String line = reader.readLine();
