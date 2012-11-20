@@ -139,7 +139,7 @@ public class Partido {
 		}
 	}
 	private void bonifTem(Scope scope, double bonus, Operator op, boolean loc) {
-		this.mementer.bonifTemp(scope, bonus, op, loc);
+		mementer.bonifTemp(scope, bonus, op, loc);
 	}
 	private static int applyEquil(int equilib, double bonus, Operator op, boolean loc){
 		String operador=op.toString();
