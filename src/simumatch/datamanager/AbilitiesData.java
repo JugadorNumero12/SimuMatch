@@ -63,7 +63,7 @@ public final class AbilitiesData {
 	/**
 	 * Reads a reader and adds its information to this object
 	 * 
-	 * @param br
+	 * @param reader
 	 *            The reader to read from
 	 * @throws IOException
 	 *             if anything goes wrong
