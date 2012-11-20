@@ -20,7 +20,7 @@ public class Partido {
 	private Turno turno[] = new Turno[duracion+1];
 	
 	
-	//Metodos Publicos (solo os interesan estos 2)
+	//Metodos Publicos (solo os interesan estos 3)
 	/** new Partido:
 	 * Crea un partido a partir de los equipos que lo juegan
 	 * */
@@ -76,7 +76,12 @@ public class Partido {
 		
 		return turno[turnoActual];
 	}
-	
+	/** boolean terminado(){
+	 *indica que ha terminado el partido
+	 */
+	public boolean terminado(){
+	return (turnoActual>=duracion);
+	}
 	//Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
 	
 	public static int estadoEstable(Equipo loc, Equipo vis) {

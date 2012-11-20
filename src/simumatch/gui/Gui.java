@@ -214,7 +214,7 @@ public class Gui {
 		textArea.setText(textArea.getText()+turn);
 		
 		//Disable
-		if(turn.terminado())button.setEnabled(false);
+		if(match.terminado())button.setEnabled(false);
 	}
 
 	//Next button for next match turn
