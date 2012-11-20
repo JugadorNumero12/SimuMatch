@@ -16,7 +16,9 @@ public class Turno {
 	public String toString(){
 		return comentarista; //el resumen del turno
 	}
-	
+	public boolean terminado(){
+		return numeroDeTurno>=partido.duracion;
+	}
 	/**
 	 *Constructora: No es publica, si necesitas crear turnos pidelos a Partido.turno(..)
 	 */
