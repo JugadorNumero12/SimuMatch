@@ -186,6 +186,7 @@ public final class AbilitiesData {
 	public List<Effect> getEffects ( Map<Action,? extends Number> actions, boolean sorted ) {
 		List<Effect> effects = new ArrayList<Effect>( data.size() * 6 );
 		
+		// Fill the effect list
 		for ( Map.Entry<Action,? extends Number> entry : actions.entrySet() ) {
 			int times = entry.getValue().intValue();
 			
@@ -194,6 +195,7 @@ public final class AbilitiesData {
 			}
 		}
 		
+		// Sort if necessary
 		if ( sorted ) {
 			Collections.sort( effects, COMPARATOR );
 		}

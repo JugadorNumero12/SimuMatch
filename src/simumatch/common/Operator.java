@@ -15,6 +15,18 @@ public enum Operator {
 		public double apply ( double a, double b ) {
 			return a + b;
 		}
+
+		@Override
+		public double scale ( double bonus, int times ) {
+			if ( bonus < 0 ) {
+				throw new IllegalArgumentException( "bonus < 0 (" + bonus + ")" );
+			}
+			if ( times < 0 ) {
+				throw new IllegalArgumentException( "times < 0 (" + times + ")" );
+			}
+			
+			return bonus * times;
+		}
 		
 	},
 	
@@ -25,6 +37,18 @@ public enum Operator {
 		public double apply ( double a, double b ) {
 			return a - b;
 		}
+
+		@Override
+		public double scale ( double bonus, int times ) {
+			if ( bonus < 0 ) {
+				throw new IllegalArgumentException( "bonus < 0 (" + bonus + ")" );
+			}
+			if ( times < 0 ) {
+				throw new IllegalArgumentException( "times < 0 (" + times + ")" );
+			}
+			
+			return bonus * times;
+		}
 	},
 	
 	/** Arithmetic product */
@@ -33,6 +57,18 @@ public enum Operator {
 		@Override
 		public double apply ( double a, double b ) {
 			return a * b;
+		}
+
+		@Override
+		public double scale ( double bonus, int times ) {
+			if ( bonus < 0 ) {
+				throw new IllegalArgumentException( "bonus < 0 (" + bonus + ")" );
+			}
+			if ( times < 0 ) {
+				throw new IllegalArgumentException( "times < 0 (" + times + ")" );
+			}
+			
+			return Math.pow( bonus, times );
 		}
 	};
 	
@@ -67,6 +103,19 @@ public enum Operator {
 	 * @return Result of the operation
 	 */
 	public abstract double apply ( double a, double b );
+	
+	/**
+	 * Applies this operator <tt>times</tt> times over <tt>bonus</tt>.
+	 * 
+	 * @param bonus
+	 *            Value to be scaled
+	 * @param times
+	 *            Number of times the operator is applied
+	 * @return The scaled value
+	 * @throws IllegalArgumentException
+	 *             if any of the arguments is negative
+	 */
+	public abstract double scale ( double bonus, int times );
 	
 	/**
 	 * Applies this operator to the given operands.

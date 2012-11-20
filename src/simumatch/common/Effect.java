@@ -98,16 +98,7 @@ public final class Effect {
 			throw new IllegalArgumentException( "times < 0 (" + times + ")" );
 		}
 		
-		double scaled;
-		
-		if ( operator == Operator.PRODUCT ) {
-			scaled = Math.pow( bonus, times );
-			
-		} else {
-			scaled = bonus * times;
-		}
-		
-		return new Effect( scope, target, operator, scaled, permanent );
+		return new Effect( scope, target, operator, operator.scale( bonus,times ), permanent );
 	}
 	
 	@Override
