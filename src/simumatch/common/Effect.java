@@ -26,7 +26,7 @@ public final class Effect {
 	 * @param target
 	 *            Target team of the effect
 	 * @param operator
-	 *            Operator used on the <tt>>target</tt>'s <tt>scope</tt>
+	 *            Operator used on the <tt>target</tt>'s <tt>scope</tt>
 	 * @param bonus
 	 *            Numeric value of the effect
 	 * @param permanent
