@@ -35,7 +35,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
-public class Gui {
+/**
+ * Graphic interface and main entry point of the application
+ */
+public final class Gui {
 
 	private JFrame frmJugadorNumero;
 	private JTextField textField;
@@ -112,7 +115,7 @@ public class Gui {
 	private JScrollPane scrollPane;
 
 	/**
-	 * Launch the application.
+	 * Entry point of the application. Command line arguments are ignored.
 	 */
 	public static void main(String[] args) {
 		/*try {
@@ -143,9 +146,9 @@ public class Gui {
 	}
 
 	/**
-	 * Create the application.
+	 * Creates the application.
 	 */
-	public Gui() {
+	private Gui() {
 		listEffectsP1 = new LinkedList<Effect>();
         listEffectsP2 = new LinkedList<Effect>();
         listEffectsM1 = new LinkedList<Effect>();
@@ -176,7 +179,7 @@ public class Gui {
 	}
 	
 	//Load button from preparatory actions
-	protected void bntCargarActionPerformed(ActionEvent arg0) {
+	private void bntCargarActionPerformed(ActionEvent arg0) {
 		int i;
 		//Local
 		for(i=0;i<15;i++){
@@ -195,7 +198,7 @@ public class Gui {
 	}
 	
 	//Load button from match actions
-	protected void buttonActionPerformed(ActionEvent arg0) {
+	private void buttonActionPerformed(ActionEvent arg0) {
 		int i;
 		//Local
 		for(i=0;i<10;i++){
@@ -218,7 +221,7 @@ public class Gui {
 	}
 
 	//Next button for next match turn
-	protected void btnSiguienteActionPerformed(ActionEvent e) {
+	private void btnSiguienteActionPerformed(ActionEvent e) {
 		textField.setText("");
 		for(int i=0;i<20;i++){
 			arraySpinsM[i].setValue(0);

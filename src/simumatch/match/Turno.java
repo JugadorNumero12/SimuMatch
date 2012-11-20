@@ -1,5 +1,8 @@
 package simumatch.match;
 
+/**
+ * Each of the turns of the game
+ */
 public class Turno {
 	private String comentarista = "Turno ";
 	private int numeroDeTurno;
@@ -7,18 +10,17 @@ public class Turno {
 	private String local, visitante;
 	private Partido partido;
 	
-	/**
-	 * Metodos Publicos
-	 */
+	/** @return The state of this turn */
 	public int getEstado() {
 		return estado; //el estado resultado
 	}
+	
+	@Override
 	public String toString(){
 		return comentarista; //el resumen del turno
 	}
-	/**
-	 *Constructora: No es publica, si necesitas crear turnos pidelos a Partido.turno(..)
-	 */
+	
+	// Constructora: No es publica, si necesitas crear turnos pidelos a Partido.turno(..)
 	Turno(int estado, Partido p, double aba[]){
 		this.estado = estado;
 		this.partido = p;

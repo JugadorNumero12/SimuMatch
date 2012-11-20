@@ -5,8 +5,17 @@ import java.util.List;
 import simumatch.team.Equipo;
 import simumatch.common.*;
 
+/**
+ * A class that represents a match and its evolution
+ */
 public class Partido {
-	public Equipo local, visitante;
+	
+	/** Local team of the match */
+	public Equipo local;
+	
+	/** Visitor team of the match */
+	public Equipo visitante;
+	
 	int aforoL, aforoV;
 	int animoL, animoV;
 	int tacL, tacV;
@@ -21,10 +30,24 @@ public class Partido {
 	
 	
 	//Metodos Publicos (solo os interesan estos 3)
-	/** new Partido:
-	 * Crea un partido a partir de los equipos que lo juegan
-	 * */
+
+	/**
+	 * Creates a new match from the playing teams.
+	 *
+	 * @param loc
+	 *            Local team of the game
+	 * @param vis
+	 *            Visitor team of the game
+	 * @throws NullPointerException
+	 *            if <tt>loc</tt> or <tt>vis</tt> are <tt>null</tt>
+	 */
 	public Partido(Equipo loc, Equipo vis){
+		if ( loc == null ) {
+			throw new NullPointerException( "loc" );
+		}
+		if ( vis == null ) {
+			throw new NullPointerException( "vis" );
+		}
 		local=loc;
 		visitante=vis;
 		arbitro = new Arbitro();
@@ -53,10 +76,26 @@ public class Partido {
 		
 		turno[0]= new Turno(equilibrio, this, firstAbanico);
 	}
-	/** Turno turno:
-	 *Genera un turno nuevo a partir de las acciones realizadas por cada equipo
+	
+	/**
+	 * Generates a new {@link Turno turn} based on the effects of each team.
+	 * 
+	 * @param accLoc
+	 *            List of the local team effects
+	 * @param accVis
+	 *            List of the visitor team effects
+	 * @return The generated turn
+	 * @throws NullPointerException
+	 *            if <tt>accLoc</tt> or <tt>accVis</tt> are <tt>null</tt> or contains a <tt>null</tt>
 	 */
 	public Turno turno(List<Effect> accLoc, List<Effect> accVis){
+		if ( accLoc == null || accLoc.contains( null ) ) {
+			throw new NullPointerException( "accLoc" );
+		}
+		if ( accVis == null || accVis.contains( null ) ) {
+			throw new NullPointerException( "accVis" );
+		}
+		
 		
 		if(++turnoActual>duracion){
 			System.out.println("El partido ya ha acabado");
@@ -76,14 +115,23 @@ public class Partido {
 		
 		return turno[turnoActual];
 	}
-	/** boolean terminado(){
-	 *indica que ha terminado el partido
-	 */
+	
+	/** @return <tt>true</tt> if the game is over, <tt>false</tt> otherwise */
 	public boolean terminado(){
-	return (turnoActual>=duracion);
+		return (turnoActual>=duracion);
 	}
 	//Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
 	
+	// XXX Marcos, o pones este mñetodo privado/protegido/de paquete, o me dices qué hace, pero todo lo público tiene
+	// que estar documentado y yo no sé qué carajo hace esto. Lo que he escrito es pura deducción.
+	/**
+	 * Returns the stable state identifier for the given teams.
+	 * @param loc
+	 *            Local team
+	 * @param vis
+	 *            Visitor team
+	 * @return A stable state identifier
+	 */
 	public static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
