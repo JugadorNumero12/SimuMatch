@@ -4,7 +4,7 @@ import simumatch.common.Effect;
 import java.util.List;
 
 /**
- * A team thatcan play a {@link simumatch.match.Partido match}.
+ * A team that can play a {@link simumatch.match.Partido match}.
  */
 public class Equipo {
 	/** @return A test team */
@@ -42,7 +42,7 @@ public class Equipo {
 	double indiceContraOf;//multiplicador a la inversion del avanico
 	double indiceOptimismo;//multiplicador al incremento de animo
 	double indiceFrialdad;//multiplicador al decremento de animo
-	double indiceViloencia;//probablidad de juego sucio
+	double indiceViolencia;//probablidad de juego sucio
 	int orgullo;//animo base al empezar el partido
 	/** Stadium of the team */
 	public Estadio estadio;
@@ -161,8 +161,8 @@ public class Equipo {
 	
 	
 	/** @return Violence value of this team */
-	public double indiceViloencia(){
-		return indiceViloencia;
+	public double indiceViolencia(){
+		return indiceViolencia;
 	}
 	
 	/** @return Proud of this team */

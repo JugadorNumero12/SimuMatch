@@ -21,7 +21,6 @@ public class Partido {
 	int tacL, tacV;
 	int marL=0; int marV=0;
 	int equilibrio;
-	Arbitro arbitro = new Arbitro();
 	int duracion = 10;
 	int descanso = duracion/2+(duracion%2);
 	int turnoActual = 0;
@@ -50,7 +49,6 @@ public class Partido {
 		}
 		local=loc;
 		visitante=vis;
-		arbitro = new Arbitro();
 		
 		aforoL = loc.aforoBase();
 		aforoV = vis.aforoBase();
@@ -122,17 +120,10 @@ public class Partido {
 	}
 	//Privados. ADVETENCIA: Su lectura puede producir daños neurologicos permanentes.
 	
-	// XXX Marcos, o pones este método privado/protegido/de paquete, o me dices qué hace, pero todo lo público tiene
-	// que estar documentado y yo no sé qué carajo hace esto. Lo que he escrito es pura deducción.
 	/**
-	 * Returns the stable state identifier for the given teams.
-	 * @param loc
-	 *            Local team
-	 * @param vis
-	 *            Visitor team
-	 * @return A stable state identifier
+	 * Determina un estado de equilibrio que depende del logaritmo de los niveles de equipo.
 	 */
-	public static int estadoEstable(Equipo loc, Equipo vis) {
+	private static int estadoEstable(Equipo loc, Equipo vis) {
 		return(int)Math.round(Math.log(loc.nivel())-Math.log(vis.nivel()));
 	}
 	Turno anterior(){
