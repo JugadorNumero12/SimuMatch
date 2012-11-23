@@ -33,22 +33,19 @@ public class Equipo {
 		return e;
 	}
 	
+	private String nombre;
 	int nivel;//el nivel de juego medio del equipo
 	double versatilidad;//probabilidad de cambiar de estrategia a la optima, depende del entrenador
 	double indiceOfensivo;//multiplicador al abanico cuando llebas ventaja
 	double indiceDefensivo;//multiplicador al abanico cuando vas perdiendo
-	double indicePosicional;//multiplicador al avanico para estabilizar el juego
-	double indiceOportunista;//multiplicador al avanico para desestabilizar el juego
-	double indiceContraOf;//multiplicador a la inversion del avanico
 	double indiceOptimismo;//multiplicador al incremento de animo
 	double indiceFrialdad;//multiplicador al decremento de animo
-	double indiceViolencia;//probablidad de juego sucio
-	int orgullo;//animo base al empezar el partido
 	/** Stadium of the team */
 	public Estadio estadio;
-	int aforoBase;
+	int aforoBase;//el aforo base al comenzar los partidos
+	private int orgullo;//el animo base al comenzar los partidos
 	private List<Effect> preparacion;//las acciones preparadas para el proximo partido
-	private String nombre;
+
 	
 	/**
 	 * @param nombre
@@ -85,11 +82,6 @@ public class Equipo {
 	/** @return Base capacity o this team */
 	public int aforoBase(){
 		return aforoBase;
-	}
-	
-	/** Resets the preparatory effects */
-	public void resetPreparatorias(){
-		preparacion = null;
 	}
 	
 	/** @return Level of this team */
@@ -132,23 +124,6 @@ public class Equipo {
 		indiceDefensivo=IndDf;
 	}
 	
-	// FIXME
-	// WHAT IS THIS I DON'T EVEN
-	
-	/** @return Positional value of this team */
-	public double indicePosicional(){
-		return indicePosicional;
-	}
-	
-	/** @return Opportunism value of this team */
-	public double indiceOportunista(){
-		return indiceOportunista;
-	}
-	
-	/** @return Counter-offensive value of this team */
-	public double indiceContraOf(){
-		return indiceContraOf;
-	}
 	
 	/** @return Optimism value of this team */
 	public double indiceOptimismo(){
@@ -159,18 +134,11 @@ public class Equipo {
 	public double indiceFrialdad(){
 		return indiceFrialdad;}
 	
-	
-	/** @return Violence value of this team */
-	public double indiceViolencia(){
-		return indiceViolencia;
-	}
-	
 	/** @return Proud of this team */
 	public int orgullo(){
 		return orgullo;
 	}
 	
-	// END OF WHAT IS THIS I DON'T EVEN
 	
 	/** @return Name of this team */
 	public String getName(){
@@ -190,6 +158,12 @@ public class Equipo {
 	public List<Effect> getPreparatorias() {
 		return preparacion;
 	}
+	
+	/** Resets the preparatory effects */
+	public void resetPreparatorias(){
+		preparacion = null;
+	}
+	
 	
 
 }
