@@ -255,12 +255,12 @@ public class Partido {
 			//si se marca gol, no se aplica este bonificador
 			double indi_est[] = {5.75, 5, 4.25, 3.5, 2.75, 2, 1.25};
 			mul_adyacen(indi_est, pAnt, abanico);
-			//el estado anterior multiplica su prob por 6.25
-			//los dos estados adyacentes multiplican por 5.5
-			//los dos estados a distancia 2 del eAnt multiplican por 4.75
-			//los dos estados a distancia 3 del eAnt multiplican por 4
+			//el estado anterior multiplica su prob por 5.75
+			//los dos estados adyacentes multiplican por 5
+			//los dos estados a distancia 2 del eAnt multiplican por 4.25
+			//los dos estados a distancia 3 del eAnt multiplican por 3.5
 			// ...
-			//los dos estados a distancia 6 del eAnt multiplican por 1.75
+			//los dos estados a distancia 6 del eAnt multiplican por 1.25
 		}
 
 		if(eAnt>0){//el Local lleva la iniciativa
